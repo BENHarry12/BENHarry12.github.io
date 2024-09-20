@@ -110,14 +110,21 @@
             cursor: pointer;
         }
 
+        .error-message {
+            display: none;
+            font-size: 24px;
+            color: red;
+            margin-top: 20px;
+        }
+
         /* Responsive Design for Mobile */
         @media only screen and (max-width: 768px) {
             body {
-                padding: 0 10px; /* เพิ่ม padding รอบข้างสำหรับหน้าจอขนาดเล็ก */
+                padding: 0 10px;
             }
 
             nav {
-                flex-wrap: wrap; /* ให้แท็บแตกบรรทัดบนหน้าจอมือถือ */
+                flex-wrap: wrap;
             }
 
             nav a {
@@ -127,11 +134,11 @@
             }
 
             .content {
-                padding: 10px; /* ลดขนาด padding ของเนื้อหาบนมือถือ */
+                padding: 10px;
             }
 
             .video-container iframe {
-                height: 300px; /* ลดขนาด iframe บนมือถือ */
+                height: 300px;
             }
 
             .external-link {
@@ -152,8 +159,18 @@
             document.getElementById(tabId).classList.add('active');
         }
 
+        function checkURL() {
+            const validPaths = ['/', '/index.html', '/server', '/internet', '/livestream', '/serverminecraft'];
+            const currentPath = window.location.pathname;
+            
+            if (!validPaths.includes(currentPath)) {
+                document.getElementById('error-message').style.display = 'block';
+            }
+        }
+
         window.onload = function () {
             showTab('tab1');
+            checkURL();  // เรียกฟังก์ชันเพื่อตรวจสอบ URL
         };
     </script>
 </head>
@@ -163,7 +180,6 @@
         <a href="#" onclick="showTab('tab1')">SERVER</a>
         <a href="#" onclick="showTab('tab2')">INTERNET</a>
         <a href="#" onclick="showTab('tab4')">LIVE STEAM</a>
-        <!-- SERVER MINECRAFT เปิดหน้าเว็บใหม่ในแท็บเดิม -->
         <a href="https://benharry12.github.io/panuwat/">SERVER MINECRAFT</a>
     </nav>
 
@@ -188,6 +204,13 @@
                 allowfullscreen></iframe>
         </div>
         <a class="external-link" href="https://benharry12.github.io/panuwat/" target="_blank">ลิ้งค์ภายนอก</a>
+    </div>
+
+    <!-- แสดงข้อความแจ้งเตือนเมื่อ URL ไม่ถูกต้อง -->
+    <div id="error-message" class="error-message">
+        <h1>อยู่ในช่วงทดลองมองข้ามไปก่อน</h1>
+        <p>หน้าเว็บนี้ยังไม่พร้อมใช้งาน กรุณากลับไปยังหน้าหลักและลองอีกครั้ง</p>
+        <a href="/">กลับไปยังหน้าหลัก</a>
     </div>
 
     <footer>
