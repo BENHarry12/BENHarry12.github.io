@@ -5,152 +5,163 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PANUWAT_DEV</title>
-
-    <!-- ใส่โลโก้เป็น favicon -->
     <link rel="icon" href="https://img5.pic.in.th/file/secure-sv1/IMG_076653e98b38560f08f3.jpeg" type="image/jpeg">
-
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
     <style>
-        /* Import Minecraft font */
-        @font-face {
-            font-family: 'Minecraft';
-            src: url('https://example.com/minecraft-font.ttf') format('truetype'); /* เปลี่ยน URL นี้ไปที่ฟอนต์ Minecraft */
-        }
-
         /* Global styles */
         body {
-            font-family: 'Minecraft', sans-serif;
+            font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #5C913B;
+            background: linear-gradient(45deg, #FF0000, #FF7F00, #FFFF00, #00FF00, #0000FF, #4B0082, #9400D3);
             color: #fff;
             display: flex;
             flex-direction: column;
-            align-items: center;
+            justify-content: space-between;
             min-height: 100vh;
             text-align: center;
+            overflow-x: hidden;
+            background-size: 400% 400%;
+            animation: gradientAnimation 10s ease infinite;
+        }
+
+        /* Animation for background */
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         /* Navigation */
         nav {
             width: 100%;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.6);
             display: flex;
-            flex-direction: row;
             justify-content: center;
             align-items: center;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-            padding: 10px 0;
+            padding: 20px 0;
             position: sticky;
             top: 0;
             z-index: 1000;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
         }
 
         nav a {
-            padding: 8px 10px;
+            padding: 15px 20px;
             color: #fff;
             text-decoration: none;
-            text-transform: uppercase;
             font-weight: bold;
-            transition: background 0.3s ease;
-            border-radius: 0px;
-            margin: 0 5px;
-            background: #4caf50;
-            border: 2px solid #333;
-            text-align: center;
-            font-size: 12px;
+            margin: 0 12px;
+            font-size: 18px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            background-color: #ff61a6;
+            border-radius: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
 
         nav a:hover {
-            background: rgba(255, 255, 255, 0.3);
+            background-color: #fff;
+            color: #ff61a6;
+            transform: scale(1.1);
         }
 
-        /* Content */
+        /* Content sections */
         .content {
             display: none;
-            padding: 20px;
-            text-align: center;
-            width: 100%;
-            max-width: 800px;
-            margin: 20px 0;
+            padding: 50px 20px;
             background: rgba(0, 0, 0, 0.6);
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+            transform: translateY(20px);
+            transition: transform 0.4s ease, opacity 0.4s ease;
         }
 
         .content.active {
             display: block;
+            transform: translateY(0);
         }
 
         .video-container {
             position: relative;
-            width: 100%;
-            border-radius: 10px;
+            margin-bottom: 30px;
+            border-radius: 12px;
             overflow: hidden;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
         }
 
         .video-container iframe {
             width: 100%;
             height: 450px;
             border: none;
+            transition: transform 0.3s ease;
+        }
+
+        .video-container iframe:hover {
+            transform: scale(1.05);
         }
 
         /* Footer */
         footer {
-            margin-top: auto;
-            padding: 10px;
+            padding: 30px 20px;
             background: rgba(0, 0, 0, 0.8);
             color: #fff;
             text-align: center;
+            box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.3);
+            position: fixed;
             width: 100%;
-            font-family: 'Minecraft', sans-serif;
+            bottom: 0;
+        }
+
+        footer a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: #ff61a6;
         }
 
         .external-link {
-            display: block;
-            margin-top: 30px;
-            font-size: 20px;
+            display: inline-block;
+            margin-top: 20px;
+            font-size: 16px;
             color: #fff;
             text-decoration: underline;
             cursor: pointer;
+            transition: color 0.3s ease;
         }
 
-        .error-message {
-            display: none;
-            font-size: 24px;
-            color: red;
-            margin-top: 20px;
+        .external-link:hover {
+            color: #ff61a6;
         }
 
-        /* Responsive Design for Mobile */
+        /* Responsive Design */
         @media only screen and (max-width: 768px) {
             body {
-                padding: 0 10px;
-            }
-
-            nav {
-                flex-wrap: wrap;
+                padding: 20px;
             }
 
             nav a {
-                padding: 6px 8px;
-                font-size: 10px;
-                margin: 2px;
+                font-size: 16px;
+                padding: 10px 15px;
+                margin: 5px;
             }
 
             .content {
-                padding: 10px;
+                padding: 40px 15px;
             }
 
             .video-container iframe {
                 height: 300px;
             }
 
-            .external-link {
-                font-size: 16px;
-            }
-
             footer {
-                padding: 5px;
+                padding: 20px 15px;
             }
         }
     </style>
@@ -163,18 +174,8 @@
             document.getElementById(tabId).classList.add('active');
         }
 
-        function checkURL() {
-            const validPaths = ['/', '/index.html', '/server', '/internet', '/livestream', '/serverminecraft'];
-            const currentPath = window.location.pathname;
-            
-            if (!validPaths.includes(currentPath)) {
-                document.getElementById('error-message').style.display = 'block';
-            }
-        }
-
         window.onload = function () {
             showTab('tab1');
-            checkURL();  // เรียกฟังก์ชันเพื่อตรวจสอบ URL
         };
     </script>
 </head>
@@ -183,7 +184,7 @@
     <nav>
         <a href="#" onclick="showTab('tab1')">SERVER</a>
         <a href="#" onclick="showTab('tab2')">INTERNET</a>
-        <a href="#" onclick="showTab('tab4')">LIVE STEAM</a>
+        <a href="#" onclick="showTab('tab4')">LIVE STREAM</a>
         <a href="https://benharry12.github.io/panuwat/">SERVER MINECRAFT</a>
     </nav>
 
@@ -202,24 +203,15 @@
     </div>
 
     <div id="tab4" class="content">
-        <h1>LIVE STEAM</h1>
+        <h1>LIVE STREAM</h1>
         <div class="video-container">
-            <iframe width="560" height="315" src="https://vdo.ninja/?view=y864jMN&bitrate=20000" frameborder="0"
-                allowfullscreen></iframe>
+            <iframe width="560" height="315" src="https://vdo.ninja/?view=y864jMN&bitrate=20000" frameborder="0" allowfullscreen></iframe>
         </div>
         <a class="external-link" href="https://benharry12.github.io/panuwat/" target="_blank">ลิ้งค์ภายนอก</a>
     </div>
 
-    <!-- แสดงข้อความแจ้งเตือนเมื่อ URL ไม่ถูกต้อง -->
-    <div id="error-message" class="error-message">
-        <h1>อยู่ในช่วงทดลองมองข้ามไปก่อน</h1>
-        <p>หน้าเว็บนี้ยังไม่พร้อมใช้งาน กรุณากลับไปยังหน้าหลักและลองอีกครั้ง</p>
-        <a href="/">กลับไปยังหน้าหลัก</a>
-    </div>
-
     <footer>
-        <p>&copy; 2024 PANUWAT_SERVER. ทั้งหมด. | ออกแบบโดย <a href="https://www.facebook.com/BOSS.klqqq/"
-                target="_blank">PANUWAT_SERVER</a></p>
+        <p>&copy; 2024 PANUWAT_SERVER. ทั้งหมด. | ออกแบบโดย <a href="https://www.facebook.com/benharry12" target="_blank">BenHarry12</a></p>
     </footer>
 </body>
 
