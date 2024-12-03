@@ -1,131 +1,218 @@
 <!DOCTYPE html>
 <html lang="th">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Chatbot</title>
+    <title>PANUWAT_DEV</title>
+    <link rel="icon" href="https://img5.pic.in.th/file/secure-sv1/IMG_076653e98b38560f08f3.jpeg" type="image/jpeg">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
     <style>
+        /* Global styles */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(45deg, #FF0000, #FF7F00, #FFFF00, #00FF00, #0000FF, #4B0082, #9400D3);
+            color: #fff;
             display: flex;
             flex-direction: column;
+            justify-content: space-between;
+            min-height: 100vh;
+            text-align: center;
+            overflow-x: hidden;
+            background-size: 400% 400%;
+            animation: gradientAnimation 10s ease infinite;
+        }
+
+        /* Animation for background */
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Navigation */
+        nav {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            background-color: #f5f5f5;
-            margin: 0;
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
         }
-        #chat-container {
-            width: 100%;
-            max-width: 600px;
+
+        nav a {
+            padding: 15px 20px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 0 12px;
+            font-size: 18px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            background-color: #ff61a6;
+            border-radius: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        nav a:hover {
             background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            color: #ff61a6;
+            transform: scale(1.1);
         }
-        #messages {
-            height: 300px;
-            overflow-y: scroll;
-            margin-bottom: 20px;
-            padding-right: 10px;
+
+        /* Content sections */
+        .content {
+            display: none;
+            padding: 50px 20px;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 12px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+            transform: translateY(20px);
+            transition: transform 0.4s ease, opacity 0.4s ease;
         }
-        #user-input {
+
+        .content.active {
+            display: block;
+            transform: translateY(0);
+        }
+
+        .video-container {
+            position: relative;
+            margin-bottom: 30px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .video-container iframe {
             width: 100%;
-            padding: 10px;
-            font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
-        }
-        #send-btn {
-            padding: 10px 15px;
-            background-color: #4CAF50;
-            color: white;
+            height: 450px;
             border: none;
-            border-radius: 5px;
+            transition: transform 0.3s ease;
+        }
+
+        .video-container iframe:hover {
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        footer {
+            padding: 30px 20px;
+            background: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            text-align: center;
+            box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.3);
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+
+        footer a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: #ff61a6;
+        }
+
+        .external-link {
+            display: inline-block;
+            margin-top: 20px;
+            font-size: 16px;
+            color: #fff;
+            text-decoration: underline;
             cursor: pointer;
+            transition: color 0.3s ease;
         }
-        #send-btn:hover {
-            background-color: #45a049;
+
+        .external-link:hover {
+            color: #ff61a6;
         }
-        .message {
-            padding: 10px;
-            border-radius: 5px;
-            margin-bottom: 10px;
-            max-width: 80%;
-        }
-        .user-message {
-            background-color: #f0f0f0;
-            align-self: flex-end;
-        }
-        .bot-message {
-            background-color: #d1ffd1;
-            align-self: flex-start;
+
+        /* Responsive Design */
+        @media only screen and (max-width: 768px) {
+            body {
+                padding: 20px;
+            }
+
+            nav a {
+                font-size: 16px;
+                padding: 10px 15px;
+                margin: 5px;
+            }
+
+            .content {
+                padding: 40px 15px;
+            }
+
+            .video-container iframe {
+                height: 300px;
+            }
+
+            footer {
+                padding: 20px 15px;
+            }
         }
     </style>
-</head>
-<body>
+    <script>
+        function showTab(tabId) {
+            var tabs = document.querySelectorAll('.content');
+            tabs.forEach(function (tab) {
+                tab.classList.remove('active');
+            });
+            document.getElementById(tabId).classList.add('active');
+        }
 
-    <div id="chat-container">
-        <h2>Chat with AI</h2>
-        <div id="messages"></div>
-        <input type="text" id="user-input" placeholder="ถามอะไรไปก็ได้..." />
-        <button id="send-btn">ส่ง</button>
+        window.onload = function () {
+            showTab('tab1');
+        };
+    </script>
+</head>
+
+<body>
+    <nav>
+        <a href="#" onclick="showTab('tab1')">SERVER</a>
+        <a href="#" onclick="showTab('tab2')">INTERNET</a>
+        <a href="#" onclick="showTab('tab4')">LIVE STREAM</a>
+        <a href="https://benharry12.github.io/panuwat/">SERVER MINECRAFT</a>
+    </nav>
+
+    <div id="tab1" class="content active">
+        <h1>SERVER CPU</h1>
+        <div class="video-container">
+            <iframe src="https://vdo.ninja/?view=ie7VQBu" allowfullscreen></iframe>
+        </div>
     </div>
 
-    <script>
-        const messagesContainer = document.getElementById('messages');
-        const userInput = document.getElementById('user-input');
-        const sendButton = document.getElementById('send-btn');
+    <div id="tab2" class="content">
+        <h1>INTERNET</h1>
+        <div class="video-container">
+            <iframe src="https://vdo.ninja/?view=xUmxwEW" allowfullscreen></iframe>
+        </div>
+    </div>
 
-        sendButton.addEventListener('click', () => {
-            const userMessage = userInput.value.trim();
-            if (userMessage) {
-                displayMessage(userMessage, 'user');
-                userInput.value = '';
-                fetchAIResponse(userMessage);
-            }
-        });
+    <div id="tab4" class="content">
+        <h1>LIVE STREAM</h1>
+        <div class="video-container">
+            <iframe width="560" height="315" src="https://vdo.ninja/?view=y864jMN&bitrate=20000" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <a class="external-link" href="https://benharry12.github.io/panuwat/" target="_blank">ลิ้งค์ภายนอก</a>
+    </div>
 
-        function displayMessage(message, sender) {
-            const messageDiv = document.createElement('div');
-            messageDiv.classList.add('message', sender === 'user' ? 'user-message' : 'bot-message');
-            messageDiv.textContent = message;
-            messagesContainer.appendChild(messageDiv);
-            messagesContainer.scrollTop = messagesContainer.scrollHeight;
-        }
-
-        function fetchAIResponse(userMessage) {
-            // API URL ของ OpenAI (หรือตัวอื่น ๆ)
-            const apiURL = 'https://api.openai.com/v1/completions';
-            const apiKey = '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'; // ใช้ API Key ที่ได้จาก OpenAI
-
-            const data = {
-                model: 'gpt-3.5-turbo',
-                prompt: userMessage,
-                max_tokens: 150,
-                temperature: 0.7,
-            };
-
-            fetch(apiURL, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${apiKey}`,
-                },
-                body: JSON.stringify(data),
-            })
-            .then(response => response.json())
-            .then(data => {
-                const botMessage = data.choices[0].text.trim();
-                displayMessage(botMessage, 'bot');
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                displayMessage('ขอโทษครับ, เกิดข้อผิดพลาดบางอย่าง.', 'bot');
-            });
-        }
-    </script>
-
+    <footer>
+        <p>&copy; 2024 PANUWAT_SERVER. ทั้งหมด. | ออกแบบโดย <a href="https://www.facebook.com/benharry12" target="_blank">BenHarry12</a></p>
+    </footer>
 </body>
+
 </html>
