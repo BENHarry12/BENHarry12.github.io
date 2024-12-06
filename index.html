@@ -144,26 +144,14 @@
             font-weight: bold;
         }
 
-        /* Footer */
-        footer {
-            padding: 20px;
-            background-color: #2D3748;
-            color: #fff;
-            text-align: center;
-            position: fixed;
-            width: 100%;
-            bottom: 0;
-        }
-
-        footer a {
-            color: #A0AEC0;
-            text-decoration: none;
+        /* Status display */
+        .wifi-status {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 16px;
+            color: green;
             font-weight: bold;
-            transition: color 0.3s ease;
-        }
-
-        footer a:hover {
-            color: #3B82F6;
         }
 
         /* Responsive Design */
@@ -206,8 +194,21 @@
             timeElement.textContent = "เวลาประเทศไทย: " + timeString;
         }
 
+        // Function to check Wi-Fi status (whether online or offline)
+        function checkWifiStatus() {
+            var wifiStatus = document.getElementById('wifi-status');
+            if (navigator.onLine) {
+                wifiStatus.textContent = "สถานะ Wi-Fi: ออนไลน์";
+                wifiStatus.style.color = "green";
+            } else {
+                wifiStatus.textContent = "สถานะ Wi-Fi: ออฟไลน์";
+                wifiStatus.style.color = "red";
+            }
+        }
+
         window.onload = function () {
             setInterval(updateTime, 1000); // Update time every second
+            setInterval(checkWifiStatus, 1000); // Check Wi-Fi status every second
         };
     </script>
 </head>
@@ -223,6 +224,9 @@
             <a href="#" onclick="showTab('tab4')">CHAT GPT</a>
         </div>
     </div>
+
+    <!-- Display Wi-Fi Status -->
+    <div id="wifi-status" class="wifi-status">สถานะ Wi-Fi: กำลังตรวจสอบ...</div>
 
     <!-- Content area -->
     <div class="content-area">
@@ -256,11 +260,6 @@
             <p>กำลังปรับปรุง...</p>
         </div>
     </div>
-
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2024 <a href="https://github.com/PanuwatDev" target="_blank">Panuwat</a></p>
-    </footer>
 </body>
 
 </html>
