@@ -17,56 +17,80 @@
             background-color: #f3f3f3;
             color: #333;
             display: flex;
+            flex-direction: column;
             height: 100vh;
             overflow: hidden;
         }
 
-        /* Sidebar */
-        .sidebar {
-            width: 250px;
+        /* Button for the dropdown menu */
+        .menu-toggle {
             background-color: #1A202C;
-            padding-top: 30px;
-            position: fixed;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: 1000;
-            box-shadow: 4px 0 15px rgba(0, 0, 0, 0.1);
             color: #fff;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            padding-bottom: 30px;
-            border-radius: 10px;
-        }
-
-        .sidebar a {
-            display: flex;
-            align-items: center;
-            padding: 18px;
-            color: #D1D5DB;
-            text-decoration: none;
-            font-weight: bold;
+            border: none;
+            padding: 12px 20px;
             font-size: 18px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            margin: 20px;
+            text-align: center;
+        }
+
+        .menu-toggle:hover {
+            background-color: #3B82F6;
+        }
+
+        /* Dropdown menu container */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        /* Dropdown button */
+        .dropdown-button {
+            background-color: #1A202C;
+            color: white;
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            border: none;
+        }
+
+        .dropdown-button:hover {
+            background-color: #3B82F6;
+        }
+
+        /* Dropdown content */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #1A202C;
+            min-width: 160px;
+            z-index: 1;
+            border-radius: 8px;
+            margin-top: 5px;
+        }
+
+        .dropdown-content a {
+            color: #fff;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            font-size: 16px;
+            font-weight: bold;
             text-transform: capitalize;
-            margin: 10px 0;
-            border-radius: 10px;
-            transition: background 0.3s ease, color 0.3s ease;
+            transition: background-color 0.3s ease;
+            border-radius: 8px;
         }
 
-        .sidebar a.active {
+        .dropdown-content a:hover {
             background-color: #3B82F6;
-            color: white;
         }
 
-        .sidebar a:hover {
-            background-color: #3B82F6;
-            color: white;
-        }
-
-        .sidebar i {
-            margin-right: 10px;
-            font-size: 20px;
+        .dropdown:hover .dropdown-content {
+            display: block;
         }
 
         /* Content area */
@@ -91,25 +115,6 @@
         .content.active {
             display: block;
             transform: translateY(0);
-        }
-
-        .video-container {
-            position: relative;
-            margin-bottom: 30px;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .video-container iframe {
-            width: 100%;
-            height: 450px;
-            border: none;
-            transition: transform 0.3s ease;
-        }
-
-        .video-container iframe:hover {
-            transform: scale(1.05);
         }
 
         /* Time display */
@@ -142,38 +147,10 @@
             color: #3B82F6;
         }
 
-        .external-link {
-            display: inline-block;
-            margin-top: 20px;
-            font-size: 16px;
-            color: #A0AEC0;
-            text-decoration: underline;
-            cursor: pointer;
-            transition: color 0.3s ease;
-        }
-
-        .external-link:hover {
-            color: #3B82F6;
-        }
-
         /* Responsive Design */
         @media only screen and (max-width: 768px) {
             body {
                 flex-direction: column;
-            }
-
-            .sidebar {
-                width: 100%;
-                height: auto;
-                position: relative;
-                display: flex;
-                justify-content: center;
-                box-shadow: none;
-            }
-
-            .sidebar a {
-                margin: 5px;
-                font-size: 14px;
             }
 
             .content-area {
@@ -190,15 +167,8 @@
                 tab.classList.remove('active');
             });
 
-            // Add active class to the clicked tab's content
-            var tabLinks = document.querySelectorAll('.sidebar a');
-            tabLinks.forEach(function (link) {
-                link.classList.remove('active');
-            });
-
             // Display the selected tab content
             document.getElementById(tabId).classList.add('active');
-            document.querySelector(`.sidebar a[href="#${tabId}"]`).classList.add('active');
         }
 
         // Function to update the time in Thailand
@@ -212,30 +182,24 @@
         }
 
         window.onload = function () {
-            showTab('tab1'); // Default active tab
             setInterval(updateTime, 1000); // Update time every second
         };
     </script>
 </head>
 
 <body>
-    <!-- Sidebar for navigation -->
-    <div class="sidebar">
-        <a href="#tab1" onclick="showTab('tab1')" class="active">
-            <i class="fa fa-cogs"></i> SERVER
-        </a>
-        <a href="#tab2" onclick="showTab('tab2')">
-            <i class="fa fa-globe"></i> INTERNET
-        </a>
-        <a href="#tab3" onclick="showTab('tab3')">
-            <i class="fa fa-video"></i> LIVE STREAM
-        </a>
-        <a href="#tab4" onclick="showTab('tab4')">
-            <i class="fa fa-comments"></i> CHAT GPT
-        </a>
+    <!-- Button to toggle dropdown -->
+    <div class="dropdown">
+        <button class="dropdown-button">เมนู</button>
+        <div class="dropdown-content">
+            <a href="#" onclick="showTab('tab1')">SERVER</a>
+            <a href="#" onclick="showTab('tab2')">INTERNET</a>
+            <a href="#" onclick="showTab('tab3')">LIVE STREAM</a>
+            <a href="#" onclick="showTab('tab4')">CHAT GPT</a>
+        </div>
     </div>
 
-    <!-- Content area where the selected tab will be displayed -->
+    <!-- Content area -->
     <div class="content-area">
         <!-- Time display -->
         <div id="time" class="time"></div>
