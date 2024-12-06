@@ -14,67 +14,78 @@
             font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f5f5f5;
+            background-color: #f3f3f3;
             color: #333;
             display: flex;
-            min-height: 100vh;
-            overflow-x: hidden;
+            height: 100vh;
+            overflow: hidden;
         }
 
         /* Sidebar */
         .sidebar {
             width: 250px;
-            background-color: #2C3E50;
-            padding-top: 20px;
+            background-color: #1A202C;
+            padding-top: 30px;
             position: fixed;
             height: 100%;
             top: 0;
             left: 0;
             z-index: 1000;
-            box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 4px 0 15px rgba(0, 0, 0, 0.1);
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            padding-bottom: 30px;
+            border-radius: 10px;
         }
 
         .sidebar a {
-            display: block;
-            padding: 15px;
-            color: #fff;
+            display: flex;
+            align-items: center;
+            padding: 18px;
+            color: #D1D5DB;
             text-decoration: none;
             font-weight: bold;
             font-size: 18px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            text-transform: capitalize;
             margin: 10px 0;
-            transition: all 0.3s ease;
-            background-color: #3498db;
-            border-radius: 5px;
+            border-radius: 10px;
+            transition: background 0.3s ease, color 0.3s ease;
         }
 
         .sidebar a.active {
-            background-color: #fff;
-            color: #3498db;
+            background-color: #3B82F6;
+            color: white;
         }
 
         .sidebar a:hover {
-            background-color: #fff;
-            color: #3498db;
+            background-color: #3B82F6;
+            color: white;
+        }
+
+        .sidebar i {
+            margin-right: 10px;
+            font-size: 20px;
         }
 
         /* Content area */
         .content-area {
             margin-left: 250px;
-            padding: 20px;
+            padding: 30px;
             flex-grow: 1;
+            background-color: #F9FAFB;
+            overflow-y: auto;
         }
 
-        /* Content sections */
         .content {
             display: none;
-            padding: 40px 20px;
-            background: #ffffff;
+            background: #fff;
+            padding: 30px;
             border-radius: 12px;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
             transform: translateY(20px);
-            transition: transform 0.4s ease, opacity 0.4s ease;
+            transition: transform 0.3s ease, opacity 0.3s ease;
         }
 
         .content.active {
@@ -101,49 +112,48 @@
             transform: scale(1.05);
         }
 
+        /* Time display */
+        .time {
+            font-size: 22px;
+            margin-top: 20px;
+            color: #3B82F6;
+            font-weight: bold;
+        }
+
         /* Footer */
         footer {
-            padding: 30px 20px;
-            background-color: #34495e;
+            padding: 20px;
+            background-color: #2D3748;
             color: #fff;
             text-align: center;
-            box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.1);
             position: fixed;
             width: 100%;
             bottom: 0;
         }
 
         footer a {
-            color: #fff;
+            color: #A0AEC0;
             text-decoration: none;
             font-weight: bold;
             transition: color 0.3s ease;
         }
 
         footer a:hover {
-            color: #3498db;
+            color: #3B82F6;
         }
 
         .external-link {
             display: inline-block;
             margin-top: 20px;
             font-size: 16px;
-            color: #fff;
+            color: #A0AEC0;
             text-decoration: underline;
             cursor: pointer;
             transition: color 0.3s ease;
         }
 
         .external-link:hover {
-            color: #3498db;
-        }
-
-        /* Time display */
-        .time {
-            font-size: 20px;
-            margin-top: 10px;
-            color: #3498db;
-            font-weight: bold;
+            color: #3B82F6;
         }
 
         /* Responsive Design */
@@ -211,11 +221,18 @@
 <body>
     <!-- Sidebar for navigation -->
     <div class="sidebar">
-        <a href="#tab1" onclick="showTab('tab1')">SERVER</a>
-        <a href="#tab2" onclick="showTab('tab2')">INTERNET</a>
-        <a href="#tab3" onclick="showTab('tab3')">LIVE STREAM</a>
-        <a href="#tab4" onclick="showTab('tab4')">CHAT GPT</a>
-        <a href="https://benharry12.github.io/panuwat/">SERVER MINECRAFT</a>
+        <a href="#tab1" onclick="showTab('tab1')" class="active">
+            <i class="fa fa-cogs"></i> SERVER
+        </a>
+        <a href="#tab2" onclick="showTab('tab2')">
+            <i class="fa fa-globe"></i> INTERNET
+        </a>
+        <a href="#tab3" onclick="showTab('tab3')">
+            <i class="fa fa-video"></i> LIVE STREAM
+        </a>
+        <a href="#tab4" onclick="showTab('tab4')">
+            <i class="fa fa-comments"></i> CHAT GPT
+        </a>
     </div>
 
     <!-- Content area where the selected tab will be displayed -->
@@ -241,20 +258,19 @@
         <div id="tab3" class="content">
             <h1>LIVE STREAM</h1>
             <div class="video-container">
-                <iframe src="https://vdo.ninja/?view=y864jMN&bitrate=20000" allowfullscreen></iframe>
+                <iframe src="https://vdo.ninja/?view=7EgRvbw" allowfullscreen></iframe>
             </div>
-            <a class="external-link" href="https://benharry12.github.io/panuwat/" target="_blank">ลิ้งค์ภายนอก</a>
         </div>
 
         <div id="tab4" class="content">
-            <h1>CHAT GPT (กำลังปรับปรุง)</h1>
-            <p>เรากำลังปรับปรุงการเชื่อมต่อกับ ChatGPT กรุณากลับมาที่นี่ในภายหลัง</p>
+            <h1>CHAT GPT</h1>
+            <p>กำลังปรับปรุง...</p>
         </div>
     </div>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2024 PANUWAT_SERVER. ทั้งหมด. | ออกแบบโดย <a href="https://www.facebook.com/benharry12" target="_blank">BenHarry12</a></p>
+        <p>&copy; 2024 <a href="https://github.com/PanuwatDev" target="_blank">Panuwat</a></p>
     </footer>
 </body>
 
