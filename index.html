@@ -1,229 +1,127 @@
 <!DOCTYPE html>
 <html lang="th">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PANUWAT_DEV</title>
+    <title>PANUWAT DEV</title>
     <link rel="icon" href="https://img5.pic.in.th/file/secure-sv1/IMG_076653e98b38560f08f3.jpeg" type="image/jpeg">
-    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Global Styles */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
         body {
-            font-family: 'Rubik', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #121212;
-            color: #fff;
-            display: flex;
-            flex-direction: column;
-            height: 100vh;
-            transition: background-color 0.3s ease, color 0.3s ease;
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(to bottom right, #1a1a1a, #121212);
+            color: #f0f0f0;
+            min-height: 100vh;
+            overscroll-behavior: none;
         }
-
-        /* Dark Theme */
-        body.dark {
-            background-color: #121212;
-            color: #fff;
+        .glass-morphism {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.125);
         }
-
-        /* Navigation Bar */
-        .nav-bar {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background: #1a1a1a;
-            padding: 20px 0;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            left: 0;
-            z-index: 100;
+        .hover-scale {
+            transition: all 0.3s ease;
         }
-
-        .nav-bar a {
-            text-decoration: none;
-            color: #fff;
-            font-size: 22px; /* Increased size for better readability */
-            font-weight: 500;
-            margin: 12px 0;
-            padding: 12px 24px; /* Added padding for better spacing */
-            border-radius: 8px; /* More rounded corners */
-            transition: background-color 0.3s ease;
-            width: 100%;
-            text-align: center;
-        }
-
-        .nav-bar a:hover {
-            background-color: #333;
-        }
-
-        /* Main Content Area */
-        .main-content {
-            margin-top: 90px; /* Adjusted for better spacing with larger nav-bar */
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            flex-grow: 1;
-            padding: 40px;
-            transition: transform 0.3s ease;
-        }
-
-        /* Card Layout for Pages */
-        .card {
-            width: 100%;
-            max-width: 600px; /* Increased max-width for larger content */
-            background-color: #1f1f1f;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-        }
-
-        .card h2 {
-            font-size: 28px; /* Larger title */
-            font-weight: 600;
-            margin-bottom: 20px;
-            color: #fff;
-        }
-
-        .card p {
-            font-size: 18px; /* Larger text for better readability */
-            line-height: 1.6;
-            color: #ccc;
-        }
-
-        .card iframe {
-            width: 100%;
-            height: 400px;
-            border: none;
-            border-radius: 12px;
-        }
-
-        /* Theme Toggle Button */
-        .theme-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background-color: #00bcd4;
-            color: #fff;
-            padding: 12px 24px;
-            font-size: 18px;
-            border-radius: 50px;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            transition: background-color 0.3s ease;
-        }
-
-        .theme-toggle:hover {
-            background-color: #ff5722;
-        }
-
-        /* Responsive Design */
-        @media only screen and (max-width: 768px) {
-            .nav-bar {
-                flex-direction: column;
-                padding: 20px 0;
-            }
-
-            .nav-bar a {
-                margin: 12px 0;
-                font-size: 18px; /* Reduced size for smaller screens */
-            }
-
-            .main-content {
-                padding: 20px;
-            }
-
-            .card {
-                padding: 20px;
-            }
+        .hover-scale:hover {
+            transform: scale(1.03);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
     </style>
 </head>
+<body class="bg-black">
+    <div id="app" class="min-h-screen">
+        <!-- Navigation -->
+        <nav class="fixed top-0 left-0 right-0 z-50 glass-morphism py-4">
+            <div class="max-w-6xl mx-auto flex justify-between items-center px-4">
+                <div class="text-2xl font-bold tracking-tight text-white">PANUWAT DEV</div>
+                <div class="space-x-4">
+                    <button onclick="toggleTheme()" class="text-white hover:text-gray-300 transition">
+                        🌓 Theme
+                    </button>
+                </div>
+            </div>
+        </nav>
 
-<body>
-    <!-- Theme Toggle Button -->
-    <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+        <!-- Main Content -->
+        <div class="pt-20 max-w-6xl mx-auto px-4">
+            <!-- Menu Grid -->
+            <div id="menu" class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div onclick="navigate('server')" class="glass-morphism rounded-2xl p-6 cursor-pointer hover-scale">
+                    <div class="text-4xl mb-4">🖥️</div>
+                    <h3 class="text-xl font-semibold">SERVER</h3>
+                    <p class="text-gray-300 mt-2">Monitor server streams</p>
+                </div>
+                <div onclick="navigate('internet')" class="glass-morphism rounded-2xl p-6 cursor-pointer hover-scale">
+                    <div class="text-4xl mb-4">🌐</div>
+                    <h3 class="text-xl font-semibold">INTERNET</h3>
+                    <p class="text-gray-300 mt-2">Connection monitoring</p>
+                </div>
+                <div onclick="navigate('live-stream')" class="glass-morphism rounded-2xl p-6 cursor-pointer hover-scale">
+                    <div class="text-4xl mb-4">📡</div>
+                    <h3 class="text-xl font-semibold">LIVE STREAM</h3>
+                    <p class="text-gray-300 mt-2">Real-time streaming</p>
+                </div>
+                <div onclick="navigate('chat-gpt')" class="glass-morphism rounded-2xl p-6 cursor-pointer hover-scale">
+                    <div class="text-4xl mb-4">🤖</div>
+                    <h3 class="text-xl font-semibold">CHAT GPT</h3>
+                    <p class="text-gray-300 mt-2">AI Interaction</p>
+                </div>
+            </div>
 
-    <!-- Navigation Bar -->
-    <div class="nav-bar">
-        <a href="#menu" onclick="navigate('menu')">MENU</a>
-    </div>
+            <!-- Content Sections -->
+            <div id="server-content" class="hidden mt-8">
+                <div class="glass-morphism rounded-2xl p-6">
+                    <h2 class="text-2xl font-bold mb-4">SERVER</h2>
+                    <iframe src="https://vdo.ninja/?view=ie7VQBu" class="w-full h-[500px] rounded-xl" allowfullscreen></iframe>
+                </div>
+            </div>
 
-    <!-- Main Content Area -->
-    <div id="menu" class="main-content">
-        <div class="card">
-            <h2>Menu</h2>
-            <ul style="list-style-type: none; padding: 0;">
-                <li><a href="#server" onclick="navigate('server')">SERVER</a></li>
-                <li><a href="#internet" onclick="navigate('internet')">INTERNET</a></li>
-                <li><a href="#live-stream" onclick="navigate('live-stream')">LIVE STREAM</a></li>
-                <li><a href="#chat-gpt" onclick="navigate('chat-gpt')">CHAT GPT</a></li>
-            </ul>
-        </div>
-    </div>
+            <div id="internet-content" class="hidden mt-8">
+                <div class="glass-morphism rounded-2xl p-6">
+                    <h2 class="text-2xl font-bold mb-4">INTERNET</h2>
+                    <iframe src="https://vdo.ninja/?view=Diqkfuu&bitrate=20000" class="w-full h-[500px] rounded-xl" allowfullscreen></iframe>
+                </div>
+            </div>
 
-    <div id="server" class="main-content" style="display:none;">
-        <div class="card">
-            <h2>SERVER</h2>
-            <iframe src="https://vdo.ninja/?view=ie7VQBu" allowfullscreen></iframe>
-            <p>Watch the server video stream below.</p>
-        </div>
-    </div>
+            <div id="live-stream-content" class="hidden mt-8">
+                <div class="glass-morphism rounded-2xl p-6">
+                    <h2 class="text-2xl font-bold mb-4">LIVE STREAM</h2>
+                    <iframe src="https://vdo.ninja/?view=Diqkfuu&bitrate=30000" class="w-full h-[500px] rounded-xl" allowfullscreen></iframe>
+                </div>
+            </div>
 
-    <div id="internet" class="main-content" style="display:none;">
-        <div class="card">
-            <h2>INTERNET</h2>
-            <iframe src="https://vdo.ninja/?view=Diqkfuu&bitrate=20000" allowfullscreen></iframe>
-            <p>Check out the internet connection stream.</p>
-        </div>
-    </div>
-
-    <div id="live-stream" class="main-content" style="display:none;">
-        <div class="card">
-            <h2>LIVE STREAM</h2>
-            <iframe src="https://vdo.ninja/?view=Diqkfuu&bitrate=30000" allowfullscreen></iframe>
-            <p>Live stream directly from the platform.</p>
-        </div>
-    </div>
-
-    <div id="chat-gpt" class="main-content" style="display:none;">
-        <div class="card">
-            <h2>CHAT GPT</h2>
-            <p>Welcome to ChatGPT. Here, you can talk to an AI!</p>
+            <div id="chat-gpt-content" class="hidden mt-8">
+                <div class="glass-morphism rounded-2xl p-6">
+                    <h2 class="text-2xl font-bold mb-4">CHAT GPT</h2>
+                    <p class="text-gray-300">Welcome to the AI interaction zone. Engage with cutting-edge conversational technology.</p>
+                </div>
+            </div>
         </div>
     </div>
 
     <script>
-        // Toggle theme
+        function navigate(section) {
+            // Hide all content sections
+            ['server', 'internet', 'live-stream', 'chat-gpt'].forEach(sec => {
+                document.getElementById(`${sec}-content`).classList.add('hidden');
+            });
+
+            // Show selected section
+            document.getElementById(`${section}-content`).classList.remove('hidden');
+        }
+
         function toggleTheme() {
             document.body.classList.toggle('dark');
         }
 
-        // Navigation logic to show and hide content
-        function navigate(page) {
-            const sections = document.querySelectorAll('.main-content');
-            sections.forEach(section => {
-                section.style.display = 'none';
-            });
-
-            const activeSection = document.getElementById(page);
-            activeSection.style.display = 'flex';
-        }
-
-        // Initial setup to show the menu content on page load
-        window.onload = function () {
-            navigate('menu');
+        // Default to menu on load
+        window.onload = () => {
+            document.getElementById('server-content').classList.add('hidden');
+            document.getElementById('internet-content').classList.add('hidden');
+            document.getElementById('live-stream-content').classList.add('hidden');
+            document.getElementById('chat-gpt-content').classList.add('hidden');
         };
     </script>
 </body>
-
 </html>
