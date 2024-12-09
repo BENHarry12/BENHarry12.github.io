@@ -13,8 +13,8 @@
             font-family: 'Rubik', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f9f9f9;
-            color: #333;
+            background-color: #121212;
+            color: #fff;
             display: flex;
             flex-direction: column;
             height: 100vh;
@@ -30,10 +30,10 @@
         /* Navigation Bar */
         .nav-bar {
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            background: linear-gradient(135deg, #00bcd4, #ff5722);
-            padding: 10px 0;
+            background: #1a1a1a;
+            padding: 20px 0;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             position: fixed;
             width: 100%;
@@ -44,21 +44,24 @@
 
         .nav-bar a {
             text-decoration: none;
-            color: white;
-            font-size: 18px;
-            font-weight: bold;
-            margin: 0 15px;
-            transition: color 0.3s ease;
+            color: #fff;
+            font-size: 22px; /* Increased size for better readability */
+            font-weight: 500;
+            margin: 12px 0;
+            padding: 12px 24px; /* Added padding for better spacing */
+            border-radius: 8px; /* More rounded corners */
+            transition: background-color 0.3s ease;
+            width: 100%;
+            text-align: center;
         }
 
         .nav-bar a:hover {
-            color: #333;
-            text-decoration: underline;
+            background-color: #333;
         }
 
         /* Main Content Area */
         .main-content {
-            margin-top: 70px;
+            margin-top: 90px; /* Adjusted for better spacing with larger nav-bar */
             display: flex;
             justify-content: center;
             align-items: flex-start;
@@ -70,8 +73,8 @@
         /* Card Layout for Pages */
         .card {
             width: 100%;
-            max-width: 500px;
-            background-color: #fff;
+            max-width: 600px; /* Increased max-width for larger content */
+            background-color: #1f1f1f;
             padding: 30px;
             border-radius: 15px;
             box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
@@ -84,16 +87,16 @@
         }
 
         .card h2 {
-            font-size: 24px;
+            font-size: 28px; /* Larger title */
             font-weight: 600;
             margin-bottom: 20px;
-            color: #333;
+            color: #fff;
         }
 
         .card p {
-            font-size: 16px;
-            line-height: 1.5;
-            color: #666;
+            font-size: 18px; /* Larger text for better readability */
+            line-height: 1.6;
+            color: #ccc;
         }
 
         .card iframe {
@@ -127,11 +130,12 @@
         @media only screen and (max-width: 768px) {
             .nav-bar {
                 flex-direction: column;
-                padding: 10px 0;
+                padding: 20px 0;
             }
 
             .nav-bar a {
-                margin: 10px 0;
+                margin: 12px 0;
+                font-size: 18px; /* Reduced size for smaller screens */
             }
 
             .main-content {
@@ -142,7 +146,6 @@
                 padding: 20px;
             }
         }
-
     </style>
 </head>
 
@@ -152,14 +155,23 @@
 
     <!-- Navigation Bar -->
     <div class="nav-bar">
-        <a href="#server" onclick="navigate('server')">SERVER</a>
-        <a href="#internet" onclick="navigate('internet')">INTERNET</a>
-        <a href="#live-stream" onclick="navigate('live-stream')">LIVE STREAM</a>
-        <a href="#chat-gpt" onclick="navigate('chat-gpt')">CHAT GPT</a>
+        <a href="#menu" onclick="navigate('menu')">MENU</a>
     </div>
 
     <!-- Main Content Area -->
-    <div id="server" class="main-content">
+    <div id="menu" class="main-content">
+        <div class="card">
+            <h2>Menu</h2>
+            <ul style="list-style-type: none; padding: 0;">
+                <li><a href="#server" onclick="navigate('server')">SERVER</a></li>
+                <li><a href="#internet" onclick="navigate('internet')">INTERNET</a></li>
+                <li><a href="#live-stream" onclick="navigate('live-stream')">LIVE STREAM</a></li>
+                <li><a href="#chat-gpt" onclick="navigate('chat-gpt')">CHAT GPT</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="server" class="main-content" style="display:none;">
         <div class="card">
             <h2>SERVER</h2>
             <iframe src="https://vdo.ninja/?view=ie7VQBu" allowfullscreen></iframe>
@@ -207,9 +219,9 @@
             activeSection.style.display = 'flex';
         }
 
-        // Initial setup to show server content on page load
+        // Initial setup to show the menu content on page load
         window.onload = function () {
-            navigate('server');
+            navigate('menu');
         };
     </script>
 </body>
