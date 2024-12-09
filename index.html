@@ -6,6 +6,7 @@
     <title>PANUWAT DEV</title>
     <link rel="icon" href="https://img5.pic.in.th/file/secure-sv1/IMG_076653e98b38560f08f3.jpeg" type="image/jpeg">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
         body {
@@ -26,6 +27,31 @@
         .hover-scale:hover {
             transform: scale(1.03);
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+        #speedometer {
+            width: 300px;
+            height: 300px;
+            background: conic-gradient(
+                from 135deg,
+                #00ff00 0%,
+                #ffff00 33%,
+                #ff0000 66%,
+                #ff0000 100%
+            );
+            border-radius: 50%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #speedNeedle {
+            width: 2px;
+            height: 120px;
+            background: white;
+            position: absolute;
+            bottom: 50%;
+            transform-origin: bottom;
+            transition: transform 1s ease;
         }
     </style>
 </head>
@@ -62,10 +88,10 @@
                     <h3 class="text-xl font-semibold">LIVE STREAM</h3>
                     <p class="text-gray-300 mt-2">Real-time streaming</p>
                 </div>
-                <div onclick="navigate('chat-gpt')" class="glass-morphism rounded-2xl p-6 cursor-pointer hover-scale">
-                    <div class="text-4xl mb-4">🤖</div>
-                    <h3 class="text-xl font-semibold">CHAT GPT</h3>
-                    <p class="text-gray-300 mt-2">AI Interaction</p>
+                <div onclick="navigate('network-test')" class="glass-morphism rounded-2xl p-6 cursor-pointer hover-scale">
+                    <div class="text-4xl mb-4">🚀</div>
+                    <h3 class="text-xl font-semibold">เช็คเน็ต</h3>
+                    <p class="text-gray-300 mt-2">Network Speed Test</p>
                 </div>
             </div>
 
@@ -91,19 +117,51 @@
                 </div>
             </div>
 
-            <div id="chat-gpt-content" class="hidden mt-8">
-                <div class="glass-morphism rounded-2xl p-6">
-                    <h2 class="text-2xl font-bold mb-4">CHAT GPT</h2>
-                    <p class="text-gray-300">Welcome to the AI interaction zone. Engage with cutting-edge conversational technology.</p>
+            <div id="network-test-content" class="hidden mt-8">
+                <div class="glass-morphism rounded-2xl p-6 flex flex-col items-center">
+                    <h2 class="text-2xl font-bold mb-4">เช็คความเร็วอินเทอร์เน็ต</h2>
+                    
+                    <div class="relative mb-6">
+                        <div id="speedometer" class="flex items-center justify-center">
+                            <div id="speedNeedle"></div>
+                            <div class="absolute text-center">
+                                <span id="speedValue" class="text-4xl font-bold text-white">0</span>
+                                <span class="block text-sm text-gray-300">Mbps</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-4 w-full text-center mt-6">
+                        <div>
+                            <h3 class="text-lg font-semibold">Download</h3>
+                            <p id="downloadSpeed" class="text-2xl text-green-400">-</p>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold">Upload</h3>
+                            <p id="uploadSpeed" class="text-2xl text-blue-400">-</p>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold">Ping</h3>
+                            <p id="pingSpeed" class="text-2xl text-purple-400">-</p>
+                        </div>
+                    </div>
+
+                    <button onclick="startSpeedTest()" class="mt-6 bg-blue-500 text-white px-6 py-3 rounded-full hover:bg-blue-600 transition">
+                        เริ่มทดสอบความเร็ว
+                    </button>
+
+                    <canvas id="speedChart" class="mt-6 w-full h-48"></canvas>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
+        let speedChart;
+
         function navigate(section) {
             // Hide all content sections
-            ['server', 'internet', 'live-stream', 'chat-gpt'].forEach(sec => {
+            ['server', 'internet', 'live-stream', 'network-test'].forEach(sec => {
                 document.getElementById(`${sec}-content`).classList.add('hidden');
             });
 
@@ -115,12 +173,75 @@
             document.body.classList.toggle('dark');
         }
 
+        function rotateSpeedometer(speed) {
+            const needle = document.getElementById('speedNeedle');
+            const speedValue = document.getElementById('speedValue');
+            const maxSpeed = 100; // Maximum speed for full rotation
+            const rotation = Math.min((speed / maxSpeed) * 270, 270);
+            
+            needle.style.transform = `rotate(${135 + rotation}deg)`;
+            speedValue.textContent = speed.toFixed(2);
+        }
+
+        function startSpeedTest() {
+            // Simulated speed test (you would replace this with actual speed test logic)
+            const downloadSpeed = Math.random() * 100;
+            const uploadSpeed = Math.random() * 50;
+            const pingSpeed = Math.random() * 50;
+
+            document.getElementById('downloadSpeed').textContent = `${downloadSpeed.toFixed(2)} Mbps`;
+            document.getElementById('uploadSpeed').textContent = `${uploadSpeed.toFixed(2)} Mbps`;
+            document.getElementById('pingSpeed').textContent = `${pingSpeed.toFixed(2)} ms`;
+
+            rotateSpeedometer(downloadSpeed);
+
+            // Update chart
+            updateSpeedChart(downloadSpeed, uploadSpeed, pingSpeed);
+        }
+
+        function updateSpeedChart(download, upload, ping) {
+            if (speedChart) {
+                speedChart.destroy();
+            }
+
+            const ctx = document.getElementById('speedChart').getContext('2d');
+            speedChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Download', 'Upload', 'Ping'],
+                    datasets: [{
+                        label: 'Network Performance',
+                        data: [download, upload, ping],
+                        backgroundColor: [
+                            'rgba(75, 192, 192, 0.6)',
+                            'rgba(54, 162, 235, 0.6)',
+                            'rgba(255, 99, 132, 0.6)'
+                        ],
+                        borderColor: [
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 99, 132, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
         // Default to menu on load
         window.onload = () => {
             document.getElementById('server-content').classList.add('hidden');
             document.getElementById('internet-content').classList.add('hidden');
             document.getElementById('live-stream-content').classList.add('hidden');
-            document.getElementById('chat-gpt-content').classList.add('hidden');
+            document.getElementById('network-test-content').classList.add('hidden');
         };
     </script>
 </body>
