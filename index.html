@@ -9,18 +9,94 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+        /* Loading Animation */
+        #loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #121212;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 1s ease-out;
+        }
+
+        .eye-container {
+            display: flex;
+            gap: 20px;
+        }
+
+        .eye {
+            width: 100px;
+            height: 100px;
+            background-color: white;
+            border-radius: 50%;
+            position: relative;
+            animation: blink 3s infinite;
+            box-shadow: 0 0 20px rgba(255,255,255,0.5);
+        }
+
+        .pupil {
+            width: 40px;
+            height: 40px;
+            background-color: black;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: move-pupil 3s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { transform: scaleY(1); }
+            45%, 55% { transform: scaleY(0.1); }
+        }
+
+        @keyframes move-pupil {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            25% { transform: translate(-40%, -40%) scale(0.8); }
+            50% { transform: translate(-60%, -60%) scale(0.9); }
+            75% { transform: translate(-50%, -50%) scale(1); }
+        }
+
+        /* Dark Theme (Default) */
         body {
             font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
             background: linear-gradient(to bottom right, #1a1a1a, #121212);
             color: #f0f0f0;
             min-height: 100vh;
             overscroll-behavior: none;
+            transition: background 0.3s, color 0.3s;
         }
+
+        /* Light Theme */
+        body.light {
+            background: linear-gradient(to bottom right, #f0f0f0, #ffffff);
+            color: #121212;
+        }
+
         .glass-morphism {
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.125);
+            transition: background 0.3s;
         }
+
+        body.light .glass-morphism {
+            background: rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        body.light nav {
+            background: rgba(255, 255, 255, 0.8);
+            color: #121212;
+        }
+
         .hover-scale {
             transition: all 0.3s ease;
         }
@@ -28,6 +104,7 @@
             transform: scale(1.03);
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
+
         #speedometer {
             width: 300px;
             height: 300px;
@@ -56,13 +133,25 @@
     </style>
 </head>
 <body class="bg-black">
+    <!-- Loading Screen -->
+    <div id="loader">
+        <div class="eye-container">
+            <div class="eye">
+                <div class="pupil"></div>
+            </div>
+            <div class="eye">
+                <div class="pupil"></div>
+            </div>
+        </div>
+    </div>
+
     <div id="app" class="min-h-screen">
         <!-- Navigation -->
         <nav class="fixed top-0 left-0 right-0 z-50 glass-morphism py-4">
             <div class="max-w-6xl mx-auto flex justify-between items-center px-4">
-                <div class="text-2xl font-bold tracking-tight text-white">PANUWAT DEV</div>
+                <div class="text-2xl font-bold tracking-tight">PANUWAT DEV</div>
                 <div class="space-x-4">
-                    <button onclick="toggleTheme()" class="text-white hover:text-gray-300 transition">
+                    <button onclick="toggleTheme()" class="hover:text-gray-300 transition">
                         🌓 Theme
                     </button>
                 </div>
@@ -159,32 +248,53 @@
     <script>
         let speedChart;
 
+        // Loading Animation
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loader');
+            loader.style.opacity = '0';
+            setTimeout(() => {
+                loader.style.display = 'none';
+            }, 1000);
+        });
+
+        // Theme Toggle
+        function toggleTheme() {
+            document.body.classList.toggle('light');
+            
+            // Save theme preference in localStorage
+            const currentTheme = document.body.classList.contains('light') ? 'light' : 'dark';
+            localStorage.setItem('theme', currentTheme);
+        }
+
+        // Check for saved theme preference
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'light') {
+                document.body.classList.add('light');
+            }
+        });
+
+        // Navigation
         function navigate(section) {
-            // Hide all content sections
             ['server', 'internet', 'live-stream', 'network-test'].forEach(sec => {
                 document.getElementById(`${sec}-content`).classList.add('hidden');
             });
-
-            // Show selected section
             document.getElementById(`${section}-content`).classList.remove('hidden');
         }
 
-        function toggleTheme() {
-            document.body.classList.toggle('dark');
-        }
-
+        // Speedometer
         function rotateSpeedometer(speed) {
             const needle = document.getElementById('speedNeedle');
             const speedValue = document.getElementById('speedValue');
-            const maxSpeed = 100; // Maximum speed for full rotation
+            const maxSpeed = 100;
             const rotation = Math.min((speed / maxSpeed) * 270, 270);
             
             needle.style.transform = `rotate(${135 + rotation}deg)`;
             speedValue.textContent = speed.toFixed(2);
         }
 
+        // Speed Test
         function startSpeedTest() {
-            // Simulated speed test (you would replace this with actual speed test logic)
             const downloadSpeed = Math.random() * 100;
             const uploadSpeed = Math.random() * 50;
             const pingSpeed = Math.random() * 50;
@@ -194,11 +304,10 @@
             document.getElementById('pingSpeed').textContent = `${pingSpeed.toFixed(2)} ms`;
 
             rotateSpeedometer(downloadSpeed);
-
-            // Update chart
             updateSpeedChart(downloadSpeed, uploadSpeed, pingSpeed);
         }
 
+        // Speed Chart
         function updateSpeedChart(download, upload, ping) {
             if (speedChart) {
                 speedChart.destroy();
@@ -236,7 +345,7 @@
             });
         }
 
-        // Default to menu on load
+        // Initial page setup
         window.onload = () => {
             document.getElementById('server-content').classList.add('hidden');
             document.getElementById('internet-content').classList.add('hidden');
