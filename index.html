@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="th">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PANUWAT DEV</title>
+    <title>AI PANUWAT</title>
     <link rel="icon" href="https://img5.pic.in.th/file/secure-sv1/IMG_076653e98b38560f08f3.jpeg" type="image/jpeg">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -37,7 +38,7 @@
             border-radius: 50%;
             position: relative;
             animation: blink 3s infinite;
-            box-shadow: 0 0 20px rgba(255,255,255,0.5);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
         }
 
         .pupil {
@@ -53,15 +54,36 @@
         }
 
         @keyframes blink {
-            0%, 100% { transform: scaleY(1); }
-            45%, 55% { transform: scaleY(0.1); }
+
+            0%,
+            100% {
+                transform: scaleY(1);
+            }
+
+            45%,
+            55% {
+                transform: scaleY(0.1);
+            }
         }
 
         @keyframes move-pupil {
-            0%, 100% { transform: translate(-50%, -50%) scale(1); }
-            25% { transform: translate(-40%, -40%) scale(0.8); }
-            50% { transform: translate(-60%, -60%) scale(0.9); }
-            75% { transform: translate(-50%, -50%) scale(1); }
+
+            0%,
+            100% {
+                transform: translate(-50%, -50%) scale(1);
+            }
+
+            25% {
+                transform: translate(-40%, -40%) scale(0.8);
+            }
+
+            50% {
+                transform: translate(-60%, -60%) scale(0.9);
+            }
+
+            75% {
+                transform: translate(-50%, -50%) scale(1);
+            }
         }
 
         /* Dark Theme (Default) */
@@ -100,38 +122,14 @@
         .hover-scale {
             transition: all 0.3s ease;
         }
+
         .hover-scale:hover {
             transform: scale(1.03);
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
-
-        #speedometer {
-            width: 300px;
-            height: 300px;
-            background: conic-gradient(
-                from 135deg,
-                #00ff00 0%,
-                #ffff00 33%,
-                #ff0000 66%,
-                #ff0000 100%
-            );
-            border-radius: 50%;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        #speedNeedle {
-            width: 2px;
-            height: 120px;
-            background: white;
-            position: absolute;
-            bottom: 50%;
-            transform-origin: bottom;
-            transition: transform 1s ease;
-        }
     </style>
 </head>
+
 <body class="bg-black">
     <!-- Loading Screen -->
     <div id="loader">
@@ -149,7 +147,7 @@
         <!-- Navigation -->
         <nav class="fixed top-0 left-0 right-0 z-50 glass-morphism py-4">
             <div class="max-w-6xl mx-auto flex justify-between items-center px-4">
-                <div class="text-2xl font-bold tracking-tight">PANUWAT DEV</div>
+                <div class="text-2xl font-bold tracking-tight">AI PANUWAT</div>
                 <div class="space-x-4">
                     <button onclick="toggleTheme()" class="hover:text-gray-300 transition">
                         🌓 Theme
@@ -162,6 +160,11 @@
         <div class="pt-20 max-w-6xl mx-auto px-4">
             <!-- Menu Grid -->
             <div id="menu" class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div onclick="navigate('chat')" class="glass-morphism rounded-2xl p-6 cursor-pointer hover-scale">
+                    <div class="text-4xl mb-4">💬</div>
+                    <h3 class="text-xl font-semibold">AI PANUWAT</h3>
+                    <p class="text-gray-300 mt-2">กำลังพัฒนา..</p>
+                </div>
                 <div onclick="navigate('server')" class="glass-morphism rounded-2xl p-6 cursor-pointer hover-scale">
                     <div class="text-4xl mb-4">🖥️</div>
                     <h3 class="text-xl font-semibold">SERVER</h3>
@@ -172,12 +175,8 @@
                     <h3 class="text-xl font-semibold">INTERNET</h3>
                     <p class="text-gray-300 mt-2">Connection monitoring</p>
                 </div>
-                <div onclick="navigate('live-stream')" class="glass-morphism rounded-2xl p-6 cursor-pointer hover-scale">
-                    <div class="text-4xl mb-4">📡</div>
-                    <h3 class="text-xl font-semibold">LIVE STREAM</h3>
-                    <p class="text-gray-300 mt-2">Real-time streaming</p>
-                </div>
-                <div onclick="navigate('network-test')" class="glass-morphism rounded-2xl p-6 cursor-pointer hover-scale">
+                <div onclick="navigate('network-test')"
+                    class="glass-morphism rounded-2xl p-6 cursor-pointer hover-scale">
                     <div class="text-4xl mb-4">🚀</div>
                     <h3 class="text-xl font-semibold">เช็คเน็ต</h3>
                     <p class="text-gray-300 mt-2">Network Speed Test</p>
@@ -185,31 +184,33 @@
             </div>
 
             <!-- Content Sections -->
+            <div id="chat-content" class="mt-8">
+                <div class="glass-morphism rounded-2xl p-6">
+                    <h2 class="text-2xl font-bold mb-4">AI CHAT</h2>
+                    <iframe src="https://deepai.org/chat" class="w-full h-[600px] rounded-xl" allowfullscreen></iframe>
+                </div>
+            </div>
+
             <div id="server-content" class="hidden mt-8">
                 <div class="glass-morphism rounded-2xl p-6">
                     <h2 class="text-2xl font-bold mb-4">SERVER</h2>
-                    <iframe src="https://vdo.ninja/?view=ie7VQBu" class="w-full h-[500px] rounded-xl" allowfullscreen></iframe>
+                    <iframe src="https://vdo.ninja/?view=ie7VQBu" class="w-full h-[500px] rounded-xl"
+                        allowfullscreen></iframe>
                 </div>
             </div>
 
             <div id="internet-content" class="hidden mt-8">
                 <div class="glass-morphism rounded-2xl p-6">
-                    <h2 class="text-2xl font-bold mb-4">INTERNET</h2>
-                    <iframe src="https://vdo.ninja/?view=Diqkfuu&bitrate=20000" class="w-full h-[500px] rounded-xl" allowfullscreen></iframe>
-                </div>
-            </div>
-
-            <div id="live-stream-content" class="hidden mt-8">
-                <div class="glass-morphism rounded-2xl p-6">
-                    <h2 class="text-2xl font-bold mb-4">LIVE STREAM</h2>
-                    <iframe src="https://vdo.ninja/?view=Diqkfuu&bitrate=30000" class="w-full h-[500px] rounded-xl" allowfullscreen></iframe>
+                    <h2 class="text-2xl font-bold mb-4">LIVE</h2>
+                    <iframe src="https://vdo.ninja/?view=Diqkfuu&bitrate=30000" class="w-full h-[500px] rounded-xl"
+                        allowfullscreen></iframe>
                 </div>
             </div>
 
             <div id="network-test-content" class="hidden mt-8">
                 <div class="glass-morphism rounded-2xl p-6 flex flex-col items-center">
                     <h2 class="text-2xl font-bold mb-4">เช็คความเร็วอินเทอร์เน็ต</h2>
-                    
+
                     <div class="relative mb-6">
                         <div id="speedometer" class="flex items-center justify-center">
                             <div id="speedNeedle"></div>
@@ -235,7 +236,8 @@
                         </div>
                     </div>
 
-                    <button onclick="startSpeedTest()" class="mt-6 bg-blue-500 text-white px-6 py-3 rounded-full hover:bg-blue-600 transition">
+                    <button onclick="startSpeedTest()"
+                        class="mt-6 bg-blue-500 text-white px-6 py-3 rounded-full hover:bg-blue-600 transition">
                         เริ่มทดสอบความเร็ว
                     </button>
 
@@ -246,8 +248,6 @@
     </div>
 
     <script>
-        let speedChart;
-
         // Loading Animation
         window.addEventListener('load', () => {
             const loader = document.getElementById('loader');
@@ -260,7 +260,7 @@
         // Theme Toggle
         function toggleTheme() {
             document.body.classList.toggle('light');
-            
+
             // Save theme preference in localStorage
             const currentTheme = document.body.classList.contains('light') ? 'light' : 'dark';
             localStorage.setItem('theme', currentTheme);
@@ -276,19 +276,19 @@
 
         // Navigation
         function navigate(section) {
-            ['server', 'internet', 'live-stream', 'network-test'].forEach(sec => {
+            ['chat', 'server', 'internet', 'network-test'].forEach(sec => {
                 document.getElementById(`${sec}-content`).classList.add('hidden');
             });
             document.getElementById(`${section}-content`).classList.remove('hidden');
         }
 
-        // Speedometer
+        // Speedometer (for Network Test)
         function rotateSpeedometer(speed) {
             const needle = document.getElementById('speedNeedle');
             const speedValue = document.getElementById('speedValue');
             const maxSpeed = 100;
             const rotation = Math.min((speed / maxSpeed) * 270, 270);
-            
+
             needle.style.transform = `rotate(${135 + rotation}deg)`;
             speedValue.textContent = speed.toFixed(2);
         }
@@ -309,12 +309,12 @@
 
         // Speed Chart
         function updateSpeedChart(download, upload, ping) {
-            if (speedChart) {
-                speedChart.destroy();
+            if (window.speedChart) {
+                window.speedChart.destroy();
             }
 
             const ctx = document.getElementById('speedChart').getContext('2d');
-            speedChart = new Chart(ctx, {
+            window.speedChart = new Chart(ctx, {
                 type: 'bar',
                 data: {
                     labels: ['Download', 'Upload', 'Ping'],
@@ -347,11 +347,12 @@
 
         // Initial page setup
         window.onload = () => {
+            document.getElementById('chat-content').classList.remove('hidden');
             document.getElementById('server-content').classList.add('hidden');
             document.getElementById('internet-content').classList.add('hidden');
-            document.getElementById('live-stream-content').classList.add('hidden');
             document.getElementById('network-test-content').classList.add('hidden');
         };
     </script>
 </body>
+
 </html>
