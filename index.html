@@ -18,7 +18,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: #1e1e1e;
+            background-color: #121212;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -54,37 +54,52 @@
         }
 
         @keyframes blink {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: scaleY(1);
             }
-            45%, 55% {
+
+            45%,
+            55% {
                 transform: scaleY(0.1);
             }
         }
 
         @keyframes move-pupil {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: translate(-50%, -50%) scale(1);
             }
+
             25% {
                 transform: translate(-40%, -40%) scale(0.8);
             }
+
             50% {
                 transform: translate(-60%, -60%) scale(0.9);
             }
+
             75% {
                 transform: translate(-50%, -50%) scale(1);
             }
         }
 
-        /* Dark Theme */
+        /* Dark Theme (Default) */
         body {
             font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(to bottom right, #2c2c2c, #1e1e1e);
+            background: linear-gradient(to bottom right, #1a1a1a, #121212);
             color: #f0f0f0;
             min-height: 100vh;
             overscroll-behavior: none;
             transition: background 0.3s, color 0.3s;
+        }
+
+        /* Light Theme */
+        body.light {
+            background: linear-gradient(to bottom right, #f0f0f0, #ffffff);
+            color: #121212;
         }
 
         .glass-morphism {
@@ -92,6 +107,16 @@
             backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.125);
             transition: background 0.3s;
+        }
+
+        body.light .glass-morphism {
+            background: rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        body.light nav {
+            background: rgba(255, 255, 255, 0.8);
+            color: #121212;
         }
 
         .hover-scale {
@@ -105,7 +130,7 @@
     </style>
 </head>
 
-<body class="bg-gray-900">
+<body class="bg-black">
     <!-- Loading Screen -->
     <div id="loader">
         <div class="eye-container">
@@ -155,12 +180,6 @@
                     <div class="text-4xl mb-4">🚀</div>
                     <h3 class="text-xl font-semibold">เช็คเน็ต</h3>
                     <p class="text-gray-300 mt-2">Network Speed Test</p>
-                </div>
-                <!-- New Screen Share Section -->
-                <div onclick="navigate('screen-share')" class="glass-morphism rounded-2xl p-6 cursor-pointer hover-scale">
-                    <div class="text-4xl mb-4">📺</div>
-                    <h3 class="text-xl font-semibold">Screen Share</h3>
-                    <p class="text-gray-300 mt-2">แชร์หน้าจอกับเพื่อน</p>
                 </div>
             </div>
 
@@ -225,20 +244,6 @@
                     <canvas id="speedChart" class="mt-6 w-full h-48"></canvas>
                 </div>
             </div>
-
-            <!-- New Screen Share Content Section -->
-            <div id="screen-share-content" class="hidden mt-8">
-                <div class="glass-morphism rounded-2xl p-6">
-                    <h2 class="text-2xl font-bold mb-4">Screen Share</h2>
-                    <div class="flex flex-col space-y-4">
-                        <iframe src="https://vdo.ninja/?push" class="w-full h-[500px] rounded-xl" allowfullscreen></iframe>
-                        <div class="text-center">
-                            <p class="text-gray-300">คลิก "Share" ใน VDO.Ninja เพื่อเริ่มแชร์หน้าจอ</p>
-                            <p class="text-sm text-gray-500">แนะนำ: ใช้ Chrome หรือ Edge สำหรับการแชร์หน้าจอที่ดีที่สุด</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 
@@ -252,15 +257,26 @@
             }, 1000);
         });
 
-        // Theme Toggle (Removed to keep dark theme)
+        // Theme Toggle
         function toggleTheme() {
-            // Placeholder to maintain the button functionality
-            alert('Dark theme is currently active');
+            document.body.classList.toggle('light');
+
+            // Save theme preference in localStorage
+            const currentTheme = document.body.classList.contains('light') ? 'light' : 'dark';
+            localStorage.setItem('theme', currentTheme);
         }
+
+        // Check for saved theme preference
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'light') {
+                document.body.classList.add('light');
+            }
+        });
 
         // Navigation
         function navigate(section) {
-            ['chat', 'server', 'internet', 'network-test', 'screen-share'].forEach(sec => {
+            ['chat', 'server', 'internet', 'network-test'].forEach(sec => {
                 document.getElementById(`${sec}-content`).classList.add('hidden');
             });
             document.getElementById(`${section}-content`).classList.remove('hidden');
@@ -332,9 +348,9 @@
         // Initial page setup
         window.onload = () => {
             document.getElementById('chat-content').classList.remove('hidden');
-            ['server-content', 'internet-content', 'network-test-content', 'screen-share-content'].forEach(id => {
-                document.getElementById(id).classList.add('hidden');
-            });
+            document.getElementById('server-content').classList.add('hidden');
+            document.getElementById('internet-content').classList.add('hidden');
+            document.getElementById('network-test-content').classList.add('hidden');
         };
     </script>
 </body>
