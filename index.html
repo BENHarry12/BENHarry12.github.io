@@ -1,358 +1,211 @@
-    <!DOCTYPE html>
-    <html lang="th">
+<!DOCTYPE html>
+<html lang="th">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>AI PANUWAT</title>
-        <link rel="icon" href="https://img5.pic.in.th/file/secure-sv1/IMG_076653e98b38560f08f3.jpeg" type="image/jpeg">
-        <script src="https://cdn.tailwindcss.com"></script>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <style>
-            @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI PANUWAT</title>
+    <link rel="icon" href="https://img5.pic.in.th/file/secure-sv1/IMG_076653e98b38560f08f3.jpeg" type="image/jpeg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
 
-            /* Loading Animation */
-            #loader {
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background-color: #121212;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                z-index: 9999;
-                transition: opacity 1s ease-out;
+        /* Loading Animation */
+        #loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #2c2c2c;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 1s ease-out;
+        }
+
+        .eye-container {
+            display: flex;
+            gap: 20px;
+        }
+
+        .eye {
+            width: 100px;
+            height: 100px;
+            background-color: #4a4a4a;
+            border-radius: 50%;
+            position: relative;
+            animation: blink 3s infinite;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+        }
+
+        .pupil {
+            width: 40px;
+            height: 40px;
+            background-color: #1a1a1a;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: move-pupil 3s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% {
+                transform: scaleY(1);
             }
-
-            .eye-container {
-                display: flex;
-                gap: 20px;
+            45%, 55% {
+                transform: scaleY(0.1);
             }
+        }
 
-            .eye {
-                width: 100px;
-                height: 100px;
-                background-color: white;
-                border-radius: 50%;
-                position: relative;
-                animation: blink 3s infinite;
-                box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+        @keyframes move-pupil {
+            0%, 100% {
+                transform: translate(-50%, -50%) scale(1);
             }
-
-            .pupil {
-                width: 40px;
-                height: 40px;
-                background-color: black;
-                border-radius: 50%;
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                animation: move-pupil 3s infinite;
+            25% {
+                transform: translate(-40%, -40%) scale(0.8);
             }
-
-            @keyframes blink {
-
-                0%,
-                100% {
-                    transform: scaleY(1);
-                }
-
-                45%,
-                55% {
-                    transform: scaleY(0.1);
-                }
+            50% {
+                transform: translate(-60%, -60%) scale(0.9);
             }
-
-            @keyframes move-pupil {
-
-                0%,
-                100% {
-                    transform: translate(-50%, -50%) scale(1);
-                }
-
-                25% {
-                    transform: translate(-40%, -40%) scale(0.8);
-                }
-
-                50% {
-                    transform: translate(-60%, -60%) scale(0.9);
-                }
-
-                75% {
-                    transform: translate(-50%, -50%) scale(1);
-                }
+            75% {
+                transform: translate(-50%, -50%) scale(1);
             }
+        }
 
-            /* Dark Theme (Default) */
-            body {
-                font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-                background: linear-gradient(to bottom right, #1a1a1a, #121212);
-                color: #f0f0f0;
-                min-height: 100vh;
-                overscroll-behavior: none;
-                transition: background 0.3s, color 0.3s;
-            }
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(to bottom right, #3c3c3c, #2c2c2c);
+            color: #f0f0f0;
+            min-height: 100vh;
+            overscroll-behavior: none;
+        }
 
-            /* Light Theme */
-            body.light {
-                background: linear-gradient(to bottom right, #f0f0f0, #ffffff);
-                color: #121212;
-            }
+        .glass-morphism {
+            background: rgba(80, 80, 80, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(120, 120, 120, 0.2);
+        }
 
-            .glass-morphism {
-                background: rgba(255, 255, 255, 0.1);
-                backdrop-filter: blur(20px);
-                border: 1px solid rgba(255, 255, 255, 0.125);
-                transition: background 0.3s;
-            }
+        .hover-scale {
+            transition: all 0.3s ease;
+        }
 
-            body.light .glass-morphism {
-                background: rgba(0, 0, 0, 0.05);
-                border: 1px solid rgba(0, 0, 0, 0.1);
-            }
+        .hover-scale:hover {
+            transform: scale(1.03);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
 
-            body.light nav {
-                background: rgba(255, 255, 255, 0.8);
-                color: #121212;
-            }
+<body class="bg-gray-800">
+    <!-- Loading Screen -->
+    <div id="loader">
+        <div class="eye-container">
+            <div class="eye">
+                <div class="pupil"></div>
+            </div>
+            <div class="eye">
+                <div class="pupil"></div>
+            </div>
+        </div>
+    </div>
 
-            .hover-scale {
-                transition: all 0.3s ease;
-            }
+    <div id="app" class="min-h-screen">
+        <!-- Navigation -->
+        <nav class="fixed top-0 left-0 right-0 z-50 glass-morphism py-4">
+            <div class="max-w-6xl mx-auto flex justify-between items-center px-4">
+                <div class="text-2xl font-bold tracking-tight">AI PANUWAT</div>
+            </div>
+        </nav>
 
-            .hover-scale:hover {
-                transform: scale(1.03);
-                box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            }
-        </style>
-    </head>
-
-    <body class="bg-black">
-        <!-- Loading Screen -->
-        <div id="loader">
-            <div class="eye-container">
-                <div class="eye">
-                    <div class="pupil"></div>
+        <!-- Main Content -->
+        <div class="pt-20 max-w-6xl mx-auto px-4">
+            <!-- Menu Grid -->
+            <div id="menu" class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div onclick="navigate('chat')" class="glass-morphism rounded-2xl p-6 cursor-pointer hover-scale">
+                    <div class="text-4xl mb-4">💬</div>
+                    <h3 class="text-xl font-semibold">AI PANUWAT</h3>
+                    <p class="text-gray-300 mt-2">กำลังพัฒนา..</p>
                 </div>
-                <div class="eye">
-                    <div class="pupil"></div>
+                <div onclick="navigate('server')" class="glass-morphism rounded-2xl p-6 cursor-pointer hover-scale">
+                    <div class="text-4xl mb-4">🖥️</div>
+                    <h3 class="text-xl font-semibold">SERVER</h3>
+                    <p class="text-gray-300 mt-2">Monitor server streams</p>
+                </div>
+                <div onclick="navigate('internet')" class="glass-morphism rounded-2xl p-6 cursor-pointer hover-scale">
+                    <div class="text-4xl mb-4">🌐</div>
+                    <h3 class="text-xl font-semibold">INTERNET</h3>
+                    <p class="text-gray-300 mt-2">Connection monitoring</p>
+                </div>
+                <div onclick="navigate('school-system')" class="glass-morphism rounded-2xl p-6 cursor-pointer hover-scale">
+                    <div class="text-4xl mb-4">🏫</div>
+                    <h3 class="text-xl font-semibold">เช็คระบบโรงเรียน</h3>
+                    <p class="text-gray-300 mt-2">ระบบจัดการโรงเรียน</p>
+                </div>
+            </div>
+
+            <!-- Content Sections -->
+            <div id="chat-content" class="mt-8">
+                <div class="glass-morphism rounded-2xl p-6">
+                    <h2 class="text-2xl font-bold mb-4">AI CHAT</h2>
+                    <iframe src="https://deepai.org/chat" class="w-full h-[600px] rounded-xl" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <div id="server-content" class="hidden mt-8">
+                <div class="glass-morphism rounded-2xl p-6">
+                    <h2 class="text-2xl font-bold mb-4">SERVER</h2>
+                    <iframe src="https://vdo.ninja/?view=ie7VQBu" class="w-full h-[500px] rounded-xl" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <div id="internet-content" class="hidden mt-8">
+                <div class="glass-morphism rounded-2xl p-6">
+                    <h2 class="text-2xl font-bold mb-4">LIVE</h2>
+                    <iframe src="https://vdo.ninja/?view=Diqkfuu&bitrate=30000" class="w-full h-[500px] rounded-xl" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <div id="school-system-content" class="hidden mt-8">
+                <div class="glass-morphism rounded-2xl p-6">
+                    <h2 class="text-2xl font-bold mb-4">เช็คระบบโรงเรียน</h2>
+                    <iframe src="https://clickcloudschool.com/" class="w-full h-[600px] rounded-xl" allowfullscreen></iframe>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div id="app" class="min-h-screen">
-            <!-- Navigation -->
-            <nav class="fixed top-0 left-0 right-0 z-50 glass-morphism py-4">
-                <div class="max-w-6xl mx-auto flex justify-between items-center px-4">
-                    <div class="text-2xl font-bold tracking-tight">AI PANUWAT</div>
-                    <div class="space-x-4">
-                        <button onclick="toggleTheme()" class="hover:text-gray-300 transition">
-                            🌓 Theme
-                        </button>
-                    </div>
-                </div>
-            </nav>
+    <script>
+        // Loading Animation
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loader');
+            loader.style.opacity = '0';
+            setTimeout(() => {
+                loader.style.display = 'none';
+            }, 1000);
+        });
 
-            <!-- Main Content -->
-            <div class="pt-20 max-w-6xl mx-auto px-4">
-                <!-- Menu Grid -->
-                <div id="menu" class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <div onclick="navigate('chat')" class="glass-morphism rounded-2xl p-6 cursor-pointer hover-scale">
-                        <div class="text-4xl mb-4">💬</div>
-                        <h3 class="text-xl font-semibold">AI PANUWAT</h3>
-                        <p class="text-gray-300 mt-2">กำลังพัฒนา..</p>
-                    </div>
-                    <div onclick="navigate('server')" class="glass-morphism rounded-2xl p-6 cursor-pointer hover-scale">
-                        <div class="text-4xl mb-4">🖥️</div>
-                        <h3 class="text-xl font-semibold">SERVER</h3>
-                        <p class="text-gray-300 mt-2">Monitor server streams</p>
-                    </div>
-                    <div onclick="navigate('internet')" class="glass-morphism rounded-2xl p-6 cursor-pointer hover-scale">
-                        <div class="text-4xl mb-4">🌐</div>
-                        <h3 class="text-xl font-semibold">INTERNET</h3>
-                        <p class="text-gray-300 mt-2">Connection monitoring</p>
-                    </div>
-                    <div onclick="navigate('network-test')"
-                        class="glass-morphism rounded-2xl p-6 cursor-pointer hover-scale">
-                        <div class="text-4xl mb-4">🚀</div>
-                        <h3 class="text-xl font-semibold">เช็คเน็ต</h3>
-                        <p class="text-gray-300 mt-2">Network Speed Test</p>
-                    </div>
-                </div>
-
-                <!-- Content Sections -->
-                <div id="chat-content" class="mt-8">
-                    <div class="glass-morphism rounded-2xl p-6">
-                        <h2 class="text-2xl font-bold mb-4">AI CHAT</h2>
-                        <iframe src="https://deepai.org/chat" class="w-full h-[600px] rounded-xl" allowfullscreen></iframe>
-                    </div>
-                </div>
-
-                <div id="server-content" class="hidden mt-8">
-                    <div class="glass-morphism rounded-2xl p-6">
-                        <h2 class="text-2xl font-bold mb-4">SERVER</h2>
-                        <iframe src="https://vdo.ninja/?view=ie7VQBu" class="w-full h-[500px] rounded-xl"
-                            allowfullscreen></iframe>
-                    </div>
-                </div>
-
-                <div id="internet-content" class="hidden mt-8">
-                    <div class="glass-morphism rounded-2xl p-6">
-                        <h2 class="text-2xl font-bold mb-4">LIVE</h2>
-                        <iframe src="https://vdo.ninja/?view=Diqkfuu&bitrate=30000" class="w-full h-[500px] rounded-xl"
-                            allowfullscreen></iframe>
-                    </div>
-                </div>
-
-                <div id="network-test-content" class="hidden mt-8">
-                    <div class="glass-morphism rounded-2xl p-6 flex flex-col items-center">
-                        <h2 class="text-2xl font-bold mb-4">เช็คความเร็วอินเทอร์เน็ต</h2>
-
-                        <div class="relative mb-6">
-                            <div id="speedometer" class="flex items-center justify-center">
-                                <div id="speedNeedle"></div>
-                                <div class="absolute text-center">
-                                    <span id="speedValue" class="text-4xl font-bold text-white">0</span>
-                                    <span class="block text-sm text-gray-300">Mbps</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="grid grid-cols-3 gap-4 w-full text-center mt-6">
-                            <div>
-                                <h3 class="text-lg font-semibold">Download</h3>
-                                <p id="downloadSpeed" class="text-2xl text-green-400">-</p>
-                            </div>
-                            <div>
-                                <h3 class="text-lg font-semibold">Upload</h3>
-                                <p id="uploadSpeed" class="text-2xl text-blue-400">-</p>
-                            </div>
-                            <div>
-                                <h3 class="text-lg font-semibold">Ping</h3>
-                                <p id="pingSpeed" class="text-2xl text-purple-400">-</p>
-                            </div>
-                        </div>
-
-                        <button onclick="startSpeedTest()"
-                            class="mt-6 bg-blue-500 text-white px-6 py-3 rounded-full hover:bg-blue-600 transition">
-                            เริ่มทดสอบความเร็ว
-                        </button>
-
-                        <canvas id="speedChart" class="mt-6 w-full h-48"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <script>
-            // Loading Animation
-            window.addEventListener('load', () => {
-                const loader = document.getElementById('loader');
-                loader.style.opacity = '0';
-                setTimeout(() => {
-                    loader.style.display = 'none';
-                }, 1000);
+        // Navigation
+        function navigate(section) {
+            ['chat', 'server', 'internet', 'school-system'].forEach(sec => {
+                document.getElementById(`${sec}-content`).classList.add('hidden');
             });
+            document.getElementById(`${section}-content`).classList.remove('hidden');
+        }
 
-            // Theme Toggle
-            function toggleTheme() {
-                document.body.classList.toggle('light');
+        // Initial page setup
+        window.onload = () => {
+            document.getElementById('chat-content').classList.remove('hidden');
+            document.getElementById('server-content').classList.add('hidden');
+            document.getElementById('internet-content').classList.add('hidden');
+            document.getElementById('school-system-content').classList.add('hidden');
+        };
+    </script>
+</body>
 
-                // Save theme preference in localStorage
-                const currentTheme = document.body.classList.contains('light') ? 'light' : 'dark';
-                localStorage.setItem('theme', currentTheme);
-            }
-
-            // Check for saved theme preference
-            window.addEventListener('DOMContentLoaded', () => {
-                const savedTheme = localStorage.getItem('theme');
-                if (savedTheme === 'light') {
-                    document.body.classList.add('light');
-                }
-            });
-
-            // Navigation
-            function navigate(section) {
-                ['chat', 'server', 'internet', 'network-test'].forEach(sec => {
-                    document.getElementById(`${sec}-content`).classList.add('hidden');
-                });
-                document.getElementById(`${section}-content`).classList.remove('hidden');
-            }
-
-            // Speedometer (for Network Test)
-            function rotateSpeedometer(speed) {
-                const needle = document.getElementById('speedNeedle');
-                const speedValue = document.getElementById('speedValue');
-                const maxSpeed = 100;
-                const rotation = Math.min((speed / maxSpeed) * 270, 270);
-
-                needle.style.transform = `rotate(${135 + rotation}deg)`;
-                speedValue.textContent = speed.toFixed(2);
-            }
-
-            // Speed Test
-            function startSpeedTest() {
-                const downloadSpeed = Math.random() * 100;
-                const uploadSpeed = Math.random() * 50;
-                const pingSpeed = Math.random() * 50;
-
-                document.getElementById('downloadSpeed').textContent = `${downloadSpeed.toFixed(2)} Mbps`;
-                document.getElementById('uploadSpeed').textContent = `${uploadSpeed.toFixed(2)} Mbps`;
-                document.getElementById('pingSpeed').textContent = `${pingSpeed.toFixed(2)} ms`;
-
-                rotateSpeedometer(downloadSpeed);
-                updateSpeedChart(downloadSpeed, uploadSpeed, pingSpeed);
-            }
-
-            // Speed Chart
-            function updateSpeedChart(download, upload, ping) {
-                if (window.speedChart) {
-                    window.speedChart.destroy();
-                }
-
-                const ctx = document.getElementById('speedChart').getContext('2d');
-                window.speedChart = new Chart(ctx, {
-                    type: 'bar',
-                    data: {
-                        labels: ['Download', 'Upload', 'Ping'],
-                        datasets: [{
-                            label: 'Network Performance',
-                            data: [download, upload, ping],
-                            backgroundColor: [
-                                'rgba(75, 192, 192, 0.6)',
-                                'rgba(54, 162, 235, 0.6)',
-                                'rgba(255, 99, 132, 0.6)'
-                            ],
-                            borderColor: [
-                                'rgba(75, 192, 192, 1)',
-                                'rgba(54, 162, 235, 1)',
-                                'rgba(255, 99, 132, 1)'
-                            ],
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        scales: {
-                            y: {
-                                beginAtZero: true
-                            }
-                        }
-                    }
-                });
-            }
-
-            // Initial page setup
-            window.onload = () => {
-                document.getElementById('chat-content').classList.remove('hidden');
-                document.getElementById('server-content').classList.add('hidden');
-                document.getElementById('internet-content').classList.add('hidden');
-                document.getElementById('network-test-content').classList.add('hidden');
-            };
-        </script>
-    </body>
-
-    </html>
+</html>
