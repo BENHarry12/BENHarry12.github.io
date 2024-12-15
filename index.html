@@ -1,211 +1,204 @@
 <!DOCTYPE html>
 <html lang="th">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI PANUWAT</title>
+    <title>AI PANUWAT SYSTEM</title>
     <link rel="icon" href="https://img5.pic.in.th/file/secure-sv1/IMG_076653e98b38560f08f3.jpeg" type="image/jpeg">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap');
 
-        /* Loading Animation */
+        :root {
+            --primary-red: #FF3366;
+            --secondary-red: #FF1744;
+            --dark-background: #0A0A1A;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Orbitron', sans-serif;
+            background: linear-gradient(135deg, var(--dark-background) 0%, #1A1A2E 100%);
+            color: #FFFFFF;
+            overflow-x: hidden;
+        }
+
+        /* Loader Styles */
         #loader {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: #2c2c2c;
+            background: var(--dark-background);
             display: flex;
             justify-content: center;
             align-items: center;
             z-index: 9999;
-            transition: opacity 1s ease-out;
+            perspective: 1000px;
         }
 
-        .eye-container {
-            display: flex;
-            gap: 20px;
-        }
-
-        .eye {
-            width: 100px;
-            height: 100px;
-            background-color: #4a4a4a;
+        .ai-loader {
+            width: 200px;
+            height: 200px;
+            border: 3px solid var(--primary-red);
             border-radius: 50%;
             position: relative;
-            animation: blink 3s infinite;
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+            animation: 
+                rotate 3s infinite linear,
+                pulse 2s infinite alternate;
         }
 
-        .pupil {
-            width: 40px;
-            height: 40px;
-            background-color: #1a1a1a;
-            border-radius: 50%;
+        @keyframes rotate {
+            0% { transform: rotateY(0deg) rotateX(0deg); }
+            100% { transform: rotateY(360deg) rotateX(360deg); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); }
+            100% { transform: scale(1.05); }
+        }
+
+        /* Glitch Effect */
+        .glitch {
+            position: relative;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            animation: move-pupil 3s infinite;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.8;
         }
 
-        @keyframes blink {
-            0%, 100% {
-                transform: scaleY(1);
-            }
-            45%, 55% {
-                transform: scaleY(0.1);
-            }
-        }
-
-        @keyframes move-pupil {
-            0%, 100% {
-                transform: translate(-50%, -50%) scale(1);
-            }
-            25% {
-                transform: translate(-40%, -40%) scale(0.8);
-            }
-            50% {
-                transform: translate(-60%, -60%) scale(0.9);
-            }
-            75% {
-                transform: translate(-50%, -50%) scale(1);
-            }
-        }
-
-        body {
-            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(to bottom right, #3c3c3c, #2c2c2c);
-            color: #f0f0f0;
-            min-height: 100vh;
-            overscroll-behavior: none;
-        }
-
-        .glass-morphism {
-            background: rgba(80, 80, 80, 0.3);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(120, 120, 120, 0.2);
-        }
-
-        .hover-scale {
+        /* Menu Items */
+        .ai-menu-item {
             transition: all 0.3s ease;
+            background: rgba(255, 51, 102, 0.1);
+            border: 1px solid var(--primary-red);
+            position: relative;
+            overflow: hidden;
         }
 
-        .hover-scale:hover {
-            transform: scale(1.03);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        .ai-menu-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255, 51, 102, 0.5);
+        }
+
+        /* Cyberpunk Content Sections */
+        .cyber-section {
+            background: rgba(30, 30, 50, 0.7);
+            border: 1px solid var(--primary-red);
+            backdrop-filter: blur(10px);
         }
     </style>
 </head>
-
-<body class="bg-gray-800">
-    <!-- Loading Screen -->
+<body class="min-h-screen">
+    <!-- AI Loader -->
     <div id="loader">
-        <div class="eye-container">
-            <div class="eye">
-                <div class="pupil"></div>
-            </div>
-            <div class="eye">
-                <div class="pupil"></div>
-            </div>
-        </div>
+        <div class="ai-loader"></div>
     </div>
 
-    <div id="app" class="min-h-screen">
-        <!-- Navigation -->
-        <nav class="fixed top-0 left-0 right-0 z-50 glass-morphism py-4">
-            <div class="max-w-6xl mx-auto flex justify-between items-center px-4">
-                <div class="text-2xl font-bold tracking-tight">AI PANUWAT</div>
-            </div>
-        </nav>
+    <!-- Main Container -->
+    <div class="container mx-auto px-4 py-8">
+        <!-- Header -->
+        <header class="mb-12 text-center">
+            <h1 class="text-5xl font-bold text-primary-red glitch" data-text="AI PANUWAT SYSTEM">
+                AI PANUWAT SYSTEM
+            </h1>
+        </header>
 
-        <!-- Main Content -->
-        <div class="pt-20 max-w-6xl mx-auto px-4">
-            <!-- Menu Grid -->
-            <div id="menu" class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div onclick="navigate('chat')" class="glass-morphism rounded-2xl p-6 cursor-pointer hover-scale">
-                    <div class="text-4xl mb-4">💬</div>
-                    <h3 class="text-xl font-semibold">AI PANUWAT</h3>
-                    <p class="text-gray-300 mt-2">กำลังพัฒนา..</p>
-                </div>
-                <div onclick="navigate('server')" class="glass-morphism rounded-2xl p-6 cursor-pointer hover-scale">
-                    <div class="text-4xl mb-4">🖥️</div>
-                    <h3 class="text-xl font-semibold">SERVER</h3>
-                    <p class="text-gray-300 mt-2">Monitor server streams</p>
-                </div>
-                <div onclick="navigate('internet')" class="glass-morphism rounded-2xl p-6 cursor-pointer hover-scale">
-                    <div class="text-4xl mb-4">🌐</div>
-                    <h3 class="text-xl font-semibold">INTERNET</h3>
-                    <p class="text-gray-300 mt-2">Connection monitoring</p>
-                </div>
-                <div onclick="navigate('school-system')" class="glass-morphism rounded-2xl p-6 cursor-pointer hover-scale">
-                    <div class="text-4xl mb-4">🏫</div>
-                    <h3 class="text-xl font-semibold">เช็คระบบโรงเรียน</h3>
-                    <p class="text-gray-300 mt-2">ระบบจัดการโรงเรียน</p>
-                </div>
+        <!-- Navigation Menu -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+            <!-- AI Chat -->
+            <div onclick="showSection('chat')" class="ai-menu-item p-6 rounded-xl cursor-pointer text-center">
+                <div class="text-5xl mb-4">💬</div>
+                <h3 class="text-xl font-semibold text-red-400">AI CHAT</h3>
             </div>
 
-            <!-- Content Sections -->
-            <div id="chat-content" class="mt-8">
-                <div class="glass-morphism rounded-2xl p-6">
-                    <h2 class="text-2xl font-bold mb-4">AI CHAT</h2>
-                    <iframe src="https://deepai.org/chat" class="w-full h-[600px] rounded-xl" allowfullscreen></iframe>
-                </div>
+            <!-- Server Monitor -->
+            <div onclick="showSection('server')" class="ai-menu-item p-6 rounded-xl cursor-pointer text-center">
+                <div class="text-5xl mb-4">🖥️</div>
+                <h3 class="text-xl font-semibold text-red-400">SERVER</h3>
             </div>
 
-            <div id="server-content" class="hidden mt-8">
-                <div class="glass-morphism rounded-2xl p-6">
-                    <h2 class="text-2xl font-bold mb-4">SERVER</h2>
-                    <iframe src="https://vdo.ninja/?view=ie7VQBu" class="w-full h-[500px] rounded-xl" allowfullscreen></iframe>
-                </div>
+            <!-- Internet Stream -->
+            <div onclick="showSection('internet')" class="ai-menu-item p-6 rounded-xl cursor-pointer text-center">
+                <div class="text-5xl mb-4">🌐</div>
+                <h3 class="text-xl font-semibold text-red-400">INTERNET</h3>
             </div>
 
-            <div id="internet-content" class="hidden mt-8">
-                <div class="glass-morphism rounded-2xl p-6">
-                    <h2 class="text-2xl font-bold mb-4">LIVE</h2>
-                    <iframe src="https://vdo.ninja/?view=Diqkfuu&bitrate=30000" class="w-full h-[500px] rounded-xl" allowfullscreen></iframe>
-                </div>
+            <!-- School System -->
+            <div onclick="showSection('school')" class="ai-menu-item p-6 rounded-xl cursor-pointer text-center">
+                <div class="text-5xl mb-4">🏫</div>
+                <h3 class="text-xl font-semibold text-red-400">SCHOOL</h3>
+            </div>
+        </div>
+
+        <!-- Content Sections -->
+        <div id="content-sections">
+            <!-- AI Chat Section -->
+            <div id="chat-section" class="cyber-section rounded-xl p-6">
+                <h2 class="text-2xl font-bold mb-4 text-red-400">AI CHAT</h2>
+                <iframe src="https://deepai.org/chat" class="w-full h-[600px] rounded-xl"></iframe>
             </div>
 
-            <div id="school-system-content" class="hidden mt-8">
-                <div class="glass-morphism rounded-2xl p-6">
-                    <h2 class="text-2xl font-bold mb-4">เช็คระบบโรงเรียน</h2>
-                    <iframe src="https://clickcloudschool.com/" class="w-full h-[600px] rounded-xl" allowfullscreen></iframe>
-                </div>
+            <!-- Server Section -->
+            <div id="server-section" class="cyber-section rounded-xl p-6 hidden">
+                <h2 class="text-2xl font-bold mb-4 text-red-400">SERVER MONITOR</h2>
+                <iframe src="https://vdo.ninja/?view=ie7VQBu" class="w-full h-[500px] rounded-xl"></iframe>
+            </div>
+
+            <!-- Internet Section -->
+            <div id="internet-section" class="cyber-section rounded-xl p-6 hidden">
+                <h2 class="text-2xl font-bold mb-4 text-red-400">INTERNET STREAM</h2>
+                <iframe src="https://vdo.ninja/?view=Diqkfuu&bitrate=30000" class="w-full h-[500px] rounded-xl"></iframe>
+            </div>
+
+            <!-- School System Section -->
+            <div id="school-section" class="cyber-section rounded-xl p-6 hidden">
+                <h2 class="text-2xl font-bold mb-4 text-red-400">SCHOOL SYSTEM</h2>
+                <iframe src="https://clickcloudschool.com/" class="w-full h-[600px] rounded-xl"></iframe>
             </div>
         </div>
     </div>
 
     <script>
-        // Loading Animation
+        // Loader Animation
         window.addEventListener('load', () => {
             const loader = document.getElementById('loader');
-            loader.style.opacity = '0';
             setTimeout(() => {
-                loader.style.display = 'none';
-            }, 1000);
+                loader.style.opacity = '0';
+                loader.style.visibility = 'hidden';
+            }, 2000);
         });
 
-        // Navigation
-        function navigate(section) {
-            ['chat', 'server', 'internet', 'school-system'].forEach(sec => {
-                document.getElementById(`${sec}-content`).classList.add('hidden');
+        // Section Navigation
+        function showSection(section) {
+            // Hide all sections
+            ['chat', 'server', 'internet', 'school'].forEach(sec => {
+                document.getElementById(`${sec}-section`).classList.add('hidden');
             });
-            document.getElementById(`${section}-content`).classList.remove('hidden');
+
+            // Show selected section
+            document.getElementById(`${section}-section`).classList.remove('hidden');
         }
 
-        // Initial page setup
+        // Default to Chat Section
         window.onload = () => {
-            document.getElementById('chat-content').classList.remove('hidden');
-            document.getElementById('server-content').classList.add('hidden');
-            document.getElementById('internet-content').classList.add('hidden');
-            document.getElementById('school-system-content').classList.add('hidden');
+            showSection('chat');
         };
     </script>
 </body>
-
 </html>
