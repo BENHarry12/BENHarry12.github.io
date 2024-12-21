@@ -7,6 +7,7 @@
     <link rel="icon" href="https://img5.pic.in.th/file/secure-sv1/IMG_076653e98b38560f08f3.jpeg" type="image/jpeg">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        /* Previous styles remain the same */
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap');
 
         :root {
@@ -191,7 +192,7 @@
         </header>
 
         <!-- Navigation Menu -->
-        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+        <div class="grid md:grid-cols-2 lg:grid-cols-5 gap-6 mb-12">
             <!-- AI Chat -->
             <div onclick="showSection('chat')" class="ai-menu-item p-6 rounded-xl cursor-pointer text-center">
                 <div class="text-5xl mb-4">💬</div>
@@ -214,6 +215,12 @@
             <div onclick="showSection('school')" class="ai-menu-item p-6 rounded-xl cursor-pointer text-center">
                 <div class="text-5xl mb-4">🏫</div>
                 <h3 class="text-xl font-semibold text-red-400">SCHOOL</h3>
+            </div>
+
+            <!-- Speedtest -->
+            <div onclick="showSection('speedtest')" class="ai-menu-item p-6 rounded-xl cursor-pointer text-center">
+                <div class="text-5xl mb-4">⚡</div>
+                <h3 class="text-xl font-semibold text-red-400">SPEEDTEST</h3>
             </div>
         </div>
 
@@ -242,6 +249,12 @@
                 <h2 class="text-2xl font-bold mb-4 text-red-400">SCHOOL SYSTEM</h2>
                 <iframe src="https://clickcloudschool.com/dashboard" class="w-full h-[600px] rounded-xl"></iframe>
             </div>
+
+            <!-- Speedtest Section -->
+            <div id="speedtest-section" class="cyber-section rounded-xl p-6 hidden">
+                <h2 class="text-2xl font-bold mb-4 text-red-400">SPEEDTEST</h2>
+                <iframe src="https://fast.com/th/" class="w-full h-[600px] rounded-xl"></iframe>
+            </div>
         </div>
     </div>
 
@@ -261,7 +274,7 @@
         // Section Navigation
         function showSection(section) {
             // Hide all sections
-            ['chat', 'server', 'internet', 'school'].forEach(sec => {
+            ['chat', 'server', 'internet', 'school', 'speedtest'].forEach(sec => {
                 document.getElementById(`${sec}-section`).classList.add('hidden');
             });
 
