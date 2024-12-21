@@ -7,244 +7,220 @@
     <link rel="icon" href="https://img5.pic.in.th/file/secure-sv1/IMG_076653e98b38560f08f3.jpeg" type="image/jpeg">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        /* Previous styles remain the same */
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap');
 
         :root {
-            --primary-red: #ff0033;
-            --secondary-red: #ff1744;
-            --neon-red: #ff003388;
-            --dark-bg: #0a0a1a;
-            --cyber-grid: #ff003322;
+            --primary-red: #FF3366;
+            --secondary-red: #FF1744;
+            --dark-background: #0A0A1A;
         }
 
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
         }
 
         body {
             font-family: 'Orbitron', sans-serif;
-            background: var(--dark-bg);
-            color: #ffffff;
+            background: linear-gradient(135deg, var(--dark-background) 0%, #1A1A2E 100%);
+            color: #FFFFFF;
             overflow-x: hidden;
-            position: relative;
         }
 
-        /* Cyber Grid Background */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                linear-gradient(90deg, var(--cyber-grid) 1px, transparent 1px) 0 0 / 50px 50px,
-                linear-gradient(0deg, var(--cyber-grid) 1px, transparent 1px) 0 0 / 50px 50px;
-            pointer-events: none;
-            animation: gridMove 20s linear infinite;
-            z-index: -1;
-        }
-
-        @keyframes gridMove {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(50px); }
-        }
-
-        /* Enhanced Loader */
+        /* Loader Styles */
         #loader {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: var(--dark-bg);
+            background: linear-gradient(45deg, var(--dark-background), #1A1A2E);
             display: flex;
             justify-content: center;
             align-items: center;
             z-index: 9999;
-        }
-
-        .cyber-loader {
-            width: 200px;
-            height: 200px;
-            position: relative;
-        }
-
-        .cyber-loader::before,
-        .cyber-loader::after {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            border: 4px solid transparent;
-            border-top-color: var(--primary-red);
-            animation: spinLoader 1.5s linear infinite;
-        }
-
-        .cyber-loader::after {
-            border: 4px solid transparent;
-            border-right-color: var(--secondary-red);
-            animation-duration: 2s;
-        }
-
-        @keyframes spinLoader {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* Glitch Text Effect */
-        .cyber-glitch {
-            position: relative;
-            text-shadow: 
-                0.05em 0 0 var(--primary-red),
-                -0.05em -0.025em 0 var(--secondary-red);
-            animation: glitch 1s infinite;
-        }
-
-        @keyframes glitch {
-            0% { text-shadow: 0.05em 0 0 var(--primary-red), -0.05em -0.025em 0 var(--secondary-red); }
-            25% { text-shadow: -0.05em -0.025em 0 var(--primary-red), 0.025em 0.025em 0 var(--secondary-red); }
-            50% { text-shadow: 0.025em 0.05em 0 var(--primary-red), -0.05em -0.05em 0 var(--secondary-red); }
-            75% { text-shadow: -0.025em -0.025em 0 var(--primary-red), -0.025em -0.05em 0 var(--secondary-red); }
-            100% { text-shadow: -0.025em 0 0 var(--primary-red), 0.05em -0.025em 0 var(--secondary-red); }
-        }
-
-        /* Enhanced Menu Items */
-        .cyber-menu-item {
-            background: rgba(255, 0, 51, 0.1);
-            border: 2px solid var(--primary-red);
-            position: relative;
-            transition: all 0.3s ease;
             overflow: hidden;
         }
 
-        .cyber-menu-item::before {
+        .loader-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .ai-loader-advanced {
+            width: 250px;
+            height: 250px;
+            position: relative;
+            perspective: 1000px;
+            animation: float 3s ease-in-out infinite alternate;
+        }
+
+        .ai-loader-advanced::before,
+        .ai-loader-advanced::after {
             content: '';
             position: absolute;
             top: 0;
-            left: -100%;
+            left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(
-                90deg,
-                transparent,
-                rgba(255, 0, 51, 0.2),
-                transparent
-            );
-            transition: 0.5s;
+            border-radius: 50%;
+            background: rgba(255, 51, 102, 0.2);
+            animation: pulse 2s infinite alternate;
         }
 
-        .cyber-menu-item:hover::before {
-            left: 100%;
+        .ai-loader-advanced::after {
+            animation-delay: 1s;
         }
 
-        .cyber-menu-item:hover {
-            transform: translateY(-5px);
+        .ai-loader-core {
+            width: 200px;
+            height: 200px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: linear-gradient(135deg, var(--primary-red), var(--secondary-red));
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             box-shadow: 
-                0 0 20px var(--neon-red),
-                inset 0 0 20px var(--neon-red);
+                0 0 30px rgba(255, 51, 102, 0.5),
+                inset 0 0 20px rgba(0,0,0,0.5);
+            animation: spin 4s linear infinite;
         }
 
-        /* Section Styling */
-        .cyber-section {
-            background: rgba(10, 10, 26, 0.8);
-            border: 2px solid var(--primary-red);
-            box-shadow: 0 0 20px var(--neon-red);
-            backdrop-filter: blur(10px);
+        .loader-text {
+            color: white;
+            font-size: 1.5rem;
+            margin-top: 20px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            opacity: 0;
+            animation: fadeIn 2s forwards;
+        }
+
+        @keyframes spin {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-20px); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.9); opacity: 0.6; }
+            100% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Glitch Effect */
+        .glitch {
+            position: relative;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.8;
+        }
+
+        /* Menu Items */
+        .ai-menu-item {
+            transition: all 0.3s ease;
+            background: rgba(255, 51, 102, 0.1);
+            border: 1px solid var(--primary-red);
             position: relative;
             overflow: hidden;
         }
 
-        .cyber-section::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            border: 2px solid var(--primary-red);
-            animation: borderPulse 2s linear infinite;
+        .ai-menu-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255, 51, 102, 0.5);
         }
 
-        @keyframes borderPulse {
-            0% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.02); opacity: 0.5; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
-        /* Scrollbar */
-        ::-webkit-scrollbar {
-            width: 10px;
-            background: var(--dark-bg);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--primary-red);
-            border-radius: 5px;
-        }
-
-        /* Responsive iframes */
-        .cyber-frame {
-            border: 2px solid var(--primary-red);
-            border-radius: 5px;
-            box-shadow: 0 0 15px var(--neon-red);
-            transition: all 0.3s ease;
-        }
-
-        .cyber-frame:hover {
-            box-shadow: 0 0 30px var(--neon-red);
+        /* Cyberpunk Content Sections */
+        .cyber-section {
+            background: rgba(30, 30, 50, 0.7);
+            border: 1px solid var(--primary-red);
+            backdrop-filter: blur(10px);
         }
     </style>
 </head>
 <body class="min-h-screen">
-    <!-- Loader -->
+    <!-- Enhanced AI Loader -->
     <div id="loader">
-        <div class="cyber-loader"></div>
+        <div class="loader-container">
+            <div class="ai-loader-advanced">
+                <div class="ai-loader-core">
+                    <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M50 10L65 35H35L50 10Z" fill="white" />
+                        <path d="M50 90L35 65H65L50 90Z" fill="white" />
+                        <path d="M10 50L35 35V65L10 50Z" fill="white" />
+                        <path d="M90 50L65 65V35L90 50Z" fill="white" />
+                    </svg>
+                </div>
+            </div>
+            <div class="loader-text">AI Panuwat System Loading</div>
+        </div>
     </div>
 
     <!-- Main Container -->
     <div class="container mx-auto px-4 py-8">
         <!-- Header -->
         <header class="mb-12 text-center">
-            <h1 class="text-6xl font-bold cyber-glitch mb-4" style="color: var(--primary-red)">
+            <h1 class="text-5xl font-bold text-primary-red glitch" data-text="AI PANUWAT SYSTEM">
                 AI PANUWAT SYSTEM
             </h1>
-            <p class="text-xl text-red-400 animate-pulse">NEXT GENERATION AI SYSTEM</p>
         </header>
 
         <!-- Navigation Menu -->
         <div class="grid md:grid-cols-2 lg:grid-cols-5 gap-6 mb-12">
             <!-- AI Chat -->
-            <div onclick="showSection('chat')" class="cyber-menu-item p-6 rounded-xl cursor-pointer text-center group">
-                <div class="text-5xl mb-4 transition-transform group-hover:scale-110">💬</div>
-                <h3 class="text-xl font-semibold" style="color: var(--primary-red)">AI CHAT</h3>
+            <div onclick="showSection('chat')" class="ai-menu-item p-6 rounded-xl cursor-pointer text-center">
+                <div class="text-5xl mb-4">💬</div>
+                <h3 class="text-xl font-semibold text-red-400">AI CHAT</h3>
             </div>
 
             <!-- Server Monitor -->
-            <div onclick="showSection('server')" class="cyber-menu-item p-6 rounded-xl cursor-pointer text-center group">
-                <div class="text-5xl mb-4 transition-transform group-hover:scale-110">🖥️</div>
-                <h3 class="text-xl font-semibold" style="color: var(--primary-red)">SERVER</h3>
+            <div onclick="showSection('server')" class="ai-menu-item p-6 rounded-xl cursor-pointer text-center">
+                <div class="text-5xl mb-4">🖥️</div>
+                <h3 class="text-xl font-semibold text-red-400">SERVER</h3>
             </div>
 
             <!-- Internet Stream -->
-            <div onclick="showSection('internet')" class="cyber-menu-item p-6 rounded-xl cursor-pointer text-center group">
-                <div class="text-5xl mb-4 transition-transform group-hover:scale-110">🌐</div>
-                <h3 class="text-xl font-semibold" style="color: var(--primary-red)">INTERNET</h3>
+            <div onclick="showSection('internet')" class="ai-menu-item p-6 rounded-xl cursor-pointer text-center">
+                <div class="text-5xl mb-4">🌐</div>
+                <h3 class="text-xl font-semibold text-red-400">INTERNET</h3>
             </div>
 
             <!-- School System -->
-            <div onclick="showSection('school')" class="cyber-menu-item p-6 rounded-xl cursor-pointer text-center group">
-                <div class="text-5xl mb-4 transition-transform group-hover:scale-110">🏫</div>
-                <h3 class="text-xl font-semibold" style="color: var(--primary-red)">SCHOOL</h3>
+            <div onclick="showSection('school')" class="ai-menu-item p-6 rounded-xl cursor-pointer text-center">
+                <div class="text-5xl mb-4">🏫</div>
+                <h3 class="text-xl font-semibold text-red-400">SCHOOL</h3>
             </div>
 
             <!-- Speedtest -->
-            <div onclick="showSection('speedtest')" class="cyber-menu-item p-6 rounded-xl cursor-pointer text-center group">
-                <div class="text-5xl mb-4 transition-transform group-hover:scale-110">⚡</div>
-                <h3 class="text-xl font-semibold" style="color: var(--primary-red)">SPEEDTEST</h3>
+            <div onclick="showSection('speedtest')" class="ai-menu-item p-6 rounded-xl cursor-pointer text-center">
+                <div class="text-5xl mb-4">⚡</div>
+                <h3 class="text-xl font-semibold text-red-400">SPEEDTEST</h3>
             </div>
         </div>
 
@@ -252,61 +228,58 @@
         <div id="content-sections">
             <!-- AI Chat Section -->
             <div id="chat-section" class="cyber-section rounded-xl p-6">
-                <h2 class="text-2xl font-bold mb-4" style="color: var(--primary-red)">AI CHAT</h2>
-                <iframe src="https://deepai.org/chat" class="cyber-frame w-full h-[600px] rounded-xl"></iframe>
+                <h2 class="text-2xl font-bold mb-4 text-red-400">AI CHAT</h2>
+                <iframe src="https://deepai.org/chat" class="w-full h-[600px] rounded-xl"></iframe>
             </div>
 
             <!-- Server Section -->
             <div id="server-section" class="cyber-section rounded-xl p-6 hidden">
-                <h2 class="text-2xl font-bold mb-4" style="color: var(--primary-red)">SERVER MONITOR</h2>
-                <iframe src="https://vdo.ninja/?view=ie7VQBu" class="cyber-frame w-full h-[500px] rounded-xl"></iframe>
+                <h2 class="text-2xl font-bold mb-4 text-red-400">SERVER MONITOR</h2>
+                <iframe src="https://vdo.ninja/?view=ie7VQBu" class="w-full h-[500px] rounded-xl"></iframe>
             </div>
 
             <!-- Internet Section -->
             <div id="internet-section" class="cyber-section rounded-xl p-6 hidden">
-                <h2 class="text-2xl font-bold mb-4" style="color: var(--primary-red)">INTERNET STREAM</h2>
-                <iframe src="https://vdo.ninja/?view=Diqkfuu&bitrate=30000" class="cyber-frame w-full h-[500px] rounded-xl"></iframe>
+                <h2 class="text-2xl font-bold mb-4 text-red-400">INTERNET STREAM</h2>
+                <iframe src="https://vdo.ninja/?view=Diqkfuu&bitrate=30000" class="w-full h-[500px] rounded-xl"></iframe>
             </div>
 
             <!-- School System Section -->
             <div id="school-section" class="cyber-section rounded-xl p-6 hidden">
-                <h2 class="text-2xl font-bold mb-4" style="color: var(--primary-red)">SCHOOL SYSTEM</h2>
-                <iframe src="https://clickcloudschool.com/dashboard" class="cyber-frame w-full h-[600px] rounded-xl"></iframe>
+                <h2 class="text-2xl font-bold mb-4 text-red-400">SCHOOL SYSTEM</h2>
+                <iframe src="https://clickcloudschool.com/dashboard" class="w-full h-[600px] rounded-xl"></iframe>
             </div>
 
             <!-- Speedtest Section -->
             <div id="speedtest-section" class="cyber-section rounded-xl p-6 hidden">
-                <h2 class="text-2xl font-bold mb-4" style="color: var(--primary-red)">SPEEDTEST</h2>
-                <iframe src="https://fast.com/th/" class="cyber-frame w-full h-[600px] rounded-xl"></iframe>
+                <h2 class="text-2xl font-bold mb-4 text-red-400">SPEEDTEST</h2>
+                <iframe src="https://fast.com/th/" class="w-full h-[600px] rounded-xl"></iframe>
             </div>
         </div>
     </div>
 
     <script>
-        // Enhanced Loader Animation
+        // Loader Animation
         window.addEventListener('load', () => {
             const loader = document.getElementById('loader');
             setTimeout(() => {
-                loader.style.transition = 'all 1s ease-out';
+                loader.style.transition = 'opacity 1s ease-out';
                 loader.style.opacity = '0';
                 setTimeout(() => {
-                    loader.style.display = 'none';
+                    loader.style.visibility = 'hidden';
                 }, 1000);
-            }, 2000);
+            }, 3000);
         });
 
-        // Section Navigation with Animation
+        // Section Navigation
         function showSection(section) {
-            const sections = ['chat', 'server', 'internet', 'school', 'speedtest'];
-            sections.forEach(sec => {
-                const element = document.getElementById(`${sec}-section`);
-                if (sec === section) {
-                    element.classList.remove('hidden');
-                    element.style.animation = 'fadeIn 0.5s ease-out';
-                } else {
-                    element.classList.add('hidden');
-                }
+            // Hide all sections
+            ['chat', 'server', 'internet', 'school', 'speedtest'].forEach(sec => {
+                document.getElementById(`${sec}-section`).classList.add('hidden');
             });
+
+            // Show selected section
+            document.getElementById(`${section}-section`).classList.remove('hidden');
         }
 
         // Default to Chat Section
