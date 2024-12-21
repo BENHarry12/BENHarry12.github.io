@@ -7,13 +7,13 @@
     <link rel="icon" href="https://img5.pic.in.th/file/secure-sv1/IMG_076653e98b38560f08f3.jpeg" type="image/jpeg">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Previous styles remain the same */
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap');
 
         :root {
-            --primary-red: #FF3366;
-            --secondary-red: #FF1744;
-            --dark-background: #0A0A1A;
+            --primary-neon: #0ff;
+            --secondary-neon: #f0f;
+            --dark-bg: #0a0a1f;
+            --cyber-grid: #1a1a3a;
         }
 
         * {
@@ -24,111 +24,180 @@
 
         body {
             font-family: 'Orbitron', sans-serif;
-            background: linear-gradient(135deg, var(--dark-background) 0%, #1A1A2E 100%);
-            color: #FFFFFF;
+            background: var(--dark-bg);
+            color: #fff;
             overflow-x: hidden;
+            position: relative;
         }
 
-        /* Loader Styles */
+        /* Cyberpunk Grid Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(to right, var(--cyber-grid) 1px, transparent 1px) 0 0 / 50px 50px,
+                linear-gradient(to bottom, var(--cyber-grid) 1px, transparent 1px) 0 0 / 50px 50px;
+            opacity: 0.2;
+            z-index: -1;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(50px); }
+        }
+
+        /* Enhanced Loader */
         #loader {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(45deg, var(--dark-background), #1A1A2E);
+            background: var(--dark-bg);
             display: flex;
             justify-content: center;
             align-items: center;
             z-index: 9999;
-            overflow: hidden;
         }
 
         .loader-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-
-        .ai-loader-advanced {
-            width: 250px;
-            height: 250px;
             position: relative;
-            perspective: 1000px;
-            animation: float 3s ease-in-out infinite alternate;
+            width: 300px;
+            height: 300px;
         }
 
-        .ai-loader-advanced::before,
-        .ai-loader-advanced::after {
+        .cyber-circle {
+            position: absolute;
+            border-radius: 50%;
+            border: 2px solid var(--primary-neon);
+            animation: pulseLoader 2s infinite;
+        }
+
+        .cyber-circle:nth-child(1) {
+            width: 100%;
+            height: 100%;
+            animation-delay: 0s;
+        }
+
+        .cyber-circle:nth-child(2) {
+            width: 80%;
+            height: 80%;
+            top: 10%;
+            left: 10%;
+            animation-delay: 0.3s;
+        }
+
+        .cyber-circle:nth-child(3) {
+            width: 60%;
+            height: 60%;
+            top: 20%;
+            left: 20%;
+            animation-delay: 0.6s;
+        }
+
+        @keyframes pulseLoader {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.5; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* Neon Text Effect */
+        .neon-text {
+            color: #fff;
+            text-shadow: 
+                0 0 5px var(--primary-neon),
+                0 0 10px var(--primary-neon),
+                0 0 20px var(--primary-neon);
+            animation: neonPulse 2s infinite alternate;
+        }
+
+        @keyframes neonPulse {
+            from { text-shadow: 0 0 5px var(--primary-neon), 0 0 10px var(--primary-neon), 0 0 20px var(--primary-neon); }
+            to { text-shadow: 0 0 10px var(--primary-neon), 0 0 20px var(--primary-neon), 0 0 40px var(--primary-neon); }
+        }
+
+        /* Menu Items */
+        .cyber-menu-item {
+            background: rgba(10, 10, 31, 0.8);
+            border: 2px solid var(--primary-neon);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .cyber-menu-item::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent,
+                transparent 40%,
+                var(--primary-neon),
+                transparent 60%,
+                transparent
+            );
+            transform: rotate(45deg);
+            animation: shimmer 3s infinite;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .cyber-menu-item:hover::before {
+            opacity: 0.2;
+        }
+
+        .cyber-menu-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 
+                0 0 10px var(--primary-neon),
+                0 0 20px var(--primary-neon),
+                0 0 40px var(--primary-neon);
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+
+        /* Content Sections */
+        .cyber-section {
+            background: rgba(10, 10, 31, 0.9);
+            border: 2px solid var(--primary-neon);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cyber-section::after {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            background: rgba(255, 51, 102, 0.2);
-            animation: pulse 2s infinite alternate;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary-neon), transparent);
+            animation: scanline 2s linear infinite;
         }
 
-        .ai-loader-advanced::after {
-            animation-delay: 1s;
-        }
-
-        .ai-loader-core {
-            width: 200px;
-            height: 200px;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: linear-gradient(135deg, var(--primary-red), var(--secondary-red));
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 
-                0 0 30px rgba(255, 51, 102, 0.5),
-                inset 0 0 20px rgba(0,0,0,0.5);
-            animation: spin 4s linear infinite;
-        }
-
-        .loader-text {
-            color: white;
-            font-size: 1.5rem;
-            margin-top: 20px;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            opacity: 0;
-            animation: fadeIn 2s forwards;
-        }
-
-        @keyframes spin {
-            0% { transform: translate(-50%, -50%) rotate(0deg); }
-            100% { transform: translate(-50%, -50%) rotate(360deg); }
-        }
-
-        @keyframes float {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(-20px); }
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(0.9); opacity: 0.6; }
-            100% { transform: scale(1.1); opacity: 0.8; }
-        }
-
-        @keyframes fadeIn {
-            0% { opacity: 0; transform: translateY(20px); }
-            100% { opacity: 1; transform: translateY(0); }
+        @keyframes scanline {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
         }
 
         /* Glitch Effect */
         .glitch {
             position: relative;
-            text-transform: uppercase;
-            font-weight: bold;
+            animation: glitch 1s infinite;
         }
 
         .glitch::before,
@@ -139,46 +208,37 @@
             left: 0;
             width: 100%;
             height: 100%;
-            opacity: 0.8;
         }
 
-        /* Menu Items */
-        .ai-menu-item {
-            transition: all 0.3s ease;
-            background: rgba(255, 51, 102, 0.1);
-            border: 1px solid var(--primary-red);
-            position: relative;
-            overflow: hidden;
+        .glitch::before {
+            left: 2px;
+            text-shadow: -2px 0 var(--primary-neon);
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim 5s infinite linear alternate-reverse;
         }
 
-        .ai-menu-item:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 20px rgba(255, 51, 102, 0.5);
+        .glitch::after {
+            left: -2px;
+            text-shadow: -2px 0 var(--secondary-neon);
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim 5s infinite linear alternate-reverse;
         }
 
-        /* Cyberpunk Content Sections */
-        .cyber-section {
-            background: rgba(30, 30, 50, 0.7);
-            border: 1px solid var(--primary-red);
-            backdrop-filter: blur(10px);
+        @keyframes glitch {
+            2%, 64% { transform: translate(2px,0) skew(0deg); }
+            4%, 60% { transform: translate(-2px,0) skew(0deg); }
+            62% { transform: translate(0,0) skew(5deg); }
         }
     </style>
 </head>
 <body class="min-h-screen">
-    <!-- Enhanced AI Loader -->
+    <!-- Loader -->
     <div id="loader">
         <div class="loader-container">
-            <div class="ai-loader-advanced">
-                <div class="ai-loader-core">
-                    <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M50 10L65 35H35L50 10Z" fill="white" />
-                        <path d="M50 90L35 65H65L50 90Z" fill="white" />
-                        <path d="M10 50L35 35V65L10 50Z" fill="white" />
-                        <path d="M90 50L65 65V35L90 50Z" fill="white" />
-                    </svg>
-                </div>
-            </div>
-            <div class="loader-text">AI Panuwat System Loading</div>
+            <div class="cyber-circle"></div>
+            <div class="cyber-circle"></div>
+            <div class="cyber-circle"></div>
+            <div class="neon-text text-center text-xl mt-4">INITIALIZING SYSTEM</div>
         </div>
     </div>
 
@@ -186,41 +246,42 @@
     <div class="container mx-auto px-4 py-8">
         <!-- Header -->
         <header class="mb-12 text-center">
-            <h1 class="text-5xl font-bold text-primary-red glitch" data-text="AI PANUWAT SYSTEM">
+            <h1 class="text-5xl font-bold glitch neon-text" data-text="AI PANUWAT SYSTEM">
                 AI PANUWAT SYSTEM
             </h1>
+            <div class="text-sm mt-2 text-cyan-400">CYBERNETIC INTERFACE v2.0</div>
         </header>
 
         <!-- Navigation Menu -->
         <div class="grid md:grid-cols-2 lg:grid-cols-5 gap-6 mb-12">
             <!-- AI Chat -->
-            <div onclick="showSection('chat')" class="ai-menu-item p-6 rounded-xl cursor-pointer text-center">
+            <div onclick="showSection('chat')" class="cyber-menu-item p-6 rounded-xl cursor-pointer text-center">
                 <div class="text-5xl mb-4">💬</div>
-                <h3 class="text-xl font-semibold text-red-400">AI CHAT</h3>
+                <h3 class="text-xl font-semibold text-cyan-400">AI CHAT</h3>
             </div>
 
             <!-- Server Monitor -->
-            <div onclick="showSection('server')" class="ai-menu-item p-6 rounded-xl cursor-pointer text-center">
+            <div onclick="showSection('server')" class="cyber-menu-item p-6 rounded-xl cursor-pointer text-center">
                 <div class="text-5xl mb-4">🖥️</div>
-                <h3 class="text-xl font-semibold text-red-400">SERVER</h3>
+                <h3 class="text-xl font-semibold text-cyan-400">SERVER</h3>
             </div>
 
             <!-- Internet Stream -->
-            <div onclick="showSection('internet')" class="ai-menu-item p-6 rounded-xl cursor-pointer text-center">
+            <div onclick="showSection('internet')" class="cyber-menu-item p-6 rounded-xl cursor-pointer text-center">
                 <div class="text-5xl mb-4">🌐</div>
-                <h3 class="text-xl font-semibold text-red-400">INTERNET</h3>
+                <h3 class="text-xl font-semibold text-cyan-400">INTERNET</h3>
             </div>
 
             <!-- School System -->
-            <div onclick="showSection('school')" class="ai-menu-item p-6 rounded-xl cursor-pointer text-center">
+            <div onclick="showSection('school')" class="cyber-menu-item p-6 rounded-xl cursor-pointer text-center">
                 <div class="text-5xl mb-4">🏫</div>
-                <h3 class="text-xl font-semibold text-red-400">SCHOOL</h3>
+                <h3 class="text-xl font-semibold text-cyan-400">SCHOOL</h3>
             </div>
 
             <!-- Speedtest -->
-            <div onclick="showSection('speedtest')" class="ai-menu-item p-6 rounded-xl cursor-pointer text-center">
+            <div onclick="showSection('speedtest')" class="cyber-menu-item p-6 rounded-xl cursor-pointer text-center">
                 <div class="text-5xl mb-4">⚡</div>
-                <h3 class="text-xl font-semibold text-red-400">SPEEDTEST</h3>
+                <h3 class="text-xl font-semibold text-cyan-400">SPEEDTEST</h3>
             </div>
         </div>
 
@@ -228,58 +289,68 @@
         <div id="content-sections">
             <!-- AI Chat Section -->
             <div id="chat-section" class="cyber-section rounded-xl p-6">
-                <h2 class="text-2xl font-bold mb-4 text-red-400">AI CHAT</h2>
+                <h2 class="text-2xl font-bold mb-4 neon-text">AI CHAT</h2>
                 <iframe src="https://deepai.org/chat" class="w-full h-[600px] rounded-xl"></iframe>
             </div>
 
             <!-- Server Section -->
             <div id="server-section" class="cyber-section rounded-xl p-6 hidden">
-                <h2 class="text-2xl font-bold mb-4 text-red-400">SERVER MONITOR</h2>
+                <h2 class="text-2xl font-bold mb-4 neon-text">SERVER MONITOR</h2>
                 <iframe src="https://vdo.ninja/?view=ie7VQBu" class="w-full h-[500px] rounded-xl"></iframe>
             </div>
 
             <!-- Internet Section -->
             <div id="internet-section" class="cyber-section rounded-xl p-6 hidden">
-                <h2 class="text-2xl font-bold mb-4 text-red-400">INTERNET STREAM</h2>
+                <h2 class="text-2xl font-bold mb-4 neon-text">INTERNET STREAM</h2>
                 <iframe src="https://vdo.ninja/?view=Diqkfuu&bitrate=30000" class="w-full h-[500px] rounded-xl"></iframe>
             </div>
 
             <!-- School System Section -->
             <div id="school-section" class="cyber-section rounded-xl p-6 hidden">
-                <h2 class="text-2xl font-bold mb-4 text-red-400">SCHOOL SYSTEM</h2>
+                <h2 class="text-2xl font-bold mb-4 neon-text">SCHOOL SYSTEM</h2>
                 <iframe src="https://clickcloudschool.com/dashboard" class="w-full h-[600px] rounded-xl"></iframe>
             </div>
 
             <!-- Speedtest Section -->
             <div id="speedtest-section" class="cyber-section rounded-xl p-6 hidden">
-                <h2 class="text-2xl font-bold mb-4 text-red-400">SPEEDTEST</h2>
+                <h2 class="text-2xl font-bold mb-4 neon-text">SPEEDTEST</h2>
                 <iframe src="https://fast.com/th/" class="w-full h-[600px] rounded-xl"></iframe>
             </div>
         </div>
     </div>
 
     <script>
-        // Loader Animation
+        // Enhanced Loader Animation
         window.addEventListener('load', () => {
             const loader = document.getElementById('loader');
             setTimeout(() => {
                 loader.style.transition = 'opacity 1s ease-out';
                 loader.style.opacity = '0';
                 setTimeout(() => {
-                    loader.style.visibility = 'hidden';
+                    loader.style.display = 'none';
                 }, 1000);
             }, 3000);
         });
 
         // Section Navigation
         function showSection(section) {
-            // Hide all sections
+            // Hide all sections with fade effect
             ['chat', 'server', 'internet', 'school', 'speedtest'].forEach(sec => {
-                document.getElementById(`${sec}-section`).classList.add('hidden');
+                const element = document.getElementById(`${sec}-section`);
+                element.style.opacity = '0';
+                setTimeout(() => {
+                    element.classList.add('hidden');
+                }, 300);
             });
 
-            // Show selected section
-            document.getElementById(`${section}-section`).classList.remove('hidden');
+            // Show selected section with fade effect
+            const selectedSection = document.getElementById(`${section}-section`);
+            setTimeout(() => {
+                selectedSection.classList.remove('hidden');
+                setTimeout(() => {
+                    selectedSection.style.opacity = '1';
+                }, 50);
+            }, 300);
         }
 
         // Default to Chat Section
