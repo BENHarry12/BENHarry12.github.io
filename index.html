@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apple System Dashboard</title>
+    <title>PANUWAT_DATA</title>
     <link rel="icon" href="https://img5.pic.in.th/file/secure-sv1/IMG_076653e98b38560f08f3.jpeg" type="image/jpeg">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap">
@@ -14,98 +14,101 @@
         }
 
         body {
-            background-color: #f5f5f7;
-            color: #1d1d1f;
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            color: #e2e8f0;
         }
 
         .apple-card {
-            background-color: white;
+            background-color: rgba(30, 41, 59, 0.7);
             border-radius: 20px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(71, 85, 105, 0.5);
         }
 
         .apple-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.12);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
         }
 
         .apple-nav-item {
             opacity: 0.7;
             transition: opacity 0.3s ease;
+            color: #cbd5e1;
         }
 
         .apple-nav-item:hover, .apple-nav-item.active {
             opacity: 1;
+            color: #ffffff;
         }
 
         .apple-gradient {
-            background: linear-gradient(135deg, #5E3FBE, #3BACE2);
+            background: linear-gradient(135deg, #4338ca, #6366f1);
             color: white;
         }
 
         .blur-background {
-            backdrop-filter: blur(10px);
-            background-color: rgba(255,255,255,0.8);
+            backdrop-filter: blur(15px);
+            background-color: rgba(17, 24, 39, 0.7);
         }
     </style>
 </head>
-<body class="min-h-screen bg-gray-50">
+<body class="min-h-screen">
     <div class="container mx-auto px-4 py-8">
         <!-- Header -->
         <header class="text-center mb-12">
-            <h1 class="text-5xl font-bold text-gray-900">Apple System</h1>
-            <p class="text-gray-500 mt-2">Unified Dashboard</p>
+            <h1 class="text-5xl font-bold text-white">PANUWAT_DATA</h1>
+            <p class="text-gray-400 mt-2">Unified Dashboard</p>
         </header>
 
         <!-- Navigation -->
         <div class="grid md:grid-cols-5 gap-4 mb-8">
             <div onclick="showSection('chat')" class="apple-card apple-nav-item p-6 text-center cursor-pointer">
                 <div class="text-4xl mb-2">💬</div>
-                <h3 class="font-semibold text-gray-800">AI Chat</h3>
+                <h3 class="font-semibold">AI Chat</h3>
             </div>
             <div onclick="showSection('server')" class="apple-card apple-nav-item p-6 text-center cursor-pointer">
                 <div class="text-4xl mb-2">🖥️</div>
-                <h3 class="font-semibold text-gray-800">Server</h3>
+                <h3 class="font-semibold">Server</h3>
             </div>
             <div onclick="showSection('internet')" class="apple-card apple-nav-item p-6 text-center cursor-pointer">
                 <div class="text-4xl mb-2">🌐</div>
-                <h3 class="font-semibold text-gray-800">Internet</h3>
+                <h3 class="font-semibold">Internet</h3>
             </div>
             <div onclick="showSection('school')" class="apple-card apple-nav-item p-6 text-center cursor-pointer">
                 <div class="text-4xl mb-2">🏫</div>
-                <h3 class="font-semibold text-gray-800">School</h3>
+                <h3 class="font-semibold">School</h3>
             </div>
             <div onclick="showSection('speedtest')" class="apple-card apple-nav-item p-6 text-center cursor-pointer">
                 <div class="text-4xl mb-2">⚡</div>
-                <h3 class="font-semibold text-gray-800">Speed Test</h3>
+                <h3 class="font-semibold">Speed Test</h3>
             </div>
         </div>
 
         <!-- Content Sections -->
         <div id="content-sections">
             <div id="chat-section" class="apple-card p-6 rounded-2xl">
-                <h2 class="text-2xl font-bold mb-4 text-gray-900">AI Chat</h2>
+                <h2 class="text-2xl font-bold mb-4 text-white">AI Chat</h2>
                 <iframe src="https://deepai.org/chat" class="w-full h-[600px] rounded-xl"></iframe>
             </div>
 
             <div id="server-section" class="apple-card p-6 rounded-2xl hidden">
-                <h2 class="text-2xl font-bold mb-4 text-gray-900">Server Monitor</h2>
+                <h2 class="text-2xl font-bold mb-4 text-white">Server Monitor</h2>
                 <iframe src="https://vdo.ninja/?view=ie7VQBu" class="w-full h-[500px] rounded-xl"></iframe>
             </div>
 
             <div id="internet-section" class="apple-card p-6 rounded-2xl hidden">
-                <h2 class="text-2xl font-bold mb-4 text-gray-900">Internet Stream</h2>
+                <h2 class="text-2xl font-bold mb-4 text-white">Internet Stream</h2>
                 <iframe src="https://vdo.ninja/?view=Diqkfuu&bitrate=30000" class="w-full h-[500px] rounded-xl"></iframe>
             </div>
 
             <div id="school-section" class="apple-card p-6 rounded-2xl hidden">
-                <h2 class="text-2xl font-bold mb-4 text-gray-900">School System</h2>
+                <h2 class="text-2xl font-bold mb-4 text-white">School System</h2>
                 <iframe src="https://clickcloudschool.com/dashboard" class="w-full h-[600px] rounded-xl"></iframe>
             </div>
 
             <div id="speedtest-section" class="apple-card p-6 rounded-2xl hidden">
-                <h2 class="text-2xl font-bold mb-4 text-gray-900">Speed Test</h2>
+                <h2 class="text-2xl font-bold mb-4 text-white">Speed Test</h2>
                 <iframe src="https://fast.com/th/" class="w-full h-[600px] rounded-xl"></iframe>
             </div>
         </div>
