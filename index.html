@@ -10,16 +10,18 @@
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap');
 
         :root {
-            --primary-neon: #0ff;
-            --secondary-neon: #f0f;
-            --dark-bg: #0a0a1f;
-            --cyber-grid: #1a1a3a;
+            --primary-neon: #ff0000;  /* Changed to red */
+            --secondary-neon: #ff3333;
+            --dark-bg: #1a0000;  /* Dark red background */
+            --cyber-grid: #330000;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            scroll-behavior: smooth;  /* Smooth scrolling */
+            transition: all 0.3s ease-in-out;  /* Global smooth transition */
         }
 
         body {
@@ -51,59 +53,32 @@
             100% { transform: translateY(50px); }
         }
 
-        /* Enhanced Loader */
-        #loader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--dark-bg);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-        }
-
-        .loader-container {
-            position: relative;
-            width: 300px;
-            height: 300px;
-        }
-
-        .cyber-circle {
-            position: absolute;
-            border-radius: 50%;
+        /* Menu Items */
+        .cyber-menu-item {
+            background: rgba(26, 0, 0, 0.8);
             border: 2px solid var(--primary-neon);
-            animation: pulseLoader 2s infinite;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            transform-origin: center;
         }
 
-        .cyber-circle:nth-child(1) {
-            width: 100%;
-            height: 100%;
-            animation-delay: 0s;
+        .cyber-menu-item:hover {
+            transform: scale(1.05);
+            box-shadow: 
+                0 0 10px var(--primary-neon),
+                0 0 20px var(--primary-neon),
+                0 0 40px var(--primary-neon);
         }
 
-        .cyber-circle:nth-child(2) {
-            width: 80%;
-            height: 80%;
-            top: 10%;
-            left: 10%;
-            animation-delay: 0.3s;
-        }
-
-        .cyber-circle:nth-child(3) {
-            width: 60%;
-            height: 60%;
-            top: 20%;
-            left: 20%;
-            animation-delay: 0.6s;
-        }
-
-        @keyframes pulseLoader {
-            0% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.1); opacity: 0.5; }
-            100% { transform: scale(1); opacity: 1; }
+        /* Content Sections */
+        .cyber-section {
+            background: rgba(26, 0, 0, 0.9);
+            border: 2px solid var(--primary-neon);
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
         }
 
         /* Neon Text Effect */
@@ -121,135 +96,30 @@
             to { text-shadow: 0 0 10px var(--primary-neon), 0 0 20px var(--primary-neon), 0 0 40px var(--primary-neon); }
         }
 
-        /* Menu Items */
-        .cyber-menu-item {
-            background: rgba(10, 10, 31, 0.8);
-            border: 2px solid var(--primary-neon);
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .cyber-menu-item::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(
-                45deg,
-                transparent,
-                transparent 40%,
-                var(--primary-neon),
-                transparent 60%,
-                transparent
-            );
-            transform: rotate(45deg);
-            animation: shimmer 3s infinite;
+        /* Smooth fade transitions for sections */
+        .section {
             opacity: 0;
-            transition: opacity 0.3s;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
         }
 
-        .cyber-menu-item:hover::before {
-            opacity: 0.2;
-        }
-
-        .cyber-menu-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 
-                0 0 10px var(--primary-neon),
-                0 0 20px var(--primary-neon),
-                0 0 40px var(--primary-neon);
-        }
-
-        @keyframes shimmer {
-            0% { transform: translateX(-100%) rotate(45deg); }
-            100% { transform: translateX(100%) rotate(45deg); }
-        }
-
-        /* Content Sections */
-        .cyber-section {
-            background: rgba(10, 10, 31, 0.9);
-            border: 2px solid var(--primary-neon);
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cyber-section::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--primary-neon), transparent);
-            animation: scanline 2s linear infinite;
-        }
-
-        @keyframes scanline {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-        }
-
-        /* Glitch Effect */
-        .glitch {
-            position: relative;
-            animation: glitch 1s infinite;
-        }
-
-        .glitch::before,
-        .glitch::after {
-            content: attr(data-text);
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-
-        .glitch::before {
-            left: 2px;
-            text-shadow: -2px 0 var(--primary-neon);
-            clip: rect(44px, 450px, 56px, 0);
-            animation: glitch-anim 5s infinite linear alternate-reverse;
-        }
-
-        .glitch::after {
-            left: -2px;
-            text-shadow: -2px 0 var(--secondary-neon);
-            clip: rect(44px, 450px, 56px, 0);
-            animation: glitch-anim 5s infinite linear alternate-reverse;
-        }
-
-        @keyframes glitch {
-            2%, 64% { transform: translate(2px,0) skew(0deg); }
-            4%, 60% { transform: translate(-2px,0) skew(0deg); }
-            62% { transform: translate(0,0) skew(5deg); }
+        .section.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
         }
     </style>
 </head>
 <body class="min-h-screen">
-    <!-- Loader -->
-    <div id="loader">
-        <div class="loader-container">
-            <div class="cyber-circle"></div>
-            <div class="cyber-circle"></div>
-            <div class="cyber-circle"></div>
-            <div class="neon-text text-center text-xl mt-4">INITIALIZING SYSTEM</div>
-        </div>
-    </div>
-
     <!-- Main Container -->
     <div class="container mx-auto px-4 py-8">
         <!-- Header -->
         <header class="mb-12 text-center">
-            <h1 class="text-5xl font-bold glitch neon-text" data-text="AI PANUWAT SYSTEM">
+            <h1 class="text-5xl font-bold neon-text">
                 AI PANUWAT SYSTEM
             </h1>
-            <div class="text-sm mt-2 text-cyan-400">CYBERNETIC INTERFACE v2.0</div>
+            <div class="text-sm mt-2 text-red-400">CYBERNETIC INTERFACE v2.0</div>
         </header>
 
         <!-- Navigation Menu -->
@@ -257,62 +127,62 @@
             <!-- AI Chat -->
             <div onclick="showSection('chat')" class="cyber-menu-item p-6 rounded-xl cursor-pointer text-center">
                 <div class="text-5xl mb-4">💬</div>
-                <h3 class="text-xl font-semibold text-cyan-400">AI CHAT</h3>
+                <h3 class="text-xl font-semibold text-red-400">AI CHAT</h3>
             </div>
 
             <!-- Server Monitor -->
             <div onclick="showSection('server')" class="cyber-menu-item p-6 rounded-xl cursor-pointer text-center">
                 <div class="text-5xl mb-4">🖥️</div>
-                <h3 class="text-xl font-semibold text-cyan-400">SERVER</h3>
+                <h3 class="text-xl font-semibold text-red-400">SERVER</h3>
             </div>
 
             <!-- Internet Stream -->
             <div onclick="showSection('internet')" class="cyber-menu-item p-6 rounded-xl cursor-pointer text-center">
                 <div class="text-5xl mb-4">🌐</div>
-                <h3 class="text-xl font-semibold text-cyan-400">INTERNET</h3>
+                <h3 class="text-xl font-semibold text-red-400">INTERNET</h3>
             </div>
 
             <!-- School System -->
             <div onclick="showSection('school')" class="cyber-menu-item p-6 rounded-xl cursor-pointer text-center">
                 <div class="text-5xl mb-4">🏫</div>
-                <h3 class="text-xl font-semibold text-cyan-400">SCHOOL</h3>
+                <h3 class="text-xl font-semibold text-red-400">SCHOOL</h3>
             </div>
 
             <!-- Speedtest -->
             <div onclick="showSection('speedtest')" class="cyber-menu-item p-6 rounded-xl cursor-pointer text-center">
                 <div class="text-5xl mb-4">⚡</div>
-                <h3 class="text-xl font-semibold text-cyan-400">SPEEDTEST</h3>
+                <h3 class="text-xl font-semibold text-red-400">SPEEDTEST</h3>
             </div>
         </div>
 
         <!-- Content Sections -->
         <div id="content-sections">
             <!-- AI Chat Section -->
-            <div id="chat-section" class="cyber-section rounded-xl p-6">
+            <div id="chat-section" class="section cyber-section rounded-xl p-6 active">
                 <h2 class="text-2xl font-bold mb-4 neon-text">AI CHAT</h2>
                 <iframe src="https://deepai.org/chat" class="w-full h-[600px] rounded-xl"></iframe>
             </div>
 
             <!-- Server Section -->
-            <div id="server-section" class="cyber-section rounded-xl p-6 hidden">
+            <div id="server-section" class="section cyber-section rounded-xl p-6">
                 <h2 class="text-2xl font-bold mb-4 neon-text">SERVER MONITOR</h2>
                 <iframe src="https://vdo.ninja/?view=ie7VQBu" class="w-full h-[500px] rounded-xl"></iframe>
             </div>
 
             <!-- Internet Section -->
-            <div id="internet-section" class="cyber-section rounded-xl p-6 hidden">
+            <div id="internet-section" class="section cyber-section rounded-xl p-6">
                 <h2 class="text-2xl font-bold mb-4 neon-text">INTERNET STREAM</h2>
                 <iframe src="https://vdo.ninja/?view=Diqkfuu&bitrate=30000" class="w-full h-[500px] rounded-xl"></iframe>
             </div>
 
             <!-- School System Section -->
-            <div id="school-section" class="cyber-section rounded-xl p-6 hidden">
+            <div id="school-section" class="section cyber-section rounded-xl p-6">
                 <h2 class="text-2xl font-bold mb-4 neon-text">SCHOOL SYSTEM</h2>
                 <iframe src="https://clickcloudschool.com/dashboard" class="w-full h-[600px] rounded-xl"></iframe>
             </div>
 
             <!-- Speedtest Section -->
-            <div id="speedtest-section" class="cyber-section rounded-xl p-6 hidden">
+            <div id="speedtest-section" class="section cyber-section rounded-xl p-6">
                 <h2 class="text-2xl font-bold mb-4 neon-text">SPEEDTEST</h2>
                 <iframe src="https://fast.com/th/" class="w-full h-[600px] rounded-xl"></iframe>
             </div>
@@ -320,43 +190,15 @@
     </div>
 
     <script>
-        // Enhanced Loader Animation
-        window.addEventListener('load', () => {
-            const loader = document.getElementById('loader');
-            setTimeout(() => {
-                loader.style.transition = 'opacity 1s ease-out';
-                loader.style.opacity = '0';
-                setTimeout(() => {
-                    loader.style.display = 'none';
-                }, 1000);
-            }, 3000);
-        });
-
-        // Section Navigation
         function showSection(section) {
-            // Hide all sections with fade effect
-            ['chat', 'server', 'internet', 'school', 'speedtest'].forEach(sec => {
-                const element = document.getElementById(`${sec}-section`);
-                element.style.opacity = '0';
-                setTimeout(() => {
-                    element.classList.add('hidden');
-                }, 300);
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(sec => {
+                sec.classList.remove('active');
             });
 
-            // Show selected section with fade effect
-            const selectedSection = document.getElementById(`${section}-section`);
-            setTimeout(() => {
-                selectedSection.classList.remove('hidden');
-                setTimeout(() => {
-                    selectedSection.style.opacity = '1';
-                }, 50);
-            }, 300);
+            // Show selected section
+            document.getElementById(`${section}-section`).classList.add('active');
         }
-
-        // Default to Chat Section
-        window.onload = () => {
-            showSection('chat');
-        };
     </script>
 </body>
 </html>
