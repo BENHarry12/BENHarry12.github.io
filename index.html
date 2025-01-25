@@ -3,187 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI PANUWAT SYSTEM</title>
+    <title>Apple System Dashboard</title>
     <link rel="icon" href="https://img5.pic.in.th/file/secure-sv1/IMG_076653e98b38560f08f3.jpeg" type="image/jpeg">
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap');
-
-        :root {
-            --primary-neon: #ff0000;  /* Changed to red */
-            --secondary-neon: #ff3333;
-            --dark-bg: #1a0000;  /* Dark red background */
-            --cyber-grid: #330000;
-        }
-
         * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            scroll-behavior: smooth;  /* Smooth scrolling */
-            transition: all 0.3s ease-in-out;  /* Global smooth transition */
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+            scroll-behavior: smooth;
         }
 
         body {
-            font-family: 'Orbitron', sans-serif;
-            background: var(--dark-bg);
-            color: #fff;
-            overflow-x: hidden;
-            position: relative;
+            background-color: #f5f5f7;
+            color: #1d1d1f;
         }
 
-        /* Cyberpunk Grid Background */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                linear-gradient(to right, var(--cyber-grid) 1px, transparent 1px) 0 0 / 50px 50px,
-                linear-gradient(to bottom, var(--cyber-grid) 1px, transparent 1px) 0 0 / 50px 50px;
-            opacity: 0.2;
-            z-index: -1;
-            animation: gridMove 20s linear infinite;
+        .apple-card {
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        @keyframes gridMove {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(50px); }
+        .apple-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.12);
         }
 
-        /* Menu Items */
-        .cyber-menu-item {
-            background: rgba(26, 0, 0, 0.8);
-            border: 2px solid var(--primary-neon);
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            transform-origin: center;
+        .apple-nav-item {
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
         }
 
-        .cyber-menu-item:hover {
-            transform: scale(1.05);
-            box-shadow: 
-                0 0 10px var(--primary-neon),
-                0 0 20px var(--primary-neon),
-                0 0 40px var(--primary-neon);
-        }
-
-        /* Content Sections */
-        .cyber-section {
-            background: rgba(26, 0, 0, 0.9);
-            border: 2px solid var(--primary-neon);
-            box-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
-            backdrop-filter: blur(10px);
-            position: relative;
-            overflow: hidden;
-        }
-
-        /* Neon Text Effect */
-        .neon-text {
-            color: #fff;
-            text-shadow: 
-                0 0 5px var(--primary-neon),
-                0 0 10px var(--primary-neon),
-                0 0 20px var(--primary-neon);
-            animation: neonPulse 2s infinite alternate;
-        }
-
-        @keyframes neonPulse {
-            from { text-shadow: 0 0 5px var(--primary-neon), 0 0 10px var(--primary-neon), 0 0 20px var(--primary-neon); }
-            to { text-shadow: 0 0 10px var(--primary-neon), 0 0 20px var(--primary-neon), 0 0 40px var(--primary-neon); }
-        }
-
-        /* Smooth fade transitions for sections */
-        .section {
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(20px);
-            transition: all 0.5s ease;
-        }
-
-        .section.active {
+        .apple-nav-item:hover, .apple-nav-item.active {
             opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
+        }
+
+        .apple-gradient {
+            background: linear-gradient(135deg, #5E3FBE, #3BACE2);
+            color: white;
+        }
+
+        .blur-background {
+            backdrop-filter: blur(10px);
+            background-color: rgba(255,255,255,0.8);
         }
     </style>
 </head>
-<body class="min-h-screen">
-    <!-- Main Container -->
+<body class="min-h-screen bg-gray-50">
     <div class="container mx-auto px-4 py-8">
         <!-- Header -->
-        <header class="mb-12 text-center">
-            <h1 class="text-5xl font-bold neon-text">
-                AI PANUWAT SYSTEM
-            </h1>
-            <div class="text-sm mt-2 text-red-400">CYBERNETIC INTERFACE v2.0</div>
+        <header class="text-center mb-12">
+            <h1 class="text-5xl font-bold text-gray-900">Apple System</h1>
+            <p class="text-gray-500 mt-2">Unified Dashboard</p>
         </header>
 
-        <!-- Navigation Menu -->
-        <div class="grid md:grid-cols-2 lg:grid-cols-5 gap-6 mb-12">
-            <!-- AI Chat -->
-            <div onclick="showSection('chat')" class="cyber-menu-item p-6 rounded-xl cursor-pointer text-center">
-                <div class="text-5xl mb-4">💬</div>
-                <h3 class="text-xl font-semibold text-red-400">AI CHAT</h3>
+        <!-- Navigation -->
+        <div class="grid md:grid-cols-5 gap-4 mb-8">
+            <div onclick="showSection('chat')" class="apple-card apple-nav-item p-6 text-center cursor-pointer">
+                <div class="text-4xl mb-2">💬</div>
+                <h3 class="font-semibold text-gray-800">AI Chat</h3>
             </div>
-
-            <!-- Server Monitor -->
-            <div onclick="showSection('server')" class="cyber-menu-item p-6 rounded-xl cursor-pointer text-center">
-                <div class="text-5xl mb-4">🖥️</div>
-                <h3 class="text-xl font-semibold text-red-400">SERVER</h3>
+            <div onclick="showSection('server')" class="apple-card apple-nav-item p-6 text-center cursor-pointer">
+                <div class="text-4xl mb-2">🖥️</div>
+                <h3 class="font-semibold text-gray-800">Server</h3>
             </div>
-
-            <!-- Internet Stream -->
-            <div onclick="showSection('internet')" class="cyber-menu-item p-6 rounded-xl cursor-pointer text-center">
-                <div class="text-5xl mb-4">🌐</div>
-                <h3 class="text-xl font-semibold text-red-400">INTERNET</h3>
+            <div onclick="showSection('internet')" class="apple-card apple-nav-item p-6 text-center cursor-pointer">
+                <div class="text-4xl mb-2">🌐</div>
+                <h3 class="font-semibold text-gray-800">Internet</h3>
             </div>
-
-            <!-- School System -->
-            <div onclick="showSection('school')" class="cyber-menu-item p-6 rounded-xl cursor-pointer text-center">
-                <div class="text-5xl mb-4">🏫</div>
-                <h3 class="text-xl font-semibold text-red-400">SCHOOL</h3>
+            <div onclick="showSection('school')" class="apple-card apple-nav-item p-6 text-center cursor-pointer">
+                <div class="text-4xl mb-2">🏫</div>
+                <h3 class="font-semibold text-gray-800">School</h3>
             </div>
-
-            <!-- Speedtest -->
-            <div onclick="showSection('speedtest')" class="cyber-menu-item p-6 rounded-xl cursor-pointer text-center">
-                <div class="text-5xl mb-4">⚡</div>
-                <h3 class="text-xl font-semibold text-red-400">SPEEDTEST</h3>
+            <div onclick="showSection('speedtest')" class="apple-card apple-nav-item p-6 text-center cursor-pointer">
+                <div class="text-4xl mb-2">⚡</div>
+                <h3 class="font-semibold text-gray-800">Speed Test</h3>
             </div>
         </div>
 
         <!-- Content Sections -->
         <div id="content-sections">
-            <!-- AI Chat Section -->
-            <div id="chat-section" class="section cyber-section rounded-xl p-6 active">
-                <h2 class="text-2xl font-bold mb-4 neon-text">AI CHAT</h2>
+            <div id="chat-section" class="apple-card p-6 rounded-2xl">
+                <h2 class="text-2xl font-bold mb-4 text-gray-900">AI Chat</h2>
                 <iframe src="https://deepai.org/chat" class="w-full h-[600px] rounded-xl"></iframe>
             </div>
 
-            <!-- Server Section -->
-            <div id="server-section" class="section cyber-section rounded-xl p-6">
-                <h2 class="text-2xl font-bold mb-4 neon-text">SERVER MONITOR</h2>
+            <div id="server-section" class="apple-card p-6 rounded-2xl hidden">
+                <h2 class="text-2xl font-bold mb-4 text-gray-900">Server Monitor</h2>
                 <iframe src="https://vdo.ninja/?view=ie7VQBu" class="w-full h-[500px] rounded-xl"></iframe>
             </div>
 
-            <!-- Internet Section -->
-            <div id="internet-section" class="section cyber-section rounded-xl p-6">
-                <h2 class="text-2xl font-bold mb-4 neon-text">INTERNET STREAM</h2>
+            <div id="internet-section" class="apple-card p-6 rounded-2xl hidden">
+                <h2 class="text-2xl font-bold mb-4 text-gray-900">Internet Stream</h2>
                 <iframe src="https://vdo.ninja/?view=Diqkfuu&bitrate=30000" class="w-full h-[500px] rounded-xl"></iframe>
             </div>
 
-            <!-- School System Section -->
-            <div id="school-section" class="section cyber-section rounded-xl p-6">
-                <h2 class="text-2xl font-bold mb-4 neon-text">SCHOOL SYSTEM</h2>
+            <div id="school-section" class="apple-card p-6 rounded-2xl hidden">
+                <h2 class="text-2xl font-bold mb-4 text-gray-900">School System</h2>
                 <iframe src="https://clickcloudschool.com/dashboard" class="w-full h-[600px] rounded-xl"></iframe>
             </div>
 
-            <!-- Speedtest Section -->
-            <div id="speedtest-section" class="section cyber-section rounded-xl p-6">
-                <h2 class="text-2xl font-bold mb-4 neon-text">SPEEDTEST</h2>
+            <div id="speedtest-section" class="apple-card p-6 rounded-2xl hidden">
+                <h2 class="text-2xl font-bold mb-4 text-gray-900">Speed Test</h2>
                 <iframe src="https://fast.com/th/" class="w-full h-[600px] rounded-xl"></iframe>
             </div>
         </div>
@@ -191,14 +113,19 @@
 
     <script>
         function showSection(section) {
-            // Hide all sections
-            document.querySelectorAll('.section').forEach(sec => {
-                sec.classList.remove('active');
+            ['chat', 'server', 'internet', 'school', 'speedtest'].forEach(sec => {
+                const element = document.getElementById(`${sec}-section`);
+                element.classList.add('hidden');
             });
 
-            // Show selected section
-            document.getElementById(`${section}-section`).classList.add('active');
+            const selectedSection = document.getElementById(`${section}-section`);
+            selectedSection.classList.remove('hidden');
         }
+
+        // Default to Chat Section
+        window.onload = () => {
+            showSection('chat');
+        };
     </script>
 </body>
 </html>
