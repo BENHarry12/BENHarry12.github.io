@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PANUWAT_DATA</title>
+    <title>PANUWAT Home Network</title>
     <link rel="icon" href="https://img5.pic.in.th/file/secure-sv1/IMG_076653e98b38560f08f3.jpeg" type="image/jpeg">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap">
@@ -12,44 +12,28 @@
             font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
             scroll-behavior: smooth;
         }
-
         body {
             background: linear-gradient(135deg, #0f172a, #1e293b);
             color: #e2e8f0;
         }
-
-        .apple-card {
-            background-color: rgba(30, 41, 59, 0.7);
+        .glass-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
             border-radius: 20px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
             border: 1px solid rgba(71, 85, 105, 0.5);
+            transition: transform 0.3s ease;
         }
-
-        .apple-card:hover {
+        .glass-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
         }
-
-        .apple-nav-item {
+        .nav-item {
             opacity: 0.7;
-            transition: opacity 0.3s ease;
-            color: #cbd5e1;
+            transition: all 0.3s ease;
         }
-
-        .apple-nav-item:hover, .apple-nav-item.active {
+        .nav-item:hover, .nav-item.active {
             opacity: 1;
-            color: #ffffff;
-        }
-
-        .apple-gradient {
-            background: linear-gradient(135deg, #4338ca, #6366f1);
-            color: white;
-        }
-
-        .blur-background {
-            backdrop-filter: blur(15px);
-            background-color: rgba(17, 24, 39, 0.7);
+            transform: scale(1.05);
         }
     </style>
 </head>
@@ -57,66 +41,176 @@
     <div class="container mx-auto px-4 py-8">
         <!-- Header -->
         <header class="text-center mb-12">
-            <h1 class="text-5xl font-bold text-white">PANUWAT_DATA</h1>
-            <p class="text-gray-400 mt-2">Unified Dashboard</p>
+            <h1 class="text-5xl font-bold text-white">PANUWAT Network</h1>
+            <p class="text-gray-400 mt-2">Home Network Dashboard</p>
         </header>
 
         <!-- Navigation -->
-        <div class="grid md:grid-cols-5 gap-4 mb-8">
-            <div onclick="showSection('chat')" class="apple-card apple-nav-item p-6 text-center cursor-pointer">
-                <div class="text-4xl mb-2">💬</div>
-                <h3 class="font-semibold">AI Chat</h3>
+        <div class="grid md:grid-cols-4 gap-4 mb-8">
+            <div onclick="showSection('network')" class="glass-card nav-item p-6 text-center cursor-pointer">
+                <div class="text-4xl mb-2">🌐</div>
+                <h3 class="font-semibold">Network</h3>
             </div>
-            <div onclick="showSection('server')" class="apple-card apple-nav-item p-6 text-center cursor-pointer">
+            <div onclick="showSection('server')" class="glass-card nav-item p-6 text-center cursor-pointer">
                 <div class="text-4xl mb-2">🖥️</div>
                 <h3 class="font-semibold">Server</h3>
             </div>
-            <div onclick="showSection('internet')" class="apple-card apple-nav-item p-6 text-center cursor-pointer">
-                <div class="text-4xl mb-2">🌐</div>
-                <h3 class="font-semibold">Internet</h3>
+            <div onclick="showSection('devices')" class="glass-card nav-item p-6 text-center cursor-pointer">
+                <div class="text-4xl mb-2">📱</div>
+                <h3 class="font-semibold">Devices</h3>
             </div>
-            <div onclick="showSection('school')" class="apple-card apple-nav-item p-6 text-center cursor-pointer">
-                <div class="text-4xl mb-2">🏫</div>
-                <h3 class="font-semibold">School</h3>
-            </div>
-            <div onclick="showSection('speedtest')" class="apple-card apple-nav-item p-6 text-center cursor-pointer">
-                <div class="text-4xl mb-2">⚡</div>
-                <h3 class="font-semibold">Speed Test</h3>
+            <div onclick="showSection('remote')" class="glass-card nav-item p-6 text-center cursor-pointer">
+                <div class="text-4xl mb-2">🔗</div>
+                <h3 class="font-semibold">Remote Access</h3>
             </div>
         </div>
 
         <!-- Content Sections -->
         <div id="content-sections">
-            <div id="chat-section" class="apple-card p-6 rounded-2xl">
-                <h2 class="text-2xl font-bold mb-4 text-white">AI Chat</h2>
-                <iframe src="https://deepai.org/chat" class="w-full h-[600px] rounded-xl"></iframe>
+            <!-- Network Section -->
+            <div id="network-section" class="glass-card p-6 rounded-2xl">
+                <h2 class="text-2xl font-bold mb-4 text-white">Network Overview</h2>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="bg-gray-800 p-4 rounded-lg">
+                        <h3 class="font-semibold text-lg mb-3">Local Network IPs</h3>
+                        <ul class="space-y-2">
+                            <li class="flex justify-between">
+                                <span>192.168.1.1</span>
+                                <span class="text-green-500">✓ Online</span>
+                            </li>
+                            <li class="flex justify-between">
+                                <span>192.168.1.8</span>
+                                <span class="text-green-500">✓ Online</span>
+                            </li>
+                            <li class="flex justify-between">
+                                <span>192.168.1.9</span>
+                                <span class="text-green-500">✓ Online</span>
+                            </li>
+                            <li class="flex justify-between">
+                                <span>192.168.1.33:22006</span>
+                                <span class="text-blue-500">✓ Active</span>
+                            </li>
+                            <li class="flex justify-between">
+                                <span>192.168.1.33:9163</span>
+                                <span class="text-blue-500">✓ Active</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-800 p-4 rounded-lg">
+                        <h3 class="font-semibold text-lg mb-3">Network Performance</h3>
+                        <div class="space-y-3">
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span>Download Speed</span>
+                                    <span>95 Mbps</span>
+                                </div>
+                                <div class="w-full bg-gray-700 rounded-full h-2.5">
+                                    <div class="bg-green-500 h-2.5 rounded-full" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span>Upload Speed</span>
+                                    <span>45 Mbps</span>
+                                </div>
+                                <div class="w-full bg-gray-700 rounded-full h-2.5">
+                                    <div class="bg-blue-500 h-2.5 rounded-full" style="width: 50%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-4">
+                    <a href="https://d4rk2e1iu.localto.net/" 
+                       target="_blank" 
+                       class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300">
+                        Open Remote Dashboard
+                    </a>
+                </div>
             </div>
 
-            <div id="server-section" class="apple-card p-6 rounded-2xl hidden">
-                <h2 class="text-2xl font-bold mb-4 text-white">Server Monitor</h2>
-                <iframe src="https://vdo.ninja/?view=ie7VQBu" class="w-full h-[500px] rounded-xl"></iframe>
+            <!-- Server Section -->
+            <div id="server-section" class="glass-card p-6 rounded-2xl hidden">
+                <h2 class="text-2xl font-bold mb-4 text-white">Server Status</h2>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="bg-gray-800 p-4 rounded-lg">
+                        <h3 class="font-semibold text-lg mb-3">CPU Performance</h3>
+                        <div class="space-y-2">
+                            <div class="flex justify-between">
+                                <span>CPU Usage</span>
+                                <span>65%</span>
+                            </div>
+                            <div class="w-full bg-gray-700 rounded-full h-2.5">
+                                <div class="bg-red-500 h-2.5 rounded-full" style="width: 65%"></div>
+                            </div>
+                            <div class="text-sm text-gray-400 mt-1">
+                                Load Average: 2.3 / 4 cores
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-gray-800 p-4 rounded-lg">
+                        <h3 class="font-semibold text-lg mb-3">System Resources</h3>
+                        <div class="space-y-2">
+                            <div class="flex justify-between">
+                                <span>Memory Usage</span>
+                                <span>42%</span>
+                            </div>
+                            <div class="w-full bg-gray-700 rounded-full h-2.5">
+                                <div class="bg-green-500 h-2.5 rounded-full" style="width: 42%"></div>
+                            </div>
+                            <div class="text-sm text-gray-400 mt-1">
+                                8 GB / 16 GB
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <div id="internet-section" class="apple-card p-6 rounded-2xl hidden">
-                <h2 class="text-2xl font-bold mb-4 text-white">Internet Stream</h2>
-                <iframe src="https://vdo.ninja/?view=Diqkfuu&bitrate=30000" class="w-full h-[500px] rounded-xl"></iframe>
+            <!-- Devices Section -->
+            <div id="devices-section" class="glass-card p-6 rounded-2xl hidden">
+                <h2 class="text-2xl font-bold mb-4 text-white">Connected Devices</h2>
+                <div class="bg-gray-800 p-4 rounded-lg">
+                    <ul class="space-y-2">
+                        <li class="flex justify-between items-center">
+                            <span>Smartphone</span>
+                            <span class="text-green-500">✓ Connected</span>
+                        </li>
+                        <li class="flex justify-between items-center">
+                            <span>Laptop</span>
+                            <span class="text-green-500">✓ Connected</span>
+                        </li>
+                        <li class="flex justify-between items-center">
+                            <span>Smart TV</span>
+                            <span class="text-green-500">✓ Connected</span>
+                        </li>
+                    </ul>
+                </div>
             </div>
 
-            <div id="school-section" class="apple-card p-6 rounded-2xl hidden">
-                <h2 class="text-2xl font-bold mb-4 text-white">School System</h2>
-                <iframe src="https://clickcloudschool.com/dashboard" class="w-full h-[600px] rounded-xl"></iframe>
-            </div>
-
-            <div id="speedtest-section" class="apple-card p-6 rounded-2xl hidden">
-                <h2 class="text-2xl font-bold mb-4 text-white">Speed Test</h2>
-                <iframe src="https://fast.com/th/" class="w-full h-[600px] rounded-xl"></iframe>
+            <!-- Remote Access Section -->
+            <div id="remote-section" class="glass-card p-6 rounded-2xl hidden">
+                <h2 class="text-2xl font-bold mb-4 text-white">Remote Access</h2>
+                <div class="bg-gray-800 p-4 rounded-lg">
+                    <h3 class="font-semibold text-lg mb-3">VPN & Remote Connections</h3>
+                    <div class="space-y-2">
+                        <div class="flex justify-between items-center">
+                            <span>VPN Status</span>
+                            <span class="text-green-500">✓ Active</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span>Remote Desktop</span>
+                            <span class="text-blue-500">✓ Enabled</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
     <script>
         function showSection(section) {
-            ['chat', 'server', 'internet', 'school', 'speedtest'].forEach(sec => {
+            ['network', 'server', 'devices', 'remote'].forEach(sec => {
                 const element = document.getElementById(`${sec}-section`);
                 element.classList.add('hidden');
             });
@@ -125,9 +219,9 @@
             selectedSection.classList.remove('hidden');
         }
 
-        // Default to Chat Section
+        // Default to Network Section
         window.onload = () => {
-            showSection('chat');
+            showSection('network');
         };
     </script>
 </body>
