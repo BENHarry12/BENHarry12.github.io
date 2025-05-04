@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PANUWAT ULTIMATE SERVER</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Roboto:wght@300;400;700&display=swap');
         
@@ -118,22 +119,41 @@
             font-family: 'Roboto Mono', monospace;
         }
 
-        .glow-button {
-            display: block;
-            width: 100%;
-            padding: 15px;
-            background: linear-gradient(45deg, #ff3030, #ff6b6b);
-            color: white;
-            text-align: center;
-            text-decoration: none;
-            border-radius: 10px;
+        .server-buttons {
+            display: flex;
+            justify-content: space-between;
             margin-top: 20px;
+        }
+
+        .server-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48%;
+            padding: 15px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: bold;
             transition: all 0.3s ease;
         }
 
-        .glow-button:hover {
+        .minecraft-button {
+            background: linear-gradient(45deg, #4CAF50, #81c784);
+            color: white;
+        }
+
+        .discord-button {
+            background: linear-gradient(45deg, #5865F2, #7289da);
+            color: white;
+        }
+
+        .server-button:hover {
             transform: scale(1.05);
-            box-shadow: 0 0 30px rgba(255, 48, 48, 0.5);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+        }
+
+        .server-button i {
+            margin-right: 10px;
         }
     </style>
 </head>
@@ -160,13 +180,13 @@
             </div>
         </div>
         
-        <div class="tap">
-            <div class="tap-title">💻 SERVER STATUS</div>
-            <div class="tap-content">
-                <a href="https://d4rk2e1iu.localto.net/" class="glow-button">
-                    Check CPU Performance
-                </a>
-            </div>
+        <div class="server-buttons">
+            <a href="minecraft://?addExternalServer=PANUWAT|panuwat.online" class="server-button minecraft-button">
+                <i class="fab fa-minecraft"></i> Join Minecraft
+            </a>
+            <a href="https://discord.gg/8D6cXscZ" target="_blank" class="server-button discord-button">
+                <i class="fab fa-discord"></i> Join Discord
+            </a>
         </div>
         
         <div class="tap">
