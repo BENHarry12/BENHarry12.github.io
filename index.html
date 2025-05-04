@@ -1,228 +1,198 @@
 <!DOCTYPE html>
-<html lang="th">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PANUWAT Home Network</title>
-    <link rel="icon" href="https://img5.pic.in.th/file/secure-sv1/IMG_076653e98b38560f08f3.jpeg" type="image/jpeg">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap">
+    <title>PANUWAT ULTIMATE SERVER</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Roboto:wght@300;400;700&display=swap');
+        
         * {
-            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-            scroll-behavior: smooth;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
+        
         body {
-            background: linear-gradient(135deg, #0f172a, #1e293b);
-            color: #e2e8f0;
+            background: linear-gradient(45deg, #000000, #1a1a2e, #16213e);
+            color: #ff3030;
+            font-family: 'Roboto', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            perspective: 1000px;
+            overflow: hidden;
         }
-        .glass-card {
-            background: rgba(30, 41, 59, 0.7);
-            backdrop-filter: blur(10px);
+
+        .cosmic-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(ellipse at bottom, #1a1a2e 0%, #000000 100%);
+            overflow: hidden;
+        }
+
+        .stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transform: rotateZ(45deg);
+        }
+
+        .star {
+            position: absolute;
+            background-color: #fff;
+            width: 2px;
+            height: 2px;
+            border-radius: 50%;
+            animation: twinkle 2s infinite alternate;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.2; }
+            100% { opacity: 1; }
+        }
+
+        .container {
+            background: rgba(22, 33, 62, 0.8);
             border-radius: 20px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-            border: 1px solid rgba(71, 85, 105, 0.5);
-            transition: transform 0.3s ease;
-        }
-        .glass-card:hover {
-            transform: translateY(-5px);
-        }
-        .nav-item {
-            opacity: 0.7;
+            padding: 40px;
+            width: 90%;
+            max-width: 700px;
+            box-shadow: 0 0 50px rgba(255, 48, 48, 0.3);
+            border: 2px solid #ff3030;
+            transform: rotateX(10deg);
             transition: all 0.3s ease;
         }
-        .nav-item:hover, .nav-item.active {
-            opacity: 1;
+
+        .container:hover {
+            transform: rotateX(0deg) scale(1.02);
+            box-shadow: 0 0 80px rgba(255, 48, 48, 0.5);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            background: linear-gradient(45deg, #ff3030, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            text-shadow: 0 0 20px rgba(255, 48, 48, 0.5);
+        }
+
+        .tap {
+            background: rgba(0, 0, 0, 0.4);
+            border-left: 5px solid #ff3030;
+            margin-bottom: 15px;
+            padding: 20px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .tap:hover {
+            transform: translateX(10px);
+            background: rgba(255, 48, 48, 0.1);
+        }
+
+        .tap-title {
+            font-weight: bold;
+            color: #ff3030;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .tap-content {
+            color: #ffffff;
+            font-family: 'Roboto Mono', monospace;
+        }
+
+        .glow-button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(45deg, #ff3030, #ff6b6b);
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 10px;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .glow-button:hover {
             transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(255, 48, 48, 0.5);
         }
     </style>
 </head>
-<body class="min-h-screen">
-    <div class="container mx-auto px-4 py-8">
-        <!-- Header -->
-        <header class="text-center mb-12">
-            <h1 class="text-5xl font-bold text-white">PANUWAT Network</h1>
-            <p class="text-gray-400 mt-2">Home Network Dashboard</p>
-        </header>
+<body>
+    <div class="cosmic-background">
+        <div class="stars" id="stars"></div>
+    </div>
 
-        <!-- Navigation -->
-        <div class="grid md:grid-cols-4 gap-4 mb-8">
-            <div onclick="showSection('network')" class="glass-card nav-item p-6 text-center cursor-pointer">
-                <div class="text-4xl mb-2">🌐</div>
-                <h3 class="font-semibold">Network</h3>
-            </div>
-            <div onclick="showSection('server')" class="glass-card nav-item p-6 text-center cursor-pointer">
-                <div class="text-4xl mb-2">🖥️</div>
-                <h3 class="font-semibold">Server</h3>
-            </div>
-            <div onclick="showSection('devices')" class="glass-card nav-item p-6 text-center cursor-pointer">
-                <div class="text-4xl mb-2">📱</div>
-                <h3 class="font-semibold">Devices</h3>
-            </div>
-            <div onclick="showSection('remote')" class="glass-card nav-item p-6 text-center cursor-pointer">
-                <div class="text-4xl mb-2">🔗</div>
-                <h3 class="font-semibold">Remote Access</h3>
+    <div class="container">
+        <div class="header">
+            <h1 class="title">PANUWAT SERVER</h1>
+        </div>
+        
+        <div class="tap">
+            <div class="tap-title">🌐 MINECRAFT SERVER</div>
+            <div class="tap-content">IP: panuwat.online</div>
+        </div>
+        
+        <div class="tap">
+            <div class="tap-title">🔐 RadMin VPN</div>
+            <div class="tap-content">
+                Username: Plotttt<br>
+                Password: 555555
             </div>
         </div>
-
-        <!-- Content Sections -->
-        <div id="content-sections">
-            <!-- Network Section -->
-            <div id="network-section" class="glass-card p-6 rounded-2xl">
-                <h2 class="text-2xl font-bold mb-4 text-white">Network Overview</h2>
-                <div class="grid md:grid-cols-2 gap-4">
-                    <div class="bg-gray-800 p-4 rounded-lg">
-                        <h3 class="font-semibold text-lg mb-3">Local Network IPs</h3>
-                        <ul class="space-y-2">
-                            <li class="flex justify-between">
-                                <span>192.168.1.1</span>
-                                <span class="text-green-500">✓ Online</span>
-                            </li>
-                            <li class="flex justify-between">
-                                <span>192.168.1.8</span>
-                                <span class="text-green-500">✓ Online</span>
-                            </li>
-                            <li class="flex justify-between">
-                                <span>192.168.1.9</span>
-                                <span class="text-green-500">✓ Online</span>
-                            </li>
-                            <li class="flex justify-between">
-                                <span>192.168.1.33:22006</span>
-                                <span class="text-blue-500">✓ Active</span>
-                            </li>
-                            <li class="flex justify-between">
-                                <span>192.168.1.33:9163</span>
-                                <span class="text-blue-500">✓ Active</span>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="bg-gray-800 p-4 rounded-lg">
-                        <h3 class="font-semibold text-lg mb-3">Network Performance</h3>
-                        <div class="space-y-3">
-                            <div>
-                                <div class="flex justify-between mb-1">
-                                    <span>Download Speed</span>
-                                    <span>95 Mbps</span>
-                                </div>
-                                <div class="w-full bg-gray-700 rounded-full h-2.5">
-                                    <div class="bg-green-500 h-2.5 rounded-full" style="width: 85%"></div>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="flex justify-between mb-1">
-                                    <span>Upload Speed</span>
-                                    <span>45 Mbps</span>
-                                </div>
-                                <div class="w-full bg-gray-700 rounded-full h-2.5">
-                                    <div class="bg-blue-500 h-2.5 rounded-full" style="width: 50%"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="mt-4">
-                    <a href="https://d4rk2e1iu.localto.net/" 
-                       target="_blank" 
-                       class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300">
-                        Open Remote Dashboard
-                    </a>
-                </div>
+        
+        <div class="tap">
+            <div class="tap-title">💻 SERVER STATUS</div>
+            <div class="tap-content">
+                <a href="https://d4rk2e1iu.localto.net/" class="glow-button">
+                    Check CPU Performance
+                </a>
             </div>
-
-            <!-- Server Section -->
-            <div id="server-section" class="glass-card p-6 rounded-2xl hidden">
-                <h2 class="text-2xl font-bold mb-4 text-white">Server Status</h2>
-                <div class="grid md:grid-cols-2 gap-4">
-                    <div class="bg-gray-800 p-4 rounded-lg">
-                        <h3 class="font-semibold text-lg mb-3">CPU Performance</h3>
-                        <div class="space-y-2">
-                            <div class="flex justify-between">
-                                <span>CPU Usage</span>
-                                <span>65%</span>
-                            </div>
-                            <div class="w-full bg-gray-700 rounded-full h-2.5">
-                                <div class="bg-red-500 h-2.5 rounded-full" style="width: 65%"></div>
-                            </div>
-                            <div class="text-sm text-gray-400 mt-1">
-                                Load Average: 2.3 / 4 cores
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bg-gray-800 p-4 rounded-lg">
-                        <h3 class="font-semibold text-lg mb-3">System Resources</h3>
-                        <div class="space-y-2">
-                            <div class="flex justify-between">
-                                <span>Memory Usage</span>
-                                <span>42%</span>
-                            </div>
-                            <div class="w-full bg-gray-700 rounded-full h-2.5">
-                                <div class="bg-green-500 h-2.5 rounded-full" style="width: 42%"></div>
-                            </div>
-                            <div class="text-sm text-gray-400 mt-1">
-                                8 GB / 16 GB
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Devices Section -->
-            <div id="devices-section" class="glass-card p-6 rounded-2xl hidden">
-                <h2 class="text-2xl font-bold mb-4 text-white">Connected Devices</h2>
-                <div class="bg-gray-800 p-4 rounded-lg">
-                    <ul class="space-y-2">
-                        <li class="flex justify-between items-center">
-                            <span>Smartphone</span>
-                            <span class="text-green-500">✓ Connected</span>
-                        </li>
-                        <li class="flex justify-between items-center">
-                            <span>Laptop</span>
-                            <span class="text-green-500">✓ Connected</span>
-                        </li>
-                        <li class="flex justify-between items-center">
-                            <span>Smart TV</span>
-                            <span class="text-green-500">✓ Connected</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Remote Access Section -->
-            <div id="remote-section" class="glass-card p-6 rounded-2xl hidden">
-                <h2 class="text-2xl font-bold mb-4 text-white">Remote Access</h2>
-                <div class="bg-gray-800 p-4 rounded-lg">
-                    <h3 class="font-semibold text-lg mb-3">VPN & Remote Connections</h3>
-                    <div class="space-y-2">
-                        <div class="flex justify-between items-center">
-                            <span>VPN Status</span>
-                            <span class="text-green-500">✓ Active</span>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <span>Remote Desktop</span>
-                            <span class="text-blue-500">✓ Enabled</span>
-                        </div>
-                    </div>
-                </div>
+        </div>
+        
+        <div class="tap">
+            <div class="tap-title">💎 จำหน่าย SERVER </div>
+            <div class="tap-content">
+                CPU: i7 12700k<br>
+                RAM: 32GB<br>
+                GPU: RTX 3050<br>
+                Price: 2000/1000 THB
             </div>
         </div>
     </div>
 
     <script>
-        function showSection(section) {
-            ['network', 'server', 'devices', 'remote'].forEach(sec => {
-                const element = document.getElementById(`${sec}-section`);
-                element.classList.add('hidden');
-            });
-
-            const selectedSection = document.getElementById(`${section}-section`);
-            selectedSection.classList.remove('hidden');
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            for (let i = 0; i < 200; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.animationDelay = `${Math.random() * 2}s`;
+                starsContainer.appendChild(star);
+            }
         }
-
-        // Default to Network Section
-        window.onload = () => {
-            showSection('network');
-        };
+        createStars();
     </script>
 </body>
 </html>
