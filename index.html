@@ -2,9 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#1a1a2e">
+    <meta name="description" content="PANUWAT ULTIMATE SERVER - Minecraft & Community">
+    
     <title>PANUWAT ULTIMATE SERVER</title>
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Roboto:wght@300;400;700&display=swap');
         
@@ -12,6 +17,9 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            user-select: none;
         }
         
         body {
@@ -24,6 +32,7 @@
             align-items: center;
             perspective: 1000px;
             overflow: hidden;
+            overscroll-behavior-y: contain;
         }
 
         .cosmic-background {
@@ -70,6 +79,7 @@
             border: 2px solid #ff3030;
             transform: rotateX(10deg);
             transition: all 0.3s ease;
+            margin: 20px;
         }
 
         .container:hover {
@@ -155,6 +165,31 @@
         .server-button i {
             margin-right: 10px;
         }
+
+        @media screen and (max-width: 600px) {
+            .container {
+                width: 95%;
+                padding: 20px;
+                margin: 10px;
+            }
+            .title {
+                font-size: 2rem;
+                letter-spacing: 2px;
+            }
+            .server-buttons {
+                flex-direction: column;
+            }
+            .server-button {
+                width: 100%;
+                margin-bottom: 15px;
+            }
+            .tap {
+                padding: 15px;
+            }
+            .tap-title {
+                font-size: 1rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -203,7 +238,9 @@
     <script>
         function createStars() {
             const starsContainer = document.getElementById('stars');
-            for (let i = 0; i < 200; i++) {
+            const starCount = window.innerWidth < 600 ? 100 : 200;
+            
+            for (let i = 0; i < starCount; i++) {
                 const star = document.createElement('div');
                 star.classList.add('star');
                 star.style.left = `${Math.random() * 100}%`;
@@ -212,6 +249,20 @@
                 starsContainer.appendChild(star);
             }
         }
+
+        // Prevent zoom on double-tap
+        document.addEventListener('touchstart', function(event) {
+            if (event.touches.length > 1) {
+                event.preventDefault();
+            }
+        }, { passive: false });
+
+        document.addEventListener('touchend', function(event) {
+            if (event.touches.length > 1) {
+                event.preventDefault();
+            }
+        }, { passive: false });
+
         createStars();
     </script>
 </body>
