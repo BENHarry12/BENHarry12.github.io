@@ -3,36 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="theme-color" content="#1a1a2e">
-    <meta name="description" content="PANUWAT ULTIMATE SERVER - Minecraft & Community">
-    
     <title>PANUWAT ULTIMATE SERVER</title>
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Roboto:wght@300;400;700&display=swap');
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-            touch-action: manipulation;
-            user-select: none;
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
         
         body {
-            background: linear-gradient(45deg, #000000, #1a1a2e, #16213e);
-            color: #ff3030;
-            font-family: 'Roboto', sans-serif;
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0f1020, #1a1a2e, #16213e);
             min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            perspective: 1000px;
-            overflow: hidden;
-            overscroll-behavior-y: contain;
+            overflow-x: hidden;
         }
 
         .cosmic-background {
@@ -43,7 +23,7 @@
             height: 100%;
             z-index: -1;
             background: radial-gradient(ellipse at bottom, #1a1a2e 0%, #000000 100%);
-            overflow: hidden;
+            pointer-events: none;
         }
 
         .stars {
@@ -57,7 +37,7 @@
 
         .star {
             position: absolute;
-            background-color: #fff;
+            background-color: rgba(255,255,255,0.7);
             width: 2px;
             height: 2px;
             border-radius: 50%;
@@ -69,232 +49,133 @@
             100% { opacity: 1; }
         }
 
-        .container {
-            background: rgba(22, 33, 62, 0.8);
-            border-radius: 20px;
-            padding: 40px;
-            width: 90%;
-            max-width: 700px;
-            box-shadow: 0 0 50px rgba(255, 48, 48, 0.3);
-            border: 2px solid #ff3030;
-            transform: rotateX(10deg);
-            transition: all 0.3s ease;
-            margin: 20px;
+        .glass-morphism {
+            background: rgba(22, 33, 62, 0.6);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
 
-        .container:hover {
-            transform: rotateX(0deg) scale(1.02);
-            box-shadow: 0 0 80px rgba(255, 48, 48, 0.5);
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 3rem;
-            background: linear-gradient(45deg, #ff3030, #ff6b6b);
+        .gradient-text {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-transform: uppercase;
-            letter-spacing: 5px;
-            text-shadow: 0 0 20px rgba(255, 48, 48, 0.5);
         }
 
-        .tap {
-            background: rgba(0, 0, 0, 0.4);
-            border-left: 5px solid #ff3030;
-            margin-bottom: 15px;
-            padding: 20px;
-            border-radius: 10px;
+        .hover-lift {
             transition: all 0.3s ease;
         }
 
-        .tap:hover {
-            transform: translateX(10px);
-            background: rgba(255, 48, 48, 0.1);
+        .hover-lift:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
         }
 
-        .tap-title {
-            font-weight: bold;
-            color: #ff3030;
-            font-size: 1.2rem;
-            margin-bottom: 10px;
+        .pulse-animation {
+            animation: pulse 2s infinite;
         }
 
-        .tap-content {
-            color: #ffffff;
-            font-family: 'Roboto Mono', monospace;
-        }
-
-        .server-buttons {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-        }
-
-        .server-button {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 48%;
-            padding: 15px;
-            border-radius: 10px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: all 0.3s ease;
-        }
-
-        .minecraft-button {
-            background: linear-gradient(45deg, #4CAF50, #81c784);
-            color: white;
-        }
-
-        .discord-button {
-            background: linear-gradient(45deg, #5865F2, #7289da);
-            color: white;
-        }
-
-        .server-performance-button {
-            background: linear-gradient(45deg, #ff6b6b, #ff3030);
-            color: white;
-        }
-
-        .server-button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
-        }
-
-        .server-button i {
-            margin-right: 10px;
-        }
-
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.9);
-        }
-
-        .modal-content {
-            background-color: rgba(22, 33, 62, 0.9);
-            margin: 10% auto;
-            padding: 20px;
-            border: 2px solid #ff3030;
-            width: 90%;
-            max-width: 600px;
-            border-radius: 15px;
-            color: white;
-            position: relative;
-        }
-
-        .close-btn {
-            color: #ff3030;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .server-iframe {
-            width: 100%;
-            height: 500px;
-            border: 2px solid #ff3030;
-            border-radius: 10px;
-        }
-
-        @media screen and (max-width: 600px) {
-            .container {
-                width: 95%;
-                padding: 20px;
-                margin: 10px;
-            }
-            .title {
-                font-size: 2rem;
-                letter-spacing: 2px;
-            }
-            .server-buttons {
-                flex-direction: column;
-            }
-            .server-button {
-                width: 100%;
-                margin-bottom: 15px;
-            }
-            .tap {
-                padding: 15px;
-            }
-            .tap-title {
-                font-size: 1rem;
-            }
-            .server-iframe {
-                height: 300px;
-            }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
     </style>
 </head>
-<body>
+<body class="text-white">
     <div class="cosmic-background">
         <div class="stars" id="stars"></div>
     </div>
 
-    <div class="container">
-        <div class="header">
-            <h1 class="title">PANUWAT SERVER</h1>
-        </div>
-        
-        <div class="tap">
-            <div class="tap-title">🌐 MINECRAFT SERVER</div>
-            <div class="tap-content">IP: panuwat.online</div>
-        </div>
-        
-        <div class="tap">
-            <div class="tap-title">🔐 RadMin VPN</div>
-            <div class="tap-content">
-                Username: Plotttt<br>
-                Password: 555555
-            </div>
-        </div>
-        
-        <div class="server-buttons">
-            <a href="minecraft://?addExternalServer=PANUWAT|panuwat.online" class="server-button minecraft-button">
-                <i class="fab fa-minecraft"></i> Join Minecraft
-            </a>
-            <a href="https://discord.gg/8D6cXscZ" target="_blank" class="server-button discord-button">
-                <i class="fab fa-discord"></i> Join Discord
-            </a>
+    <div class="container mx-auto px-4 py-16 max-w-4xl">
+        <div class="text-center mb-12">
+            <h1 class="text-5xl font-bold gradient-text mb-4 pulse-animation">
+                PANUWAT ULTIMATE SERVER
+            </h1>
+            <p class="text-xl text-gray-300">
+                Minecraft & Community Performance Hub
+            </p>
         </div>
 
-        <div class="server-buttons">
-            <a href="#" id="serverPerformanceBtn" class="server-button server-performance-button">
-                <i class="fas fa-server"></i> Server Performance
-            </a>
+        <div class="grid md:grid-cols-2 gap-6">
+            <div class="glass-morphism rounded-xl p-6 hover-lift">
+                <h2 class="text-2xl font-bold text-red-400 mb-4">
+                    🌐 Minecraft Server
+                </h2>
+                <div class="bg-gray-800 rounded-lg p-4">
+                    <p class="font-mono text-green-400">
+                        Server IP: panuwat.online
+                    </p>
+                </div>
+            </div>
+
+            <div class="glass-morphism rounded-xl p-6 hover-lift">
+                <h2 class="text-2xl font-bold text-blue-400 mb-4">
+                    🔐 VPN Access
+                </h2>
+                <div class="bg-gray-800 rounded-lg p-4 font-mono">
+                    <p>Username: Plotttt</p>
+                    <p>Password: 555555</p>
+                </div>
+            </div>
         </div>
-        
-        <div class="tap">
-            <div class="tap-title">💎 จำหน่าย SERVER </div>
-            <div class="tap-content">
-                CPU: i7 12700k<br>
-                RAM: 32GB<br>
-                GPU: RTX 3050<br>
-                Price: 2000/1000 THB
+
+        <div class="mt-8 grid md:grid-cols-3 gap-6">
+            <a href="minecraft://?addExternalServer=PANUWAT|panuwat.online" 
+               class="glass-morphism rounded-xl p-6 text-center hover-lift bg-green-600 hover:bg-green-700 transition">
+                <i class="fab fa-minecraft text-4xl"></i>
+                <p class="mt-2">Join Minecraft</p>
+            </a>
+
+            <a href="https://discord.gg/8D6cXscZ" target="_blank"
+               class="glass-morphism rounded-xl p-6 text-center hover-lift bg-indigo-600 hover:bg-indigo-700 transition">
+                <i class="fab fa-discord text-4xl"></i>
+                <p class="mt-2">Discord Server</p>
+            </a>
+
+            <div id="serverPerformanceBtn" 
+                 class="glass-morphism rounded-xl p-6 text-center hover-lift bg-red-600 hover:bg-red-700 transition cursor-pointer">
+                <i class="fas fa-server text-4xl"></i>
+                <p class="mt-2">Server Performance</p>
+            </div>
+        </div>
+
+        <div class="mt-8 grid md:grid-cols-2 gap-6">
+            <div class="glass-morphism rounded-xl p-6 hover-lift">
+                <h2 class="text-2xl font-bold text-yellow-400 mb-4">
+                    💎 Server Specs
+                </h2>
+                <div class="bg-gray-800 rounded-lg p-4 font-mono">
+                    <p>CPU: i7 12700k</p>
+                    <p>RAM: 32GB</p>
+                    <p>GPU: RTX 3050</p>
+                    <p>Price: 2000/1000 THB</p>
+                </div>
+            </div>
+
+            <div class="glass-morphism rounded-xl p-6 hover-lift">
+                <h2 class="text-2xl font-bold text-purple-400 mb-4">
+                    🚀 Performance Tools
+                </h2>
+                <div class="space-y-4">
+                    <a href="https://amdaputuningutility.com/" target="_blank" 
+                       class="block bg-gray-800 rounded-lg p-3 hover:bg-gray-700 transition">
+                        AMD Tuning Utility
+                    </a>
+                    <a href="https://atlasos.net/" target="_blank" 
+                       class="block bg-gray-800 rounded-lg p-3 hover:bg-gray-700 transition">
+                        AtlasOS
+                    </a>
+                </div>
             </div>
         </div>
     </div>
 
-    <div id="serverModal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn">&times;</span>
+    <div id="serverModal" class="fixed inset-0 bg-black bg-opacity-80 z-50 hidden">
+        <div class="container mx-auto p-6 max-w-4xl relative">
+            <button id="closeModal" class="absolute top-0 right-0 text-4xl text-white">&times;</button>
             <iframe 
                 src="https://d4rk2e1iu.localto.net/" 
-                class="server-iframe" 
-                frameborder="0">
+                class="w-full h-[600px] rounded-xl border-4 border-red-500">
             </iframe>
         </div>
     </div>
@@ -317,36 +198,11 @@
         // Modal Functionality
         const modal = document.getElementById('serverModal');
         const btn = document.getElementById('serverPerformanceBtn');
-        const span = document.getElementsByClassName('close-btn')[0];
+        const closeBtn = document.getElementById('closeModal');
 
-        btn.onclick = function(event) {
-            event.preventDefault();
-            modal.style.display = "block";
-        }
-
-        span.onclick = function() {
-            modal.style.display = "none";
-        }
-
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-
-        // Prevent zoom on double-tap
-        document.addEventListener('touchstart', function(event) {
-            if (event.touches.length > 1) {
-                event.preventDefault();
-            }
-        }, { passive: false });
-
-        document.addEventListener('touchend', function(event) {
-            if (event.touches.length > 1) {
-                event.preventDefault();
-            }
-        }, { passive: false });
-
+        btn.onclick = () => modal.classList.remove('hidden');
+        closeBtn.onclick = () => modal.classList.add('hidden');
+        
         createStars();
     </script>
 </body>
