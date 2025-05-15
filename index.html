@@ -1,261 +1,257 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-    <meta charset="UTF-8">
-    <title>ใบเสนอราคา หจก.ส.สเตนเลส เเอนด์ พาร์ท</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        @media print {
-            .no-print { display: none; }
-            body { margin: 0; }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>ใบเสนอราคา หจก.ส.สเตนเลส เเอนด์ พาร์ท</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @media print {
+      .no-print { display: none; }
+      body { margin: 0; }
+    }
+  </style>
 </head>
 <body class="bg-gray-100">
-    <div class="container mx-auto max-w-[210mm] bg-white p-6">
-        <!-- Company Header -->
-        <div class="flex justify-between items-center mb-4">
-            <div class="text-xl font-bold">
-                หจก.ส.สเตนเลส เเอนด์พาร์ท (สำนักงานใหญ่)
-            </div>
-            <div class="text-right text-sm">
-                <p>314 หมู่ 2 ถ. พุทธรักษา ตำาบลเเพรกษาใหม่ อำาเภอเมือง จังหวัดสมุทรปราการ 10280</p>
-                <p>เลขประจำตัวผู้เสียภาษี 0113562005414</p>
-                <p>โทร. 0896971068</p>
-            </div>
-        </div>
-
-        <!-- Quotation Title -->
-        <div class="text-center mb-4">
-            <h1 class="text-2xl font-bold">ใบเสนอราคา</h1>
-            <p>เลขที่ QT202505150001</p>
-            <p>วันที่ 15/05/2025</p>
-        </div>
-
-        <!-- Seller and Customer Info -->
-        <div class="grid grid-cols-2 gap-4 mb-4">
-            <div>
-                <h3 class="font-bold">ผู้ขาย</h3>
-                <p>ภานุวัฒน์ลิ้มประยูร</p>
-                <p>ติดต่อ: น้องมาเรียม</p>
-                <p>โทร: 02-026-8989</p>
-                <p>อีเมล: Support@flowaccount.com</p>
-            </div>
-            <div class="text-right">
-                <h3 class="font-bold">ลูกค้า</h3>
-                <p>บริษัท ตัวอย่าง จำกัด (สำนักงานใหญ่)</p>
-                <p>อ่าวทึง ต.อ่าวนาง อ.เมือง จ.กระบี่ 10000</p>
-                <p>เลขประจำตัวผู้เสียภาษี 1234567891234</p>
-            </div>
-        </div>
-
-        <!-- Items Table -->
-        <table class="w-full border-collapse border mb-4">
-            <thead>
-                <tr class="bg-gray-100">
-                    <th class="border p-2">ลำดับ</th>
-                    <th class="border p-2">รายการ</th>
-                    <th class="border p-2">จำนวน</th>
-                    <th class="border p-2">ราคาต่อหน่วย</th>
-                    <th class="border p-2">ยอดรวม</th>
-                    <th class="border p-2 no-print">จัดการ</th>
-                </tr>
-            </thead>
-            <tbody id="invoiceItems">
-                <tr>
-                    <td class="border p-2 text-center">1</td>
-                    <td class="border p-2">
-                        <input type="text" class="w-full item-description" value="asd">
-                    </td>
-                    <td class="border p-2">
-                        <input type="number" class="w-full text-right item-quantity" value="1">
-                    </td>
-                    <td class="border p-2">
-                        <input type="number" class="w-full text-right item-price" value="0">
-                    </td>
-                    <td class="border p-2 text-right item-total">0.00</td>
-                    <td class="border p-2 text-center no-print">
-                        <button onclick="removeItem(this)" class="text-red-500">ลบ</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="border p-2 text-center">2</td>
-                    <td class="border p-2">
-                        <input type="text" class="w-full item-description" value="sad sas">
-                    </td>
-                    <td class="border p-2">
-                        <input type="number" class="w-full text-right item-quantity" value="1">
-                    </td>
-                    <td class="border p-2">
-                        <input type="number" class="w-full text-right item-price" value="0">
-                    </td>
-                    <td class="border p-2 text-right item-total">0.00</td>
-                    <td class="border p-2 text-center no-print">
-                        <button onclick="removeItem(this)" class="text-red-500">ลบ</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="border p-2 text-center">3</td>
-                    <td class="border p-2">
-                        <input type="text" class="w-full item-description" value="asd asd">
-                    </td>
-                    <td class="border p-2">
-                        <input type="number" class="w-full text-right item-quantity" value="1">
-                    </td>
-                    <td class="border p-2">
-                        <input type="number" class="w-full text-right item-price" value="0">
-                    </td>
-                    <td class="border p-2 text-right item-total">0.00</td>
-                    <td class="border p-2 text-center no-print">
-                        <button onclick="removeItem(this)" class="text-red-500">ลบ</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-
-        <!-- Add Item Button -->
-        <button onclick="addItem()" class="bg-green-500 text-white px-4 py-2 no-print mb-4">
-            เพิ่มรายการ
-        </button>
-
-        <!-- Totals -->
-        <div class="text-right">
-            <div>รวมเป็นเงิน: <span id="subtotal">0.00</span> บาท</div>
-            <div>ภาษีมูลค่าเพิ่ม 7%: <span id="vat">0.00</span> บาท</div>
-            <div class="font-bold">จำนวนเงินรวมทั้งสิ้น: <span id="total">0.00</span> บาท</div>
-            <div class="italic">(ศูนย์บาทถ้วน)</div>
-        </div>
-
-        <!-- Signatures -->
-        <div class="grid grid-cols-2 mt-8 text-center">
-            <div>
-                <div class="h-16 border-b mb-2"></div>
-                <p>ผู้สั่งซื้อสินค้า</p>
-                <p>วันที่</p>
-            </div>
-            <div>
-                <div class="h-16 border-b mb-2"></div>
-                <p>ผู้อนุมัติ</p>
-                <p>วันที่</p>
-            </div>
-        </div>
-
-        <!-- Print/Action Buttons -->
-        <div class="text-center mt-4 no-print">
-            <button onclick="window.print()" class="bg-blue-500 text-white px-6 py-2 rounded mr-2">
-                พิมพ์เอกสาร
-            </button>
-            <button onclick="saveQuotation()" class="bg-green-500 text-white px-6 py-2 rounded">
-                บันทึก
-            </button>
-        </div>
+  <div class="container mx-auto max-w-[210mm] bg-white p-6">
+    <!-- ปุ่มแก้ไขข้อมูล -->
+    <div class="no-print mb-4 flex justify-between">
+      <button onclick="openSellerModal()" class="bg-blue-500 text-white px-4 py-2 rounded">แก้ไขข้อมูลผู้ขาย</button>
+      <button onclick="openCustomerModal()" class="bg-green-500 text-white px-4 py-2 rounded">แก้ไขข้อมูลลูกค้า</button>
     </div>
 
-    <script>
-        function calculateTotals() {
-            let subtotal = 0;
-            const rows = document.querySelectorAll('#invoiceItems tr');
-            
-            rows.forEach((row, index) => {
-                const qty = parseFloat(row.querySelector('.item-quantity').value) || 0;
-                const price = parseFloat(row.querySelector('.item-price').value) || 0;
-                
-                const itemTotal = qty * price;
-                row.querySelector('.item-total').textContent = itemTotal.toLocaleString('th-TH', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-                row.querySelector('td:first-child').textContent = index + 1;
-                subtotal += itemTotal;
-            });
+    <!-- Header -->
+    <div class="flex justify-between items-center mb-4">
+      <div id="seller-name" class="text-xl font-bold">หจก.ส.สเตนเลส เเอนด์พาร์ท (สำนักงานใหญ่)</div>
+      <div class="text-right text-sm" id="seller-address">
+        <p>314 หมู่ 2 ถ. พุทธรักษา ตำาบลเเพรกษาใหม่ อำาเภอเมือง จังหวัดสมุทรปราการ 10280</p>
+        <p>เลขประจำตัวผู้เสียภาษี 0113562005414</p>
+        <p>โทร. <span id="seller-phone">0896971068</span></p>
+      </div>
+    </div>
 
-            const vat = subtotal * 0.07;
-            const total = subtotal + vat;
+    <!-- Title -->
+    <div class="text-center mb-4">
+      <h1 class="text-2xl font-bold">ใบเสนอราคา</h1>
+      <p>เลขที่ QT202505150001</p>
+      <p>วันที่ 15/05/2025</p>
+    </div>
 
-            document.getElementById('subtotal').textContent = subtotal.toLocaleString('th-TH', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-            document.getElementById('vat').textContent = vat.toLocaleString('th-TH', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-            document.getElementById('total').textContent = total.toLocaleString('th-TH', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-        }
+    <!-- ข้อมูลผู้ขายและลูกค้า -->
+    <div class="grid grid-cols-2 gap-4 mb-4">
+      <div>
+        <h3 class="font-bold">ผู้ขาย</h3>
+        <p id="seller-contact">ภานุวัฒน์ลิ้มประยูร</p>
+        <p>ติดต่อ: <span id="seller-person">น้องมาเรียม</span></p>
+        <p>โทร: <span id="seller-contact-phone">02-026-8989</span></p>
+        <p>อีเมล: <span id="seller-email">Support@flowaccount.com</span></p>
+      </div>
+      <div class="text-right">
+        <h3 class="font-bold">ลูกค้า</h3>
+        <p id="customer-name">บริษัท ตัวอย่าง จำกัด (สำนักงานใหญ่)</p>
+        <p id="customer-address">อ่าวทึง ต.อ่าวนาง อ.เมือง จ.กระบี่ 10000</p>
+        <p>เลขประจำตัวผู้เสียภาษี <span id="customer-taxid">1234567891234</span></p>
+      </div>
+    </div>
 
-        function addItem() {
-            const table = document.getElementById('invoiceItems');
-            const newRow = table.rows[0].cloneNode(true);
-            
-            // Reset values
-            newRow.querySelectorAll('input').forEach(input => {
-                input.value = input.type === 'number' ? '0' : '';
-            });
-            
-            newRow.querySelector('.item-total').textContent = '0.00';
-            
-            table.appendChild(newRow);
-            
-            // Add event listeners
-            newRow.querySelectorAll('input').forEach(input => {
-                input.addEventListener('input', calculateTotals);
-            });
+    <!-- ตารางรายการ -->
+    <table class="w-full border-collapse border mb-4">
+      <thead>
+        <tr class="bg-gray-100">
+          <th class="border p-2">ลำดับ</th>
+          <th class="border p-2">รายการ</th>
+          <th class="border p-2">จำนวน</th>
+          <th class="border p-2">ราคาต่อหน่วย</th>
+          <th class="border p-2">ยอดรวม</th>
+          <th class="border p-2 no-print">จัดการ</th>
+        </tr>
+      </thead>
+      <tbody id="invoiceItems">
+        <tr>
+          <td class="border p-2 text-center">1</td>
+          <td class="border p-2"><input type="text" class="w-full item-description" value=""></td>
+          <td class="border p-2"><input type="number" class="w-full text-right item-quantity" value="1"></td>
+          <td class="border p-2"><input type="number" class="w-full text-right item-price" value="0"></td>
+          <td class="border p-2 text-right item-total">0.00</td>
+          <td class="border p-2 text-center no-print"><button onclick="removeItem(this)" class="text-red-500">ลบ</button></td>
+        </tr>
+      </tbody>
+    </table>
 
-            calculateTotals();
-        }
+    <button onclick="addItem()" class="bg-green-500 text-white px-4 py-2 no-print mb-4">เพิ่มรายการ</button>
 
-        function removeItem(btn) {
-            const table = document.getElementById('invoiceItems');
-            if (table.rows.length > 1) {
-                btn.closest('tr').remove();
-                calculateTotals();
-            }
-        }
+    <!-- รวมราคา -->
+    <div class="text-right">
+      <div>รวมเป็นเงิน: <span id="subtotal">0.00</span> บาท</div>
+      <div>ภาษีมูลค่าเพิ่ม 7%: <span id="vat">0.00</span> บาท</div>
+      <div class="font-bold">จำนวนเงินรวมทั้งสิ้น: <span id="total">0.00</span> บาท</div>
+      <div class="italic">(ศูนย์บาทถ้วน)</div>
+    </div>
 
-        function saveQuotation() {
-            const quotationData = {
-                companyInfo: {
-                    name: "หจก.ส.สเตนเลส เเอนด์พาร์ท (สำนักงานใหญ่)",
-                    address: "314 หมู่ 2 ถ. พุทธรักษา ตำาบลเเพรกษาใหม่ อำาเภอเมือง จังหวัดสมุทรปราการ 10280",
-                    taxId: "0113562005414",
-                    phone: "0896971068"
-                },
-                customerInfo: {
-                    name: "บริษัท ตัวอย่าง จำกัด (สำนักงานใหญ่)",
-                    address: "อ่าวทึง ต.อ่าวนาง อ.เมือง จ.กระบี่ 10000",
-                    taxId: "1234567891234"
-                },
-                quotationDetails: {
-                    number: "QT202505150001",
-                    date: "15/05/2025",
-                    seller: "ภานุวัฒน์ลิ้มประยูร",
-                    contact: "น้องมาเรียม",
-                    contactPhone: "02-026-8989",
-                    contactEmail: "Support@flowaccount.com"
-                },
-                items: [],
-                totals: {
-                    subtotal: document.getElementById('subtotal').textContent,
-                    vat: document.getElementById('vat').textContent,
-                    total: document.getElementById('total').textContent
-                }
-            };
+    <!-- ลายเซ็น -->
+    <div class="grid grid-cols-2 mt-8 text-center">
+      <div>
+        <div class="h-16 border-b mb-2"></div>
+        <p>ผู้สั่งซื้อสินค้า</p>
+        <p>วันที่</p>
+      </div>
+      <div>
+        <div class="h-16 border-b mb-2"></div>
+        <p>ผู้อนุมัติ</p>
+        <p>วันที่</p>
+      </div>
+    </div>
 
-            const rows = document.querySelectorAll('#invoiceItems tr');
-            rows.forEach(row => {
-                quotationData.items.push({
-                    description: row.querySelector('.item-description').value,
-                    quantity: row.querySelector('.item-quantity').value,
-                    price: row.querySelector('.item-price').value,
-                    total: row.querySelector('.item-total').textContent
-                });
-            });
+    <!-- ปุ่ม -->
+    <div class="text-center mt-4 no-print">
+      <button onclick="window.print()" class="bg-blue-500 text-white px-6 py-2 rounded mr-2">พิมพ์เอกสาร</button>
+      <button onclick="saveQuotation()" class="bg-green-500 text-white px-6 py-2 rounded">บันทึก</button>
+    </div>
+  </div>
 
-            const blob = new Blob([JSON.stringify(quotationData, null, 2)], {type: 'application/json'});
-            const link = document.createElement('a');
-            link.href = URL.createObjectURL(blob);
-            link.download = `quotation_${quotationData.quotationDetails.number}.json`;
-            link.click();
-        }
+  <!-- Modal ผู้ขาย -->
+  <div id="sellerModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden items-center justify-center no-print">
+    <div class="bg-white p-6 rounded w-96">
+      <h2 class="text-xl font-bold mb-4">แก้ไขข้อมูลผู้ขาย</h2>
+      <input id="sellerNameInput" class="w-full border p-2 mb-2" placeholder="ชื่อผู้ขาย">
+      <input id="sellerPersonInput" class="w-full border p-2 mb-2" placeholder="ผู้ติดต่อ">
+      <input id="sellerPhoneInput" class="w-full border p-2 mb-2" placeholder="โทร">
+      <input id="sellerEmailInput" class="w-full border p-2 mb-4" placeholder="อีเมล">
+      <div class="text-right space-x-2">
+        <button onclick="closeSellerModal()" class="bg-gray-500 text-white px-4 py-2">ยกเลิก</button>
+        <button onclick="applySellerEdit()" class="bg-blue-500 text-white px-4 py-2">บันทึก</button>
+      </div>
+    </div>
+  </div>
 
-        // Initial setup
-        document.querySelectorAll('#invoiceItems input').forEach(input => {
-            input.addEventListener('input', calculateTotals);
-        });
+  <!-- Modal ลูกค้า -->
+  <div id="customerModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden items-center justify-center no-print">
+    <div class="bg-white p-6 rounded w-96">
+      <h2 class="text-xl font-bold mb-4">แก้ไขข้อมูลลูกค้า</h2>
+      <input id="customerNameInput" class="w-full border p-2 mb-2" placeholder="ชื่อลูกค้า">
+      <input id="customerAddressInput" class="w-full border p-2 mb-2" placeholder="ที่อยู่">
+      <input id="customerTaxInput" class="w-full border p-2 mb-4" placeholder="เลขผู้เสียภาษี">
+      <div class="text-right space-x-2">
+        <button onclick="closeCustomerModal()" class="bg-gray-500 text-white px-4 py-2">ยกเลิก</button>
+        <button onclick="applyCustomerEdit()" class="bg-green-500 text-white px-4 py-2">บันทึก</button>
+      </div>
+    </div>
+  </div>
 
-        // Calculate initial totals
+  <script>
+    function calculateTotals() {
+      let subtotal = 0;
+      const rows = document.querySelectorAll('#invoiceItems tr');
+      rows.forEach((row, index) => {
+        const qty = parseFloat(row.querySelector('.item-quantity').value) || 0;
+        const price = parseFloat(row.querySelector('.item-price').value) || 0;
+        const total = qty * price;
+        row.querySelector('.item-total').textContent = total.toFixed(2);
+        row.querySelector('td:first-child').textContent = index + 1;
+        subtotal += total;
+      });
+      const vat = subtotal * 0.07;
+      const total = subtotal + vat;
+      document.getElementById('subtotal').textContent = subtotal.toFixed(2);
+      document.getElementById('vat').textContent = vat.toFixed(2);
+      document.getElementById('total').textContent = total.toFixed(2);
+    }
+
+    function addItem() {
+      const table = document.getElementById('invoiceItems');
+      const newRow = table.rows[0].cloneNode(true);
+      newRow.querySelectorAll('input').forEach(i => i.value = i.type === 'number' ? '0' : '');
+      newRow.querySelector('.item-total').textContent = '0.00';
+      table.appendChild(newRow);
+      newRow.querySelectorAll('input').forEach(input => input.addEventListener('input', calculateTotals));
+      calculateTotals();
+    }
+
+    function removeItem(btn) {
+      const table = document.getElementById('invoiceItems');
+      if (table.rows.length > 1) {
+        btn.closest('tr').remove();
         calculateTotals();
-    </script>
+      }
+    }
+
+    function saveQuotation() {
+      const data = {
+        seller: {
+          name: document.getElementById('seller-name').textContent,
+          contact: document.getElementById('seller-contact').textContent,
+          person: document.getElementById('seller-person').textContent,
+          phone: document.getElementById('seller-contact-phone').textContent,
+          email: document.getElementById('seller-email').textContent
+        },
+        customer: {
+          name: document.getElementById('customer-name').textContent,
+          address: document.getElementById('customer-address').textContent,
+          taxId: document.getElementById('customer-taxid').textContent
+        },
+        items: [],
+        totals: {
+          subtotal: document.getElementById('subtotal').textContent,
+          vat: document.getElementById('vat').textContent,
+          total: document.getElementById('total').textContent
+        }
+      };
+      document.querySelectorAll('#invoiceItems tr').forEach(row => {
+        data.items.push({
+          description: row.querySelector('.item-description').value,
+          quantity: row.querySelector('.item-quantity').value,
+          price: row.querySelector('.item-price').value,
+          total: row.querySelector('.item-total').textContent
+        });
+      });
+      const blob = new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'});
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = 'quotation.json';
+      link.click();
+    }
+
+    // Modal Functions
+    function openSellerModal() {
+      document.getElementById('sellerModal').classList.remove('hidden');
+      document.getElementById('sellerNameInput').value = document.getElementById('seller-name').textContent;
+      document.getElementById('sellerPersonInput').value = document.getElementById('seller-person').textContent;
+      document.getElementById('sellerPhoneInput').value = document.getElementById('seller-contact-phone').textContent;
+      document.getElementById('sellerEmailInput').value = document.getElementById('seller-email').textContent;
+    }
+
+    function closeSellerModal() {
+      document.getElementById('sellerModal').classList.add('hidden');
+    }
+
+    function applySellerEdit() {
+      document.getElementById('seller-name').textContent = document.getElementById('sellerNameInput').value;
+      document.getElementById('seller-person').textContent = document.getElementById('sellerPersonInput').value;
+      document.getElementById('seller-contact-phone').textContent = document.getElementById('sellerPhoneInput').value;
+      document.getElementById('seller-email').textContent = document.getElementById('sellerEmailInput').value;
+      closeSellerModal();
+    }
+
+    function openCustomerModal() {
+      document.getElementById('customerModal').classList.remove('hidden');
+      document.getElementById('customerNameInput').value = document.getElementById('customer-name').textContent;
+      document.getElementById('customerAddressInput').value = document.getElementById('customer-address').textContent;
+      document.getElementById('customerTaxInput').value = document.getElementById('customer-taxid').textContent;
+    }
+
+    function closeCustomerModal() {
+      document.getElementById('customerModal').classList.add('hidden');
+    }
+
+    function applyCustomerEdit() {
+      document.getElementById('customer-name').textContent = document.getElementById('customerNameInput').value;
+      document.getElementById('customer-address').textContent = document.getElementById('customerAddressInput').value;
+      document.getElementById('customer-taxid').textContent = document.getElementById('customerTaxInput').value;
+      closeCustomerModal();
+    }
+
+    // Setup event listeners
+    document.querySelectorAll('#invoiceItems input').forEach(i => i.addEventListener('input', calculateTotals));
+    calculateTotals();
+  </script>
 </body>
 </html>
