@@ -1,209 +1,261 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>PANUWAT ULTIMATE SERVER</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <title>ใบเสนอราคา หจก.ส.สเตนเลส เเอนด์ พาร์ท</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #0f1020, #1a1a2e, #16213e);
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-
-        .cosmic-background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background: radial-gradient(ellipse at bottom, #1a1a2e 0%, #000000 100%);
-            pointer-events: none;
-        }
-
-        .stars {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            transform: rotateZ(45deg);
-        }
-
-        .star {
-            position: absolute;
-            background-color: rgba(255,255,255,0.7);
-            width: 2px;
-            height: 2px;
-            border-radius: 50%;
-            animation: twinkle 2s infinite alternate;
-        }
-
-        @keyframes twinkle {
-            0% { opacity: 0.2; }
-            100% { opacity: 1; }
-        }
-
-        .glass-morphism {
-            background: rgba(22, 33, 62, 0.6);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255,255,255,0.1);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-
-        .gradient-text {
-            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hover-lift {
-            transition: all 0.3s ease;
-        }
-
-        .hover-lift:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
-        }
-
-        .pulse-animation {
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+        @media print {
+            .no-print { display: none; }
+            body { margin: 0; }
         }
     </style>
 </head>
-<body class="text-white">
-    <div class="cosmic-background">
-        <div class="stars" id="stars"></div>
-    </div>
-
-    <div class="container mx-auto px-4 py-16 max-w-4xl">
-        <div class="text-center mb-12">
-            <h1 class="text-5xl font-bold gradient-text mb-4 pulse-animation">
-                PANUWAT ULTIMATE SERVER
-            </h1>
-            <p class="text-xl text-gray-300">
-                Minecraft & Community Performance Hub
-            </p>
-        </div>
-
-        <div class="grid md:grid-cols-2 gap-6">
-            <div class="glass-morphism rounded-xl p-6 hover-lift">
-                <h2 class="text-2xl font-bold text-red-400 mb-4">
-                    🌐 Minecraft Server
-                </h2>
-                <div class="bg-gray-800 rounded-lg p-4">
-                    <p class="font-mono text-green-400">
-                        Server IP: panuwat.online
-                    </p>
-                </div>
+<body class="bg-gray-100">
+    <div class="container mx-auto max-w-[210mm] bg-white p-6">
+        <!-- Company Header -->
+        <div class="flex justify-between items-center mb-4">
+            <div class="text-xl font-bold">
+                หจก.ส.สเตนเลส เเอนด์พาร์ท (สำนักงานใหญ่)
             </div>
-
-            <div class="glass-morphism rounded-xl p-6 hover-lift">
-                <h2 class="text-2xl font-bold text-blue-400 mb-4">
-                    🔐 VPN Access
-                </h2>
-                <div class="bg-gray-800 rounded-lg p-4 font-mono">
-                    <p>Username: Plotttt</p>
-                    <p>Password: 555555</p>
-                </div>
+            <div class="text-right text-sm">
+                <p>314 หมู่ 2 ถ. พุทธรักษา ตำาบลเเพรกษาใหม่ อำาเภอเมือง จังหวัดสมุทรปราการ 10280</p>
+                <p>เลขประจำตัวผู้เสียภาษี 0113562005414</p>
+                <p>โทร. 0896971068</p>
             </div>
         </div>
 
-        <div class="mt-8 grid md:grid-cols-3 gap-6">
-            <a href="minecraft://?addExternalServer=PANUWAT|panuwat.online" 
-               class="glass-morphism rounded-xl p-6 text-center hover-lift bg-green-600 hover:bg-green-700 transition">
-                <i class="fab fa-minecraft text-4xl"></i>
-                <p class="mt-2">Join Minecraft</p>
-            </a>
+        <!-- Quotation Title -->
+        <div class="text-center mb-4">
+            <h1 class="text-2xl font-bold">ใบเสนอราคา</h1>
+            <p>เลขที่ QT202505150001</p>
+            <p>วันที่ 15/05/2025</p>
+        </div>
 
-            <a href="https://discord.gg/8D6cXscZ" target="_blank"
-               class="glass-morphism rounded-xl p-6 text-center hover-lift bg-indigo-600 hover:bg-indigo-700 transition">
-                <i class="fab fa-discord text-4xl"></i>
-                <p class="mt-2">Discord Server</p>
-            </a>
-
-            <div id="serverPerformanceBtn" 
-                 class="glass-morphism rounded-xl p-6 text-center hover-lift bg-red-600 hover:bg-red-700 transition cursor-pointer">
-                <i class="fas fa-server text-4xl"></i>
-                <p class="mt-2">Server Performance</p>
+        <!-- Seller and Customer Info -->
+        <div class="grid grid-cols-2 gap-4 mb-4">
+            <div>
+                <h3 class="font-bold">ผู้ขาย</h3>
+                <p>ภานุวัฒน์ลิ้มประยูร</p>
+                <p>ติดต่อ: น้องมาเรียม</p>
+                <p>โทร: 02-026-8989</p>
+                <p>อีเมล: Support@flowaccount.com</p>
+            </div>
+            <div class="text-right">
+                <h3 class="font-bold">ลูกค้า</h3>
+                <p>บริษัท ตัวอย่าง จำกัด (สำนักงานใหญ่)</p>
+                <p>อ่าวทึง ต.อ่าวนาง อ.เมือง จ.กระบี่ 10000</p>
+                <p>เลขประจำตัวผู้เสียภาษี 1234567891234</p>
             </div>
         </div>
 
-        <div class="mt-8 grid md:grid-cols-2 gap-6">
-            <div class="glass-morphism rounded-xl p-6 hover-lift">
-                <h2 class="text-2xl font-bold text-yellow-400 mb-4">
-                    💎 Server Specs
-                </h2>
-                <div class="bg-gray-800 rounded-lg p-4 font-mono">
-                    <p>CPU: i7 12700k</p>
-                    <p>RAM: 32GB</p>
-                    <p>GPU: RTX 3050</p>
-                    <p>Price: 2000/1000 THB</p>
-                </div>
-            </div>
+        <!-- Items Table -->
+        <table class="w-full border-collapse border mb-4">
+            <thead>
+                <tr class="bg-gray-100">
+                    <th class="border p-2">ลำดับ</th>
+                    <th class="border p-2">รายการ</th>
+                    <th class="border p-2">จำนวน</th>
+                    <th class="border p-2">ราคาต่อหน่วย</th>
+                    <th class="border p-2">ยอดรวม</th>
+                    <th class="border p-2 no-print">จัดการ</th>
+                </tr>
+            </thead>
+            <tbody id="invoiceItems">
+                <tr>
+                    <td class="border p-2 text-center">1</td>
+                    <td class="border p-2">
+                        <input type="text" class="w-full item-description" value="asd">
+                    </td>
+                    <td class="border p-2">
+                        <input type="number" class="w-full text-right item-quantity" value="1">
+                    </td>
+                    <td class="border p-2">
+                        <input type="number" class="w-full text-right item-price" value="0">
+                    </td>
+                    <td class="border p-2 text-right item-total">0.00</td>
+                    <td class="border p-2 text-center no-print">
+                        <button onclick="removeItem(this)" class="text-red-500">ลบ</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="border p-2 text-center">2</td>
+                    <td class="border p-2">
+                        <input type="text" class="w-full item-description" value="sad sas">
+                    </td>
+                    <td class="border p-2">
+                        <input type="number" class="w-full text-right item-quantity" value="1">
+                    </td>
+                    <td class="border p-2">
+                        <input type="number" class="w-full text-right item-price" value="0">
+                    </td>
+                    <td class="border p-2 text-right item-total">0.00</td>
+                    <td class="border p-2 text-center no-print">
+                        <button onclick="removeItem(this)" class="text-red-500">ลบ</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="border p-2 text-center">3</td>
+                    <td class="border p-2">
+                        <input type="text" class="w-full item-description" value="asd asd">
+                    </td>
+                    <td class="border p-2">
+                        <input type="number" class="w-full text-right item-quantity" value="1">
+                    </td>
+                    <td class="border p-2">
+                        <input type="number" class="w-full text-right item-price" value="0">
+                    </td>
+                    <td class="border p-2 text-right item-total">0.00</td>
+                    <td class="border p-2 text-center no-print">
+                        <button onclick="removeItem(this)" class="text-red-500">ลบ</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
 
-            <div class="glass-morphism rounded-xl p-6 hover-lift">
-                <h2 class="text-2xl font-bold text-purple-400 mb-4">
-                    🚀 Performance Tools
-                </h2>
-                <div class="space-y-4">
-                    <a href="https://amdaputuningutility.com/" target="_blank" 
-                       class="block bg-gray-800 rounded-lg p-3 hover:bg-gray-700 transition">
-                        AMD Tuning Utility
-                    </a>
-                    <a href="https://atlasos.net/" target="_blank" 
-                       class="block bg-gray-800 rounded-lg p-3 hover:bg-gray-700 transition">
-                        AtlasOS
-                    </a>
-                </div>
+        <!-- Add Item Button -->
+        <button onclick="addItem()" class="bg-green-500 text-white px-4 py-2 no-print mb-4">
+            เพิ่มรายการ
+        </button>
+
+        <!-- Totals -->
+        <div class="text-right">
+            <div>รวมเป็นเงิน: <span id="subtotal">0.00</span> บาท</div>
+            <div>ภาษีมูลค่าเพิ่ม 7%: <span id="vat">0.00</span> บาท</div>
+            <div class="font-bold">จำนวนเงินรวมทั้งสิ้น: <span id="total">0.00</span> บาท</div>
+            <div class="italic">(ศูนย์บาทถ้วน)</div>
+        </div>
+
+        <!-- Signatures -->
+        <div class="grid grid-cols-2 mt-8 text-center">
+            <div>
+                <div class="h-16 border-b mb-2"></div>
+                <p>ผู้สั่งซื้อสินค้า</p>
+                <p>วันที่</p>
+            </div>
+            <div>
+                <div class="h-16 border-b mb-2"></div>
+                <p>ผู้อนุมัติ</p>
+                <p>วันที่</p>
             </div>
         </div>
-    </div>
 
-    <div id="serverModal" class="fixed inset-0 bg-black bg-opacity-80 z-50 hidden">
-        <div class="container mx-auto p-6 max-w-4xl relative">
-            <button id="closeModal" class="absolute top-0 right-0 text-4xl text-white">&times;</button>
-            <iframe 
-                src="https://d4rk2e1iu.localto.net/" 
-                class="w-full h-[600px] rounded-xl border-4 border-red-500">
-            </iframe>
+        <!-- Print/Action Buttons -->
+        <div class="text-center mt-4 no-print">
+            <button onclick="window.print()" class="bg-blue-500 text-white px-6 py-2 rounded mr-2">
+                พิมพ์เอกสาร
+            </button>
+            <button onclick="saveQuotation()" class="bg-green-500 text-white px-6 py-2 rounded">
+                บันทึก
+            </button>
         </div>
     </div>
 
     <script>
-        function createStars() {
-            const starsContainer = document.getElementById('stars');
-            const starCount = window.innerWidth < 600 ? 100 : 200;
+        function calculateTotals() {
+            let subtotal = 0;
+            const rows = document.querySelectorAll('#invoiceItems tr');
             
-            for (let i = 0; i < starCount; i++) {
-                const star = document.createElement('div');
-                star.classList.add('star');
-                star.style.left = `${Math.random() * 100}%`;
-                star.style.top = `${Math.random() * 100}%`;
-                star.style.animationDelay = `${Math.random() * 2}s`;
-                starsContainer.appendChild(star);
+            rows.forEach((row, index) => {
+                const qty = parseFloat(row.querySelector('.item-quantity').value) || 0;
+                const price = parseFloat(row.querySelector('.item-price').value) || 0;
+                
+                const itemTotal = qty * price;
+                row.querySelector('.item-total').textContent = itemTotal.toLocaleString('th-TH', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+                row.querySelector('td:first-child').textContent = index + 1;
+                subtotal += itemTotal;
+            });
+
+            const vat = subtotal * 0.07;
+            const total = subtotal + vat;
+
+            document.getElementById('subtotal').textContent = subtotal.toLocaleString('th-TH', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            document.getElementById('vat').textContent = vat.toLocaleString('th-TH', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            document.getElementById('total').textContent = total.toLocaleString('th-TH', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+        }
+
+        function addItem() {
+            const table = document.getElementById('invoiceItems');
+            const newRow = table.rows[0].cloneNode(true);
+            
+            // Reset values
+            newRow.querySelectorAll('input').forEach(input => {
+                input.value = input.type === 'number' ? '0' : '';
+            });
+            
+            newRow.querySelector('.item-total').textContent = '0.00';
+            
+            table.appendChild(newRow);
+            
+            // Add event listeners
+            newRow.querySelectorAll('input').forEach(input => {
+                input.addEventListener('input', calculateTotals);
+            });
+
+            calculateTotals();
+        }
+
+        function removeItem(btn) {
+            const table = document.getElementById('invoiceItems');
+            if (table.rows.length > 1) {
+                btn.closest('tr').remove();
+                calculateTotals();
             }
         }
 
-        // Modal Functionality
-        const modal = document.getElementById('serverModal');
-        const btn = document.getElementById('serverPerformanceBtn');
-        const closeBtn = document.getElementById('closeModal');
+        function saveQuotation() {
+            const quotationData = {
+                companyInfo: {
+                    name: "หจก.ส.สเตนเลส เเอนด์พาร์ท (สำนักงานใหญ่)",
+                    address: "314 หมู่ 2 ถ. พุทธรักษา ตำาบลเเพรกษาใหม่ อำาเภอเมือง จังหวัดสมุทรปราการ 10280",
+                    taxId: "0113562005414",
+                    phone: "0896971068"
+                },
+                customerInfo: {
+                    name: "บริษัท ตัวอย่าง จำกัด (สำนักงานใหญ่)",
+                    address: "อ่าวทึง ต.อ่าวนาง อ.เมือง จ.กระบี่ 10000",
+                    taxId: "1234567891234"
+                },
+                quotationDetails: {
+                    number: "QT202505150001",
+                    date: "15/05/2025",
+                    seller: "ภานุวัฒน์ลิ้มประยูร",
+                    contact: "น้องมาเรียม",
+                    contactPhone: "02-026-8989",
+                    contactEmail: "Support@flowaccount.com"
+                },
+                items: [],
+                totals: {
+                    subtotal: document.getElementById('subtotal').textContent,
+                    vat: document.getElementById('vat').textContent,
+                    total: document.getElementById('total').textContent
+                }
+            };
 
-        btn.onclick = () => modal.classList.remove('hidden');
-        closeBtn.onclick = () => modal.classList.add('hidden');
-        
-        createStars();
+            const rows = document.querySelectorAll('#invoiceItems tr');
+            rows.forEach(row => {
+                quotationData.items.push({
+                    description: row.querySelector('.item-description').value,
+                    quantity: row.querySelector('.item-quantity').value,
+                    price: row.querySelector('.item-price').value,
+                    total: row.querySelector('.item-total').textContent
+                });
+            });
+
+            const blob = new Blob([JSON.stringify(quotationData, null, 2)], {type: 'application/json'});
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = `quotation_${quotationData.quotationDetails.number}.json`;
+            link.click();
+        }
+
+        // Initial setup
+        document.querySelectorAll('#invoiceItems input').forEach(input => {
+            input.addEventListener('input', calculateTotals);
+        });
+
+        // Calculate initial totals
+        calculateTotals();
     </script>
 </body>
 </html>
